@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:export-ydpi="11.050000"
+   inkscape:export-xdpi="11.050000"
+   inkscape:export-filename="/home/andrewm/oc/health/NetEpi/netepi-2x2.png"
+   sodipodi:docname="netepi-2x2.svg"
+   sodipodi:docbase="/home/andrewm/oc/health/NetEpi"
+   inkscape:version="0.41"
+   sodipodi:version="0.32"
+   id="svg2"
+   height="297mm"
+   width="210mm">
+  <defs
+     id="defs3">
+    <marker
+       inkscape:stockid="DiamondL"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="DiamondL"
+       style="overflow:visible">
+      <path
+         id="path3799"
+         d="M -2.1579186e-005,-7.0710768 L -7.0710894,-8.9383918e-006 L -2.1579186e-005,7.0710589 L 7.0710462,-8.9383918e-006 L -2.1579186e-005,-7.0710768 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none"
+         transform="scale(0.8)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     inkscape:window-y="208"
+     inkscape:window-x="79"
+     inkscape:window-height="908"
+     inkscape:window-width="1044"
+     inkscape:grid-points="true"
+     showguides="false"
+     showgrid="true"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="px"
+     inkscape:cy="884.34839"
+     inkscape:cx="300.48822"
+     inkscape:zoom="1.0000000"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base" />
+  <metadata
+     id="metadata4">
+    <rdf:RDF
+       id="RDF5">
+      <cc:Work
+         id="Work6"
+         rdf:about="">
+        <dc:format
+           id="format7">image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage"
+           id="type9" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <path
+       id="path1376"
+       d="M 129.57180,352.64808 L 631.00000,352.64808"
+       style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:20.000000;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000;marker-start:none;marker-mid:none" />
+    <path
+       id="path2136"
+       d="M 380.28590,101.93398 L 380.28590,603.36218"
+       style="fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#000000;stroke-width:20.000000;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000;marker-start:none" />
+    <rect
+       y="142.00372"
+       x="170.00000"
+       height="143.29248"
+       width="143.39384"
+       id="rect2142"
+       style="fill:#ee7700;fill-opacity:1.0000000;stroke:#ee7700;stroke-width:74.131943;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000" />
+    <rect
+       y="207.50546"
+       x="433.60452"
+       height="91.252190"
+       width="91.316750"
+       id="rect3714"
+       style="fill:#008800;fill-opacity:1.0000000;stroke:#008800;stroke-width:47.209057;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000" />
+    <rect
+       y="409.19489"
+       x="218.21826"
+       height="105.00522"
+       width="105.07949"
+       id="rect3716"
+       style="fill:#110088;fill-opacity:1.0000000;stroke:#110088;stroke-width:54.324135;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000" />
+    <rect
+       y="399.65689"
+       x="427.62405"
+       height="68.132492"
+       width="68.180695"
+       id="rect3885"
+       style="fill:#bb1100;fill-opacity:1.0000000;stroke:#bb1100;stroke-width:35.248146;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-opacity:1.0000000" />
+  </g>
+</svg>

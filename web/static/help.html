@@ -1,0 +1,418 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- 
+    The contents of this file are subject to the HACOS License Version 1.2
+    (the "License"); you may not use this file except in compliance with
+    the License.  Software distributed under the License is distributed
+    on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+    implied. See the LICENSE file for the specific language governing
+    rights and limitations under the License.  The Original Software
+    is "NetEpi Analysis". The Initial Developer of the Original
+    Software is the Health Administration Corporation, incorporated in
+    the State of New South Wales, Australia.  
+    
+    Copyright (C) 2004,2005 Health Administration Corporation. 
+    All Rights Reserved.
+-->
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 1.1.2  (Linux)">
+	<META NAME="CREATED" CONTENT="20041215;17110100">
+	<META NAME="CHANGED" CONTENT="20041220;13145000">
+</HEAD>
+<BODY BGCOLOR="white" LANG="en-US" DIR="A4">
+<H1>NetEpi Analysis Version 0.1 Web interface – a brief
+introduction</H1>
+<P>Tim Churches (<A HREF="mailto:tchur@doh.health.nsw.gov.au">tchur@doh.health.nsw.gov.au</A>),
+Centre for Epidemiology and Research, Population Health Division, New
+South Wales Department of Health</P>
+<P>21 December, 2004</P>
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Introduction</FONT></FONT></P>
+<P>This document provides a brief introduction to the Web interface
+for NetEpi Analysis (NEA) Version 0.1. Please note that this is an
+early version of the application and it is highly likely that the
+interface and capabilities of NEA will change considerably as it is
+developed further.</P>
+<P>NEA was designed and written by Tim Churches (Centre for
+Epidemiology and Research, NSW Department of Health) and Andrew
+McNamara (Object Craft Pty Ltd, working under contract to NSW
+Department of Health). Dave Cole and Ben Golding, also both of Object
+Craft Pty Ltd, contributed fast set-theoretic functions and a filter
+clause parser respectively.</P>
+<P>NEA uses several (somewhat) unusual techniques to ensure
+reasonable performance when dealing with moderately-sized datasets
+(up to about 10 million records), despite being programmed in a
+highly dynamic, late-binding, object-oriented programming language
+(Python). In particular, all datasets are stored in vertically
+partitioned form – that is, column-wise, not row-wise, and dataset
+summarisation is achieved using set-theoretic operations on ordinal
+mappings – that is, the ordinal row position in each column is used
+as an implicit row ID and set intersections (and other set
+operations) are performed on these row IDs. This approach differs
+from more commonly used bit-mapped indexes in that value indexes are
+stored as vectors of sorted integer indexes – an approach which
+sacrifices some performance on very large datasets, but which retains
+storage and processing efficiency even for columns with very high
+cardinality, without having to use complex bitmap compression
+schemes. High cardinality data are routinely encountered in health
+and epidemiological datasets. A peer-reviewed paper describing these
+techniques appeared in 2003 – please see: <A HREF="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&amp;db=pubmed&amp;dopt=Abstract&amp;list_uids=12725961">Churches
+T. Exploratory data analysis using set operations and ordinal
+mapping. Comput Methods Programs Biomed 2003; 71(1):11-23</A>.
+Preprint copies of the paper in PDF format are available from the
+author on request (email: <A HREF="mailto:tchur@doh.health.nsw.gov.au">tchur@doh.health.nsw.gov.au</A>)
+if your institution or organisation does not have access to this
+journal.</P>
+<P>This tutorial assumes that NEA has been installed on a suitable
+computer and that the demonstration datasets have been loaded. If
+not, please see the README file in the top level NEA directory for
+instructions on creating these datasets. We also recommend that you
+run the api_demo.py and plot_demo.py programmes in the demo
+subdirectory to gain an appreciation of the programmatic interface to
+NEA, which can be used directly in any batch or interactive Python
+programme, before working through this introduction to the Web
+interface. Instructions for running demo/api_demo.py and
+demo/plot_demo.py can be found in the README file mentioned above.</P>
+<P>Please report all bugs, problems, feature requests and ideas for
+future development to the NetEpi-discuss mailing list. You need to
+subscribe to this list in order to post messages to it – please see
+the <A HREF="http://lists.sourceforge.net/mailman/listinfo/netepi-discuss">list
+management Web page</A>.</P>
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>NEA
+home page</FONT></FONT></P>
+<P>The first step is to open your Web browser and type in the URL for
+the NEA demonstration. If you are using nea-standalone.py to host the
+demonstration Web site on your own computer, then the URL will
+generally be http://localhost:8080/cgi-bin/nea/nea.py If the
+demonstration is being hosted on an Apache web server, the URL will
+be something like http://some_server/cgi-bin/nea/nea.py where
+some_server is the DNS name of the host server.</P>
+<P>Note that unless your system administrator has established access
+control within Apache, no username or password is required to access
+the NEA demonstration site. Future versions of NEA will provide
+built-in user authentication and access control facilities.</P>
+<P>The home page displays two pull-down lists with buttons besides
+each.</P>
+<P>The upper pull-down list allows you to select a dataset to work
+with. As new datasets are added to directories within the SOOM engine
+search path, they automatically appear in this list. Clicking on the
+<B>[Explore]</B> button displays metadata about the selected data in
+a new browser window. You can click on the <B>[View]</B> button to
+the left of each column name to see further details for that column.</P>
+<P>The lower pull-down list allows you to select a type of analysis
+to perform on the selected dataset. At this stage the analyses are
+restricted to exploratory graphs and tables. More sophisticated and
+specialised types of epidemiological analyses will be added in future
+versions.</P>
+<P>Several of the features and facilities are common to all types of
+analyses. These will be covered in detail in the context of bar
+charts, but will not be mentioned for other types of analyses, as
+they work in the same fashion everywhere in NEA.</P>
+<P>Choose the National Hospital Discharge Survey dataset from the
+upper pull-down list, and Bar Chart from the lower analysis type
+pull-down list. Click the <B>[Analyse]</B> button. 
+</P>
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Filters</FONT></FONT></P>
+<P>The Filter section allows you to specify filters to restrict your
+analysis to certain rows in the dataset. The text area shows the
+current filter expression. You can directly enter filter expressions
+here if you wish. The syntax is very similar to SQL WHERE clause
+syntax, with a few differences and extensions. In particular, the
+equality operator is “==”, not “=” (this may change in a
+later version). The logical operators AND, OR and NOT are supported,
+as is bracketing (and nested bracketing) of expressions. An “in”
+operator is provided, which tests for values in a list e.g. “column_a
+in (1, 2, 3)” is equivalent to “column_a == 1 OR column_a == 2 OR
+column_a ==3 “. It is also possible to test whether string values
+start with certain substrings by suffixing a colon eg column_b ==:
+'A' will select all values in column_b which start with 'A'.</P>
+<P>However, it is usually easier to use the filter editor to define
+dataset filters. To do this, click the <B>[New]</B> button to the
+right of the filter text box. You will be presented with the filter
+editing page. The filter is shown diagrammatically on the left of the
+page, with the currently selected clause of the filter highlighted in
+light pink. Edit controls for the currently selected clause appear in
+a panel in the middle of the page, and various action buttons appear
+on the right.</P>
+<P>To edit a clause, click the red “target” symbol to the left of
+the clause (if the filter is new and thus undefined, a blank clause
+denoted by “???” should already be highlighted. In the edit panel
+in the middle of the page, select a column for the filter clause from
+one of the three pull-down lists provided, and then click the <B>[&gt;&gt;]</B>
+button (the clause editor operates as a “wizard” or “druid”,
+allowing you to move to the next step or the previous step by
+clicking the <B>[&gt;&gt;]</B> or <B>[&lt;&lt;]</B> buttons
+respectively).</P>
+<P STYLE="font-weight: medium">The operator expression section of the
+clause will then be highlighted, and you can choose an appropriate
+operator from the pull-down list. Note that the “starts with”
+operators only work with string values (which may be strings of
+numerals, eg ICD-9-CM codes). Then click the <B>[&gt;&gt;]</B> button
+again. 
+</P>
+<P>The value section of the clause editor will display a pull-down
+selection box for categorical or ordinal columns with small or
+moderate cardinality – select a value form the list (or multiple
+values if the “in” operator has been used – hold down the <B>Ctrl</B>
+key to select multiple items). For high cardinality columns, and
+scalar columns, a text box is displayed in which an appropriate value
+can be entered. Future versions of NetEpi Analysis will have better
+methods for selecting values for high cardinality columns such as
+those which contain ICD codes. If the column you selected is a date
+column, then components of the date may be selected from pull-down
+lists (the next version will support specification of time and
+date/time values in the filter editor as well).</P>
+<P>When you have specified the value, click the <B>[&gt;&gt;]</B>
+button again. The filter clause editor panel will disappear from the
+middle of the page, and the filter clause will be shown on the left. 
+</P>
+<P>To edit that clause again, or to add new clauses, click on the
+target symbol at the left-hand side of the clause. The clause editor
+panel will re-appear in the middle of the page.</P>
+<P>To add additional clauses to the filter, click on the <B>[and]</B>
+or <B>[or]</B> buttons in the lower left-hand corner of the clause
+editor panel. The <B>[Delete]</B> button at the lower right of the
+clause editor panel has the obvious effect.</P>
+<P>By repeating the above steps, complex filters can be built up and
+displayed in diagrammatic form. When you have finished, you can click
+the <B>[Okay]</B> button on the right of the page. The filter which
+you have defined will then appear in the filter text box on the
+analysis parameters page. Note that although you can edit the filter
+definition directly in the text box on the analysis parameter pages,
+your edits will not be reflected in the state of the filter displayed
+on the filter editor page - in other words, the connection between
+the two is only unidirectional, from filter editor to filter text
+box, at this stage.</P>
+<P>For more complex filter definitions, rather than just clicking
+<B>[Okay]</B>, it is a good idea to give the definition a name and
+description by clicking on the <B>[Edit info]</B> button, and then
+clicking the <B>[Save]</B> button to save the filter definition. Note
+that filter definitions are currently shared between all users.
+Future versions of NEA will provide user-specific workspaces.</P>
+<P>If you make a mistake while editing a filter definition, you can
+use the <B>[Undo]</B> and <B>[Redo]</B> buttons to roll back or roll
+forward the changes you have made to the definition.</P>
+<P>Saved filter definitions can be loaded by selecting the definition
+by name from the pull-down list to the right of the filter text box
+and clicking <B>[Load]</B>. Loaded or current filter definitions can
+be edited by clicking the <B>[Edit]</B> button.</P>
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Titles
+and Footers</FONT></FONT></P>
+<P>These text boxes allow you to specify titles and footers for your
+graphs and tables. They are automatically populated with text, which
+is adjusted each time you set various parameters. You can adjust the
+contents of the title and footer text boxes if you wish. However, if
+you do edit the text, no further automatic changes will be made until
+you start a new analysis. (Note that for Summary Tables and
+Crosstabs, the titles and footers text boxes are populated after you
+run the analysis – they can then be edited and the analysis re-run.
+In future versions the behaviour will be made the same as the plot
+analysis types.) 
+</P>
+<P>Future versions will allow similar editing of graph axis labels
+and table row and column headings.</P>
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Output
+format</FONT></FONT></P>
+<P>For graphs, you can change the format of the output by choosing
+PNG (web graphics), PDF or SVG formats. SVG requires a browser
+plug-in or stand-alone SVG viewer – see the <A HREF="http://www.w3.org/Graphics/SVG/SVG-Implementations">W3C
+Web page on SVG implementations</A> for more information. After
+selecting a new format, click the <B>[Change]</B> button. The size or
+orientation of the selected output format can be set using the radio
+buttons on the right. Future versions will permit greater control
+over output size and orientation, as well as a wider range of output
+formats.</P>
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Bar
+charts</FONT></FONT></P>
+<P>You should have the Bar Chart parameter specification page
+displayed.</P>
+<P>The <B>X Column</B> selection list allows you to select a column
+to use as the X axis of the bar chart. The X axis is by convention
+the horizontal axis, but selecting the <B>Horizontal</B> check box
+makes the X axis the vertical axis (and thus the bars horizontal).
+Note that only categorical, ordinal and date columns are available
+for selection for the bar chart X axis.</P>
+<P>The <B>Measure Column</B> pull-down list is used to select the
+type of measure to use for the Y axis of the bar chart – that is,
+the quantity which determines the height (or length) of each bar. It
+defaults to <B>Frequency</B>, weighted by the default weighting
+column for the dataset, if there is one. Other weighting columns can
+be chosen if they are available for the dataset in question, or
+weighting can be disable by selecting “No weighting” from the
+weighting pull-down selection list (the rightmost one of the three).
+For some types of measures, such as mean or median, a scalar column
+must be chosen as the basis of the measure, using the middle
+pull-down selection list.</P>
+<P>Note also that the first measure shown is the list is a proportion
+(of weighted or unweighted frequencies, as appropriate) for each
+category on the X axis. If stacking, grouping or paneling columns are
+also specified (see below), then proportions for combinations of each
+of these conditioning columns are also automatically made available
+for use. Future versions may offer automatic calculation of
+proportions of other quantities other than counts, where this makes
+sense. Support for other forms of ratio may also be added.</P>
+<P>A <B>Group By</B> column can also be specified – this causes
+separate bars to be displayed for each value of the Group By column.
+Selecting the <B>Stack</B> check box causes stacking (division of
+bars) rather than side-by-side grouping.</P>
+<P>One or more paneling columns can similarly be specified by
+clicking on the <B>[Add]</B> button in the <B>Panel(s</B>) section.
+This causes separate bar charts to be created in panels for each
+value of paneling column(s). It is not a good idea to specify more
+than two or three paneling columns. Also, it is possible to use
+scalar columns for paneling, in which case the paneling columns will
+be automatically partitioned into ranges. However, for large,
+unfiltered datasets, this can be an exceedingly slow operation.
+Future versions will advise users of this fact and offer
+alternatives, such as faster binning of scalar columns in Numeric
+Python before passing data to R for plotting.</P>
+<P STYLE="font-weight: medium">Finally, the origin of bar charts can
+be specified using the <B>Origin</B> text box.</P>
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Dot
+charts</FONT></FONT></P>
+<P>Dot charts are very similar to bar charts, except that dots are
+used instead of bars. All of the parameters are the same as for bar
+charts, except that <B>Group-by Column</B> is replaced by <B>Stack-by
+Column</B> because dots are always stacked along a single line for
+each value of the axis column. 
+</P>
+<P>Future versions will permit the size, shape and colour of the dots
+to be set by the user.</P>
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Line
+plots</FONT></FONT></P>
+<P>Line plots are designed to display time series data, using date,
+time or date/time columns for the X axis. However, categorical and
+ordinal columns can also be used for the X axis. In other respects,
+the parameters for line plots are similar to those for bar and dot
+charts. Once again, future versions will permit the width, style and
+colour of lines to be set by the user (this can already be done via
+the programmatic interface).</P>
+<P>When a date column is used for the X axis, NEA tries to select
+appropriate tick mark points. More control over this will be provided
+in future versions.</P>
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Histogram
+and density plots</FONT></FONT></P>
+<P>These allow a single scalar column to be specified. For
+histograms, the <B>Bins</B> parameter allows the number of bars in
+the histogram to be set. Future versions will also allow parameters
+for density plots to be set.</P>
+<P>Note that histogram and density plots, as well as box plots and
+scatter plots (see below), involve the transfer of all the data
+(after filtering) for the selected column from Python to R. This can
+be both slow and use a great deal of memory. Therefore, when using
+large datasets, it is recommended that filters are used to limit the
+amount of data being processed. Future versions will warn the user of
+this issue and offer optional random or stratified random sampling of
+data used for these types of plots.</P>
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Box-and-whisker
+plots</FONT></FONT></P>
+<P>Only scalar columns can be chosen for the Y axis, and only
+categorical, ordinal or date columns can be chosen for the X axis.
+The <B>Outliers</B> and <B>Notches</B> options currently have no
+effect. Future versions may calculate the statistics needed for
+drawing the box plots in Numeric Python, which may speed this type of
+analysis considerably for large datasets.</P>
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Scatter
+plots</FONT></FONT></P>
+<P>These are self-explanatory. Only scalar columns can be chosen for
+the X and Y axes. Better tick marks for log-scaled axes are on the
+TO-DO list for future versions.</P>
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Scatter
+matrix plots </FONT></FONT>
+</P>
+<P>The <B>Measures</B> parameter allows several scalar columns to be
+selected. A matrix of scatter plots is then displayed for each pair
+of columns.</P>
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Summary
+tables</FONT></FONT></P>
+<P>This produces simple summaries, similar to those produced by
+GROUP-BY in SQL or PROC SUMMARY in <A HREF="http://www.sas.com/">SAS</A><FONT FACE="Bitstream Vera Serif">&reg;</FONT>.
+Zero or more categorical, ordinal or date columns can be chosen (by
+clicking the <B>[Add]</B> button) to condition the summary. One row
+of summary data is produced for each combination of values in each of
+the conditioning columns. Zero or more <B>Statistics</B>, which are
+equivalent to <B>Measures</B> in the plots, can be specified (if none
+are specified then unweighted frequency counts are shown). The
+inconsistency in nomenclature (<B>Measures</B> versus <B>Statistics</B>)
+will be corrected in a future version, and the ability to specify
+frequency proportions and other ratios will be added, as will the
+ability to save the output as a new dataset, and to export it as a
+CSV or other data file for use in other programmes.</FONT></P>
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Crosstabs</FONT></FONT></P>
+<P>Cross-tabulations may be
+produced using this analysis type. At least one categorical, ordinal
+or date <B>Column</B> column and one one categorical, ordinal or date
+<B>Row</B> column must be specified. Note hwever that more than one
+Row or Column column can be specified, in which case the row or
+column value headings are nested. By default, crosstabs display
+frequency counts, weighted according to the setting of the <B>Weight
+by column</B> parameter. Other statistics may be added to the table.
+Proportions of frequency counts can also be added by selecting one or
+more proportions in the <B>Proportions</B> list box (hold down the
+<B>Crtl</B> key to select more than one). The method for selecting
+proportions will be made more like that used for the plots in a
+future version.</P>
+<P>The <B>Heatmap</B> check box
+demonstrates the use of table cell shading – in the current
+version, cells are shaded based on absolute value – future versions
+will offer a range of shading options based on the expectation for
+each cell in the table. <B>Marginal Totals</B> may be added at the
+top and left of rows and columns respectively, or at the bottom and
+right (or suppressed entirely, which is the default).</P>
+<P>On some browsers, complex
+crosstabs may not display correctly – if so, retry the analysis
+after selecting the <B>Use simplified table rendering</B> check box.</P>
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Demonstration
+datasets</FONT></FONT></P>
+<P>Programmes to load two
+demonstration datasets are provided. The US National Hospital
+Discharge Survey dataset provides a moderately sized dataset (just
+over 2 million records) which represents a sampled survey (and yes,
+we are aware that the variance estimates do not current account for
+the survey design effects – a future version will correct this).
+Please be sure to observe the data use restrictions which the National Center for
+Health Statitics attaches to these files (see the various README files at 
+<a href="ftp://ftp.cdc.gov/pub/Health_Statistics/NCHS/Dataset_Documentation/NHDS/">ftp://ftp.cdc.gov/pub/Health_Statistics/NCHS/Dataset_Documentation/NHDS/</a> ).
+Some sample WHO national health indicator data are also provided
+(please see the README file in the demo subdirectory for
+instructions on how to obtain fresh version of these indicator data).
+The WHO indicator dataset is small, but provides many more scalar
+columns (as well as demonstrating some  current deficiencies in the
+axis labelling routines...).  You are encouraged to load additional
+datasets to try out. At the moment there is no formal documentation
+of the API for loading datasets, but it should be fairly obvious from
+the examples in the demo/loaders subdirectory, as well as from the
+programme source code. Full documentation will of course be included
+in future versions.</P>
+<P STYLE="margin-top: 0.42cm; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Future
+directions</FONT></FONT></P>
+<P>Features with the highest
+priority for inclusion in the next version are:</P>
+<UL>
+	<LI><P>the ability to suppress
+	certain values from the table and graph output (but not from the
+	underlying computations – filtering can be used to do that);</P>
+	<LI><P>the ability to create
+	ordinal (categorical) columns from scalar (continuous or discrete
+	value) columns using a range of “binning” or histogramming
+	methods (including user-specified ranges);</P>
+	<LI><P>other forms of column
+	recoding facilities using Python syntax;</P>
+	<LI><P>the ability to specify
+	customised orders for the display of column values in tables and
+	plots;</P>
+	<LI><P>he addition of some
+	facilities for the calculation of basic epidemiological quantities
+	such as rates, relative risks and odds ratios.</P>
+	<LI><P>Please see the TODO file in
+	the top level directory of the NetEpi Analysis distribution for
+	details of other planned or possible enhancements.</P>
+</UL>
+<P><BR><BR>
+</P>
+<P><BR><BR>
+</P>
+</BODY>
+</HTML>
+

@@ -1,0 +1,230 @@
+Searchable text columns in SOOM
+===============================
+
+NOTE - All material associated with "NetEpi Analysis" is Copyright (C)
+2004, 2005 Health Administration Corporation (New South Wales Department
+of Health).
+
+NetEpi Analysis is licensed under the terms of the Health Administration
+Corporation Open Source License Version 1.2 (HACOS License V1.2),
+the full text of which can be found in the LICENSE file provided with
+NetEpi Analysis.
+
+
+New SOOM column type SearchableTextDatasetColumn added with a new column
+type of 'searchabletext'.
+
+Builds a reverse index of the vocabulary of the column keeping, for
+each word, all rows and word positions within those rows where that
+word occurs.
+
+These are stored in three files, e.g.
+
+    nursing_assessment/data.SOOMstringarray
+    nursing_assessment/inverted.SOOMstringvocab
+    nursing_assessment/occurrences.SOOMpackeddata
+
+data.SOOMstringarray contains the actual rows of the column
+
+inverted.SOOMstringvocab contains, for each word, and (offset, length)
+pair indexing into occurrences.SOOMpackeddata
+
+occurrences.SOOMpackeddata contains (many) (rownum, wordnum) pairs in
+rownum/wordnum sorted order for each word.
+
+A 'searchabletext' column may be queried using the 'contains' operator
+(and only the 'contains' operator) with an expression of the form
+
+    column contains [[search-expr]]
+
+Where column is the name of the column, e.g. nursing_assessment, and
+search-expr is a query according to the following grammar.
+
+    search-expr ::= sfactor ( '|' sfactor ) *
+    sfactor     ::= sphrase ( ( '&' | '&-' ) sphrase
+                  | ( '<' | '>' | '~' ) ( '[' INT ']') ? sphrase
+                  | ( '-' ) ? sphrase ) *
+    sphrase     ::= sterm | '"' sterm + '"'
+    sterm       ::= WORD | '(' search-expr ')'
+
+Where WORD is a sequence of letter, numbers, "'" characters and '*'
+characters.  The sequence must contain at least one letter or number.
+The character '*' will match zero or more characters.
+
+In other words a basic query consists of individual WORDs, so
+
+    dog
+
+matches all records where the column contains the word 'dog' (or 'DOG',
+or 'DoG'; searching is not case-sensitive) but not where it contains
+the word 'dogs' and not the word 'dog' on its own;
+
+All punctuation is ignored in queries but serves to separate WORDs,
+except for "'" which is ignored but which does not separate WORDs.
+
+    hair-cut
+
+is two words, while
+
+    don't
+
+is one word and will match the query 'dont'.
+
+A basic query unit can also be a phrase of WORDs, i.e.
+
+    "arrived via car"
+
+means the WORD 'arrived' followed by the WORD 'via' followed by the word
+'car' and would match 'ARRIVED VIA CAR' but not 'ARRIVED IN CAR' or
+'ARRIVED VIA OWN CAR'.  (See below for alternatives to phrases.)
+
+Individual words (or phrases) may be joined together with conjunction
+operators:
+
+    &   and
+    &-  and not
+    <   before
+    ~   near
+    >   after
+
+So
+
+--  A & B
+
+    the search-expression A must match the row and the search-expression
+    B must also match the row
+
+    dog & cat
+    
+    will match 'dog ate cat' as well as 'cat scratched dog' but will
+    NOT match 'dog ate dinner', 'cat left home' or 'the weather is nice'
+
+--  A &- B (or A & - B; or A & -B)
+
+    the search-expression A must match the row and the search-expression
+    B MUST NOT match the row
+
+    dog &- cat
+
+    will match 'dog ate dinner', but will NOT match 'dog ate cat',
+    'cat scratched dog', 'cat left home' or 'the weather is nice'
+
+**  NOTE: The '&' character may be left out which means that the
+    expression 'hair-cut' is equivalent to 'hair &- cut' which may not
+    be what is desired.
+
+--  A < B
+
+    something matching the search-expression A must occur within
+    some number of words (usually 10) before something matching the
+    search-expression B in the same row
+
+    dog < cat
+
+    will match 'dog ate cat', but will NOT match 'dog ate dinner',
+    'cat scratched dog', 'cat left home' or 'the weather is nice'.
+
+**  NOTE: 'dog < cat' will match 'the cat bit the dog then the cat left'
+    since 'dog' appears before 'cat' in that sentence.
+
+--  A > B
+
+    something matching the search-expression A must occur within
+    some number of words (usually 10) after something matching the
+    search-expression B in the same row
+
+    dog > cat
+
+    will match 'cat scratched dog', but will NOT match 'dog ate cat',
+    'dog ate dinner', 'cat left home' or 'the weather is nice'.
+
+--  A ~ B
+
+    something matching the search-expression A must occur within
+    some number of words (usually 10) of something matching the
+    search-expression B in the same row
+
+    dog ~ cat
+
+    will match 'dog ate cat' as well as 'cat scratched dog', but will
+    NOT match 'dog ate dinner', 'cat left home' or 'the weather is nice'.
+
+**  NOTE: The difference between '~' (NEAR) and '&' (AND) is that with
+    '&' the WORDs can appear anywhere in the text while with '~' the
+    WORDs must appear in proximity to one another.  The text 'I took the
+    dog for a walk an along the way we went into a park and met a cat'
+    would NOT match the above query without changing the proximity value
+    for the NEAR operator.
+
+**  NOTE: ~ (NEAR) may be a quicker alternative to the use of complicated
+    phrases: pick the least common words in a phrase and use ~ instead,
+    e.g.  instead of
+
+    "whether 'tis nobler in the mind"
+
+    use
+
+    nobler ~ mind
+
+    which is likely to be faster without producing too many extra results.
+
+**  NOTE: The degree of 'nearness' for ~, <, and > may be changed by
+    specifying a number in the query, e.g.
+
+    dog ~[2] cat
+
+    will match 'dog' and 'cat' appearing within two (2) words of each
+    other, i.e.  with at most one (1) intervening word.
+
+All conjunction operators are left associative and of the same precedence
+so expression are evaluation left to right.  Some thought must be given
+to such expressions to work out what matches.  For example
+
+    bitten < ferret < hand
+
+will match 'bitten on the hand by a ferret' since (bitten < ferret)
+matches the words 'bitten' and 'ferret' and thus some part of the left
+hand side of the second <, i.e. the result of (bitten < ferret) is before
+'hand':
+
+    (bitten < ferret) matches 'bitten' and 'ferret'
+    ((bitten < ferret) < hand) matches {'bitten', 'hand'} since only
+        the word 'bitten' in the result {'bitten', 'ferret'} is before
+        {'hand'}
+
+Think of the results of an operator as a set of words: A < B means
+anything in A which is before anything in B union anything in B which
+is after anything in A, taking into account proximity constraints.
+
+Of a lower priority than conjunction is disjunction or union.  The |
+joins together the results of subqueries.
+
+--  A | B
+
+    matches anything which matched A or B
+
+    dog | cat
+
+    will match 'dog ate cat', 'cat scratched dog', 'dog ate dinner',
+    'cat left home' but will NOT match 'the weather is nice'
+
+Sub-expression may be grouped using parentheses to overcome operator
+precedence, e.g.
+
+    (fall | fell) (etoh | alcohol)
+
+will match anything containing the word 'fall' or 'fall' and also
+containing the word 'etoh' or the word 'alcohol'; cf.
+
+    fall | fell etoh | alcohol
+
+which will match anything containing the word 'fall' as well as anything
+containing the words 'fell' and the word 'etoh', or any rows containing
+the word 'alcohol'.  This is quite different.
+
+**  NOTE: the individual elements of a phrase can be WORDs, or
+    subexpressions, so, for example
+
+    "fell (over | down)"
+
+    would match 'fell down' as well as 'fell over'

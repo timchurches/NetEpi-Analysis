@@ -1,0 +1,72 @@
+%
+%   The contents of this file are subject to the HACOS License Version 1.2
+%   (the "License"); you may not use this file except in compliance with
+%   the License.  Software distributed under the License is distributed
+%   on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+%   implied. See the LICENSE file for the specific language governing
+%   rights and limitations under the License.  The Original Software
+%   is "NetEpi Analysis". The Initial Developer of the Original
+%   Software is the Health Administration Corporation, incorporated in
+%   the State of New South Wales, Australia.
+%
+%   Copyright (C) 2004,2005 Health Administration Corporation.
+%   All Rights Reserved.
+%
+\let\pdfannotlink\pdfstartlink
+\documentclass[a4paper]{howto}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{color}
+\pagecolor{white}
+
+\title{SOOM Extensions for NetEpi Analysis}
+
+\author{Dave Cole and Tim Churches}
+
+% Please at least include a long-lived email address;
+% the rest is at your discretion.
+\authoraddress{E-mail: \email{djc@object-craft.com.au} \email{TCHUR@doh.health.nsw.gov.au}}
+
+\release{0.11}
+\date{December 5, 2001}
+
+\makeindex			% tell \index to actually write the .idx file
+\makemodindex			% If this contains a lot of module sections.
+
+\begin{document}
+
+\maketitle
+
+% This makes the contents more accessible from the front page of the HTML.
+\ifhtml
+\chapter*{Front Matter\label{front}}
+\fi
+
+\input{copyright}
+
+\begin{abstract}
+
+\noindent
+
+The SOOM (Set Operations on Ordinal Mappings) Extensions package is a collection
+of Numeric Python optimisations which accelerate a number of performance
+critical SOOM functions.
+
+\begin{seealso}
+\seetitle[http://numpy.sourceforge.net/]
+{Numerical Python Web Site}{for information on Numpy}
+\end{seealso}
+
+\end{abstract}
+
+\tableofcontents
+
+\input{installation}
+\input{soomfunc}
+\input{soomarray}
+\input{blobstore}
+\input{storage}
+
+\input{soom.ind}
+
+\end{document}

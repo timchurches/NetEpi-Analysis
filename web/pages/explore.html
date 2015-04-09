@@ -1,0 +1,82 @@
+<al-comment>
+
+    The contents of this file are subject to the HACOS License Version 1.2
+    (the "License"); you may not use this file except in compliance with
+    the License.  Software distributed under the License is distributed
+    on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+    implied. See the LICENSE file for the specific language governing
+    rights and limitations under the License.  The Original Software
+    is "NetEpi Analysis". The Initial Developer of the Original
+    Software is the Health Administration Corporation, incorporated in
+    the State of New South Wales, Australia.  
+    
+    Copyright (C) 2004,2005 Health Administration Corporation. 
+    All Rights Reserved.
+
+</al-comment>
+<al-expand name="page_layout">
+ <center>
+  <table class="explore">
+   <al-for iter="meta_i" expr="workspace.get_dataset_meta()">
+    <al-exec expr="label, value = meta_i.value()" />
+    <tr>
+     <th class="label"><al-value expr="label" />:</th>
+     <td><al-value expr="value" /><td>
+    </tr>
+   </al-for>
+   <al-if expr="show_col">
+    <al-expand name="coldetail" />
+   <al-else>
+    <tr>
+     <td colspan="2">
+      <al-expand name="showcols" />
+     </td>
+    </tr>
+   </al-if>
+   <tr>
+    <td colspan="2" align="center">
+     <al-if expr="show_col">
+      <al-input type="submit" name="allcols" value="All Columns" />
+     </al-if>
+     <al-input type="submit" name="back" value="Back" />
+    </td>
+   </tr>
+  </table>
+ </center>
+</al-expand>
+
+<al-macro name="showcols">
+    <table cellspacing="0">
+     <al-exec expr="colshead, colsdata = workspace.get_dataset().describe_cols()" />
+     <tr>
+      <td></td>
+      <al-for iter="colhead_i" expr="colshead">
+       <th><al-value expr="colhead_i.value()" /></th>
+      </al-for>
+     </tr>
+     <al-for iter="rows_i" expr="zip(*colsdata)">
+      <tr>
+       <td><al-input type="submit" 
+             nameexpr="'view_' + rows_i.value()[0]" value="View" />
+       </td>
+       <al-for iter="row_i" expr="rows_i.value()">
+        <td><al-value expr="row_i.value()" /></td>
+       </al-for>
+      </tr>
+     </al-for>
+    </table>
+</al-macro>
+
+<al-macro name="coldetail">
+  <tr>
+   <th colspan="2" class="detail" align="center">Column detail</th>
+  </tr>
+  <al-for iter="meta_i" expr="workspace.get_column_meta(show_col)">
+   <al-exec expr="label, value = meta_i.value()" />
+   <tr>
+    <th class="detail label"><al-value expr="label" />:</th>
+    <td class="detail"><al-value expr="value" /><td>
+   </tr>
+  </al-for>
+</al-macro>
+

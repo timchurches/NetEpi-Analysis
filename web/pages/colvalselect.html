@@ -1,0 +1,113 @@
+<al-comment>
+
+    The contents of this file are subject to the HACOS License Version 1.2
+    (the "License"); you may not use this file except in compliance with
+    the License.  Software distributed under the License is distributed
+    on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+    implied. See the LICENSE file for the specific language governing
+    rights and limitations under the License.  The Original Software
+    is "NetEpi Analysis". The Initial Developer of the Original
+    Software is the Health Administration Corporation, incorporated in
+    the State of New South Wales, Australia.  
+    
+    Copyright (C) 2004,2005 Health Administration Corporation. 
+    All Rights Reserved.
+
+</al-comment>
+
+<al-macro name="high_card_values">
+ <al-if expr="colvalselect">
+  <table width="100%" cellpadding="0" cellspacing="0">
+   <tr>
+    <td width="100%">
+     <table width="100%">
+      <al-for iter="ii" expr="colvalselect.trans_values(workspace)">
+       <tr>
+        <td width="17">
+         <al-if expr="colvalselect.multiple">
+          <al-input type="image" src="/nea/button-del.png"
+           nameexpr="'sop/del/%s' % ii.value()[0]" />
+         </al-if>
+        </td>
+        <td>
+         <al-value expr="ii.value()[1]" />
+        </td>
+       </tr>
+      </al-for>
+     </table>
+    </td>
+    <td valign="middle" class="submit">
+     <al-if expr="colvalselect.multiple">
+      <al-input type="submit" class="submit" value="None" name="sop/none/" />
+     </al-if>
+    </td>
+   </tr>
+  </table>
+ <al-else>
+  <div class="warn" align="center">Nothing selected</div>
+ </al-if>
+</al-macro>
+
+<al-macro name="colval_search">
+      <table width="100%" cellpadding="0" cellspacing="0" class="search">
+       <tr>
+        <td colspan="2" nowrap>
+         <b>Search:</b>
+         <al-input name="colvalselect.search_pat" />
+         <al-input type="submit" class="submit" value="Search" name="search" />
+         <al-input type="submit" class="submit" value="Clear" name="sop/clr/" />
+        </td>
+       </tr>
+       <al-if expr="colvalselect.errorstr">
+        <tr>
+         <td class="error" colspan="2">
+          <al-value expr="colvalselect.errorstr" />
+         </td>
+        </tr>
+       </al-if>
+       <tr>
+        <td width="100%">
+         <al-if expr="search_result">
+          <table width="100%">
+           <al-for iter="ii" expr="search_result">
+            <tr>
+             <td width="17">
+              <al-input type="image" src="/nea/button-add.png"
+               nameexpr="'sop/add/%s' % ii.value()[0]" />
+             </td>
+             <td width="100%">
+              <al-value expr="ii.value()[1]" />
+             </td>
+            </tr>
+           </al-for>
+          </table>
+         </al-if>
+        </td>
+        <td valign="middle" class="submit" align="right">
+         <al-if expr="colvalselect.multiple">
+          <al-input type="submit" class="submit" value="All" name="sop/all/" />
+         </al-if>
+        </td>
+       </tr>
+      </table>
+</al-macro>
+
+<al-macro name="value_edit">
+     <al-if expr="colvalselect.cardinality_is_high(workspace)">
+      <al-expand name="high_card_values" />
+     <al-else>
+      <table width="100%" cellpadding="0" cellspacing="0">
+       <tr>
+        <td>
+         <al-if expr="colvalselect.multiple">
+          <al-select name="colvalselect.value" multiple size="8"
+                optionexpr="colvalselect.select_values(workspace)" />
+         <al-else>
+          <al-select name="colvalselect.value" size="8"
+                optionexpr="colvalselect.select_values(workspace)" />
+         </al-if>
+        </td>
+       </tr>
+      </table>
+     </al-if>
+</al-macro>

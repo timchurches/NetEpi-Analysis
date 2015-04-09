@@ -1,0 +1,81 @@
+<al-comment>
+
+    The contents of this file are subject to the HACOS License Version 1.2
+    (the "License"); you may not use this file except in compliance with
+    the License.  Software distributed under the License is distributed
+    on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+    implied. See the LICENSE file for the specific language governing
+    rights and limitations under the License.  The Original Software
+    is "NetEpi Analysis". The Initial Developer of the Original
+    Software is the Health Administration Corporation, incorporated in
+    the State of New South Wales, Australia.  
+    
+    Copyright (C) 2004,2005 Health Administration Corporation. 
+    All Rights Reserved.
+
+</al-comment>
+
+   <div class="header"><al-value expr="workspace.output.title" /></div>
+   <al-exec expr="full_ds = SOOMv0.dsload(workspace.dsname)" />
+   <al-exec expr="ds = SOOMv0.filtered_ds(full_ds, workspace.output.dsrows)" />
+   <al-exec expr="cols = ds.get_columns(workspace.output.colnames)" />
+   <al-exec expr="rows = len(workspace.output.dsrows)" />
+   <al-if expr="rows == 0">
+    <i>No results returned by query.  Try a less specific query.</i>
+   <al-else>
+    <al-exec expr="pagesize = workspace.output.pagesize">
+    <al-for iter="row_i" expr="xrange(rows)" pagesize="1" prepare />
+    <al-exec expr="row_i.set_pagesize(pagesize)" />
+    <al-if expr="pagesize == 0 or rows <= pagesize">
+     (<al-value expr="rows" /> result rows)
+    <al-else>
+     <al-if expr="row_i.has_prevpage()">
+      <al-input type="submit" prevpage="row_i" value="Previous Page" />
+     </al-if>
+     &nbsp;
+     Page <al-value expr="row_i.value() / pagesize + 1" /> of <al-value expr="(rows - 1) / pagesize + 1" /> (<al-value expr="rows" /> rows overall)
+     &nbsp;
+     <al-if expr="row_i.has_nextpage()">
+      <al-input type="submit" nextpage="row_i" value="Next Page" />
+     </al-if>
+    </al-if>
+    <table class="tableout">
+     <tr>
+      <th>Row</th>
+      <al-for iter="col_i" expr="cols">
+       <th><al-value expr="col_i.value().label" /></th>
+      </al-for>
+     </tr>
+     <al-for iter="row_i" continue>
+      <tr>
+       <td class="numeric"><al-value expr="row_i.value() + 1" /></td>
+       <al-for iter="col_i" expr="cols">
+         <al-exec expr="col = col_i.value()" />
+		 <al-exec expr="value = col.do_outtrans(col[row_i.value()])" />
+         <al-if expr="type(value) in (int, float)">
+          <td class="numeric">
+           <al-value expr="col.do_format(value)" />
+          </td>
+         <al-else>
+		  <al-exec expr="highlight = workspace.output.highlight_fns.get(col.name)" />
+		  <al-if expr="highlight is not None">
+           <td><al-value expr="col.do_format(highlight(value))" noescape /></td>
+		  <al-else>
+           <td><al-value expr="col.do_format(value)" /></td>
+		  </al-if>
+         </al-if>
+       </al-for>
+      </tr>
+     </al-for>
+    </table>
+    <al-if expr="pagesize != 0">
+     <al-if expr="row_i.has_prevpage()">
+      <al-input type="submit" prevpage="row_i" value="Previous Page" />
+     </al-if>
+     &nbsp;
+     <al-if expr="row_i.has_nextpage()">
+      <al-input type="submit" nextpage="row_i" value="Next Page" />
+     </al-if>
+    </al-if>
+   </al-if>
+   <div class="footer"><al-value expr="workspace.output.subtitle" /></div>

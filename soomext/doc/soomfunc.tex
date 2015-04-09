@@ -1,0 +1,170 @@
+%
+%   The contents of this file are subject to the HACOS License Version 1.2
+%   (the "License"); you may not use this file except in compliance with
+%   the License.  Software distributed under the License is distributed
+%   on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+%   implied. See the LICENSE file for the specific language governing
+%   rights and limitations under the License.  The Original Software
+%   is "NetEpi Analysis". The Initial Developer of the Original
+%   Software is the Health Administration Corporation, incorporated in
+%   the State of New South Wales, Australia.
+%
+%   Copyright (C) 2004,2005 Health Administration Corporation.
+%   All Rights Reserved.
+%
+\section{\module{soomfunc}}
+
+\declaremodule{extension}{soomfunc}
+
+The \module{soomfunc} module contains a collection of set operations
+which can be performed on Numpy arrays:
+
+The \module{soomfunc} module contains the following:
+
+\begin{datadesc}{__version__}
+A string which specifies the version of the \module{soomfunc} module.
+\end{datadesc}
+
+\begin{funcdesc}{unique}{a \optional{, b}}
+Remove all duplicate values from the sorted rank-1 array passed as the
+\var{a} argument returning a new rank-1 array of unique values.  If
+the optional second argument \var{b} is supplied it will be used to
+store the result.
+
+\begin{verbatim}
+>>> from soomfunc import * 
+>>> from Numeric import *
+>>> unique(array([1,2,3,3,4,4,5]))
+array([1, 2, 3, 4, 5])
+\end{verbatim}
+\end{funcdesc}
+
+\begin{funcdesc}{intersect}{a, b \optional{, \ldots}}
+Return the unique intersection of the sorted rank-1 arrays passed.
+All arrays must have the same typecode.
+
+The function finds the smallest array then allocates an array of that
+length to hold the result.  The result is primed by finding the
+intersection of the smallest array with the first array in the
+argument list (or the second if the first is the smallest).  The
+result is then incrementally intersected in-place with the remainder
+of the arrays generating a new result.
+
+With each intersection, the function compares the length of the two
+arrays.  If one array is at least three times larger than the other,
+the \function{sparse_intersect()} method is used, otherwise the
+\function{dense_intersect()} method is used.
+
+\begin{verbatim}
+>>> from soomfunc import * 
+>>> from Numeric import *
+>>> intersect(array([1,2,3]), array([2,3]), array([3,4]))
+array([3])
+\end{verbatim}
+\end{funcdesc}
+
+\begin{funcdesc}{sparse_intersect}{a, b \optional{, \ldots}}
+Return the intersection of the sorted rank-1 arrays passed.  All
+arrays must have the same typecode.  This generates the same result as
+the \function{intersect()} function.
+
+When finding the intersection of two arrays it uses a binary search to
+locate matching values.  The first point for the binary search is
+determined by dividing the number of elements remaining in the target
+array by the number of elements remaining in the source array.
+
+This method can be thousands of times faster than the
+\function{dense_intersect()} function.  For arrays of similar size,
+the \function{dense_intersect()} function will be more than twice as
+fast as this function.
+
+You are encouraged to use the \function{intersect()} function as it
+will automatically use the best intersection function.
+\end{funcdesc}
+
+\begin{funcdesc}{dense_intersect}{a, b \optional{, \ldots}}
+Return the intersection of the sorted rank-1 arrays passed.  All
+arrays must have the same typecode.  This generates the same result as
+the \function{intersect()} function.
+
+When finding the intersection of two arrays it steps through both
+arrays one value at a time to locate matching values.  The
+\function{sparse_intersect()} function can be thousands of times
+faster than this function for some inputs.
+
+You are encouraged to use the \function{intersect()} function as it
+will automatically use the best intersection function.
+\end{funcdesc}
+
+\begin{funcdesc}{outersect}{a, b \optional{, \ldots}}
+Return the unique symmetric difference of the sorted rank-1 arrays
+passed.  All arrays must have the same typecode.
+
+Steps through all arrays in lock-step and finds all values which do
+not occur in every array.  This is the exact opposite of the
+\function{intersect()} function.
+
+\begin{verbatim}
+>>> from soomfunc import * 
+>>> from Numeric import *
+>>> outersect(array([1,2,3]), array([2,3]), array([3,4]))
+array([1, 2, 4])
+\end{verbatim}
+\end{funcdesc}
+
+\begin{funcdesc}{union}{a, b \optional{, \ldots}}
+Return the unique union of the sorted rank-1 arrays passed.  All
+arrays must have the same typecode.
+
+Steps through all arrays in lock-step and finds all unique values
+across every array.
+
+\begin{verbatim}
+>>> from soomfunc import * 
+>>> from Numeric import *
+>>> union(array([1,2,3,3]), array([2,2,3]), array([3,4]))
+array([1, 2, 3, 4])
+\end{verbatim}
+\end{funcdesc}
+
+\begin{funcdesc}{difference}{a, b \optional{, \ldots}}
+Return the result of subtracting the second and subsequent sorted
+rank-1 arrays from the first sorted rank-1 array.  All arrays must
+have the same typecode.
+
+\begin{verbatim}
+>>> from soomfunc import * 
+>>> from Numeric import *
+>>> difference(array([1,2,3,3]), array([2,2,3]), array([3,4]))
+array([1])
+\end{verbatim}
+\end{funcdesc}
+
+\begin{funcdesc}{valuepos}{a, b}
+Return an array of indexes into rank-1 array \var{a} where the values
+in rank-1 array \var{b} appear.  Both arrays must have the same
+typecode.
+
+\begin{verbatim}
+>>> from soomfunc import * 
+>>> from Numeric import *
+>>> valuepos(array([2,2,3,3,4,5,6]),array([3,5]))
+array([2, 3, 5])
+\end{verbatim}
+\end{funcdesc}
+
+\begin{funcdesc}{preload}{a \optional{, num \code{= -1}}}
+Step backwards over \var{num} entries of the array in the \var{a}
+argument forcing the pages into memory.  If \var{num} is less than
+zero or greater than the length of the array, the entire array is
+scanned.
+
+This function is used to optimise the use of arrays stored in memory
+mapped blobs.
+
+\begin{verbatim}
+>>> from soomfunc import * 
+>>> from Numeric import *
+>>> preload(array([2,2,3,3,4,5,6]))
+\end{verbatim}
+\end{funcdesc}

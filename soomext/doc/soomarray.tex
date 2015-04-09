@@ -1,0 +1,163 @@
+%
+%   The contents of this file are subject to the HACOS License Version 1.2
+%   (the "License"); you may not use this file except in compliance with
+%   the License.  Software distributed under the License is distributed
+%   on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+%   implied. See the LICENSE file for the specific language governing
+%   rights and limitations under the License.  The Original Software
+%   is "NetEpi Analysis". The Initial Developer of the Original
+%   Software is the Health Administration Corporation, incorporated in
+%   the State of New South Wales, Australia.
+%
+%   Copyright (C) 2004,2005 Health Administration Corporation.
+%   All Rights Reserved.
+%
+\section{\module{soomarray}}
+
+\declaremodule{standard}{soomarray}
+
+The \module{soomarray} module contains a Python wrapper around the
+\module{blobstore} extension module.
+
+The \module{soomarray} module contains the following:
+
+\begin{excdesc}{Error}
+Exception raised when unexpected data is located in the BLOB store.
+\end{excdesc}
+
+\begin{classdesc}{MmapArray}{blob}
+Return a new instance of the \class{MmapArray} class using the
+\class{Blob} object specified in the \var{blob} argument.
+\end{classdesc}
+
+\begin{classdesc}{ArrayDict}{filename, mode \code{= 'r'}}
+Return a new instance of the \class{ArrayDict} class.
+
+The \var{filename} argument specifies the name of the file which will
+be used to store and retrieve memory arrays.  The \var{mode} argument
+is can be \code{'r'} to access an existing file in read only mode,
+\code{'r+'} to access an existing file in read-write mode, or
+\code{'w+'} to create a new file in read-write mode.
+\end{classdesc}
+
+\subsection{ArrayDict Objects}
+
+These objects behave like a Python dictionary.  Each item stored must
+be either a plain Numpy array, or a masked array from the MA package.
+
+Internally the object manages a \class{BlobStore} object in which the
+BLOB at index zero contains a pickled dictionary which yields the
+index of the BLOB which contains the Numpy array.  For masked arrays,
+the BLOB referenced by the dictionary contains the index of the mask
+array in the \member{other} BLOB member.
+
+You must be careful when modifying the contents of the
+\class{ArrayDict} object because the internal \class{BlobStore} may
+need to grow the memory mapped file.  Growing the file will invalidate
+all of the addresses contained in arrays retrieved from the file.  The
+\class{MmapArray} objects are able to automatically handle this event,
+but any arrays derived from these will not.  If you slice and dice
+\class{MmapArray} objects then modify their containing
+\class{ArrayDict}, you will get a segmentation fault.
+
+\begin{verbatim}
+>>> from Numeric import *
+>>> from soomarray import ArrayDict 
+>>> ad = ArrayDict('file.dat', 'w+')
+>>> ad['a'] = array(xrange(100))
+>>> ad.keys()
+['a']
+>>> len(ad) 
+1
+>>> ad['b'] = array(range(10))
+>>> ad['b']
+[0,1,2,3,4,5,6,7,8,9,]
+>>> from soomfunc import *
+>>> intersect(ad['a'], ad['b']) 
+[0,1,2,3,4,5,6,7,8,9,]
+\end{verbatim}
+
+\class{ArrayDict} objects have the following interface:
+
+\begin{methoddesc}[ArrayDict]{__del__}{}
+When the last reference to the object is dropped, the object will
+repickle the internal array dictionary to BLOB zero in the associated
+\class{BlobStore} object.
+\end{methoddesc}
+
+\begin{methoddesc}[ArrayDict]{__getitem__}{key}
+Returns a \class{MmapArray} object indexed by the \var{key} argument.
+This is called to evaluate \code{ad[key]}.  Raises
+\exception{KeyError} if \var{key} is not a key in the dictionary.
+\end{methoddesc}
+
+\begin{methoddesc}[ArrayDict]{__setitem__}{key, a}
+Called to implement assignment of \var{a} to \code{ad[key]}.
+\end{methoddesc}
+
+\begin{methoddesc}[ArrayDict]{__delitem__}{key}
+Called to delete \code{ad[key]}.  Raises \exception{KeyError} if
+\var{key} is not a key in the dictionary.
+\end{methoddesc}
+
+\begin{methoddesc}[ArrayDict]{__len__}{}
+Returns the number of items stored in the dictionary.  A masked array
+counts as one item.
+\end{methoddesc}
+
+\begin{methoddesc}[ArrayDict]{clear}{}
+Deletes all contents.
+\end{methoddesc}
+
+\begin{methoddesc}[ArrayDict]{get}{key \optional{, default \code{= None}}}
+Implements the dictionary \method{get()} method.
+\end{methoddesc}
+
+\begin{methoddesc}[ArrayDict]{has_key}{key}
+Returns TRUE if \var{key} is a valid key in the dictionary.
+\end{methoddesc}
+
+\begin{methoddesc}[ArrayDict]{keys}{}
+Returns a list containing all of the keys in the dictionary.
+\end{methoddesc}
+
+\begin{methoddesc}[ArrayDict]{values}{}
+Returns a list containing all of the arrays in the dictionary.
+\end{methoddesc}
+
+\begin{methoddesc}[ArrayDict]{items}{key}
+Returns a list of tuples containing all \code{(key, array)} pairs in
+the dictionary.
+\end{methoddesc}
+
+\subsection{MmapArray Objects}
+
+Implements a Numpy array which has memory mapped data within a
+\class{BlobStore}.  These objects act exactly like the \class{UserArray}
+object from the Numpy package (they should since their code was pasted
+from the Numpy source).
+
+Internally they wrap a \class{Blob} object which was retrieved from
+the parent \class{BlobStore} object.  Each time the array is used the
+object calls the \class{Blob} \method{as_array()} method to refresh
+the address of the array data.
+
+Apart from the standard Numpy array methods the \class{MmapArray}
+class implements the following:
+
+\begin{methoddesc}[MmapArray]{append}{a}
+This method appends the array in the \var{a} argument to the BLOB.
+The \class{BlobStore} container will resize as required.  This is a
+handy way to build up an array which is too large to fit in memory.
+
+\begin{verbatim}
+>>> from Numeric import *
+>>> from soomarray import ArrayDict 
+>>> ad = ArrayDict('file.dat', 'w+')
+>>> ad['a'] = array(xrange(100))
+>>> a = ad['a']
+>>> a.append(xrange(100))
+>>> len(a) 
+200
+\end{verbatim}
+\end{methoddesc}

@@ -1,0 +1,454 @@
+<al-comment>
+
+    The contents of this file are subject to the HACOS License Version 1.2
+    (the "License"); you may not use this file except in compliance with
+    the License.  Software distributed under the License is distributed
+    on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+    implied. See the LICENSE file for the specific language governing
+    rights and limitations under the License.  The Original Software
+    is "NetEpi Analysis". The Initial Developer of the Original
+    Software is the Health Administration Corporation, incorporated in
+    the State of New South Wales, Australia.  
+    
+    Copyright (C) 2004,2005 Health Administration Corporation. 
+    All Rights Reserved.
+
+</al-comment>
+
+<al-macro name="field">
+  <tr>
+   <td class="section">
+    <al-value expr="field.label" />: 
+    <al-if expr="field.note">
+     <div class="note"><al-value expr="field.note" /></div>
+    </al-if>
+   </td>
+   <al-usearg />
+  </tr>
+</al-macro>
+
+<al-macro name="simplefield">
+ <al-expand name="field">
+   <td><al-usearg /></td>
+ </al-expand>
+</al-macro>
+
+<al-macro name="rowtable">
+ <al-expand name="field">
+   <td>
+    <table class="rowtable">
+     <tr>
+      <al-usearg>
+     </tr>
+    </table>
+   </td>
+ </al-expand>
+</al-macro>
+
+<al-macro name="fillfield">
+ <al-expand name="field">
+   <td class="fill"><al-usearg /></td>
+ </al-expand>
+</al-macro>
+
+<al-lookup name="field_markup">
+
+ <al-item expr="'showdataset'">
+  <al-expand name="rowtable">
+   <td class="fill">
+    <al-value expr="workspace.dsname" /> - 
+    <al-value expr="workspace.dslabel"/><br />
+   </td>
+   <td><al-input class="submit" type="submit" name="back" value="Change" /></td>
+  </al-expand>
+ </al-item> 
+
+ <al-item expr="'analysis'">
+  <al-expand name="rowtable">
+   <td class="fill">
+    <al-select name="workspace.plottype_name" onchange="submit();" 
+     optionexpr="workspace.available_plottypes()" />
+   </td>
+   <td>
+    <al-input class="submit" type="submit" name="plottype_change" value="Change" />
+    <al-input class="submit" type="submit" name="plottype_reset" value="Reset" />
+   </td>
+  </al-expand>
+ </al-item> 
+
+ <al-item expr="'filter'">
+  <al-expand name="rowtable">
+   <td class="fill" width="70%">
+    <al-textarea cols="40" rows="3" 
+     nameexpr="'workspace.params.%s.filterexpr' % field.param" />
+   </td>
+   <td width="30%">
+    <table class="rowtable">
+     <al-exec expr="avail = getattr(workspace.params, field.param).available_filters()" />
+     <al-if expr="avail">
+      <tr>
+       <td colspan="2" class="fill">
+        <al-select nameexpr="'workspace.params.%s.filtername' % field.param" 
+         optionexpr="avail" />
+       </td>
+       <td><al-input class="submit" type="submit" value="Load"
+        nameexpr="'filter/load/' + field.param"  /></td>
+      </tr>
+     </al-if>
+     <tr>
+      <td><al-input class="submit" type="submit" value="Clear" 
+       nameexpr="'filter/clear/' + field.param" /></td>
+      <td><al-input class="submit" type="submit" value="Edit" 
+       nameexpr="'filter/edit/' + field.param" /></td>
+      <td><al-input class="submit" type="submit" value="New" 
+       nameexpr="'filter/new/' + field.param" /></td>
+     </tr>
+    </table>
+   </td>
+  </al-expand>
+ </al-item> 
+
+ <al-item expr="'colname'">
+  <al-expand name="rowtable">
+   <td class="fill">
+    <al-select nameexpr="'workspace.params.%s' % field.param" 
+     optionexpr="field.availablecols(workspace)"
+         onchange="submit();" />
+   </td>
+   <al-if expr="field.logscale_attr">
+    <td nowrap>
+     &nbsp;Logscale:
+     <al-for iter="base_i" expr="['No', 2, 10, 100]">
+      <al-value expr="base_i.value()" />
+      <al-input type="radio" valueexpr="base_i.value()"
+       nameexpr="'workspace.params.%s' % field.logscale_attr" />&nbsp;
+     </al-for>
+    </td>
+   </al-if>
+  </al-expand>
+ </al-item>
+
+ <al-item expr="'twobytwocolname'">
+  <al-expand name="rowtable">
+   <td class="fill">
+    <table> 
+     <tr>
+      <td>
+       <al-select nameexpr="'workspace.params.%s' % field.param" 
+        optionexpr="field.availablecols(workspace)"
+            onchange="submit();" />
+      </td>
+     </tr>
+     <al-exec expr="params = field.get_condcolparams(workspace)" />
+     <al-if expr="params.low_cardinality">
+      <tr>
+       <td class="error">
+        Column does not have enough values (at least two are required)
+       </td>
+      </tr>
+     <al-else>
+      <al-if expr="not params.is_okay()">
+       <tr>
+        <td class="warn">
+         Column values must be assigned
+        </td>
+       </tr>
+      </al-if>
+      <tr>
+       <td>
+        <div class="leftcol">
+         <b>Positive: </b>
+         <al-value expr="params.positive_label" />: 
+         <al-value expr="params.desc_positive(workspace)" />
+        </div>
+        <div class="rightcol">
+         <b>Negative: </b>
+         <al-value expr="params.negative_label" />: 
+         <al-value expr="params.desc_negative(workspace)" />
+        </div>
+       </td>
+      </tr>
+     </al-if>
+    </table>
+   </td>
+   <td>
+    <al-input class="submit" type="submit" nameexpr="'edit_' + params.label" value="Edit" />
+   </td>
+  </al-expand>
+ </al-item>
+
+ <al-item expr="'measurecol'">
+  <al-expand name="simplefield">
+    <al-select style="width: 34%;" name="workspace.params.measure_stat" 
+     optionexpr="field.statmethods(workspace)" />
+    <al-select style="width: 33%;" name="workspace.params.measure_col" 
+     optionexpr="field.statcols(workspace)" />
+    <al-select style="width: 33%;" name="workspace.params.measure_weight" 
+     optionexpr="field.weightcols(workspace)" />
+  </al-expand>
+ </al-item>
+
+ <al-item expr="'condcols'">
+  <al-expand name="simplefield">
+    <table class="rowtable">
+     <al-for iter="condcol_i" expr="getattr(workspace.params, field.param)">
+      <al-exec expr="idx = condcol_i.index()" />
+      <tr>
+       <td class="fill">
+        <al-select 
+         nameexpr="'workspace.params.%s[%d]' % (field.param, idx)"
+         optionexpr="field.availablecols(workspace)"
+         onchange="submit();" />
+       </td>
+       <td><al-input class="submit" type="submit" value="Remove"
+         nameexpr="'condcoldel/%s/%d' % (field.param, idx)" /></td>
+      </tr>
+     </al-for>
+     <tr>
+      <td class="fill"></td>
+      <td>
+       <al-input class="submit" type="submit" value="Add" 
+        nameexpr="'condcoladd/' + field.param" />
+      </td>
+     </tr>
+    </table>
+  </al-expand>
+ </al-item>
+
+ <al-item expr="'groupbycol'">
+  <al-expand name="rowtable">
+   <td class="fill">
+    <al-select nameexpr="'workspace.params.%s' % field.param" 
+     optionexpr="field.groupbycols(workspace)" 
+     onchange="submit();" />
+   </td>
+   <al-if expr="field.allow_stack">
+    <td><al-input type="checkbox" name="workspace.params.stack"
+      value="True" />&nbsp;Stack</td>
+   </al-if>
+  </al-expand>
+ </al-item>
+
+ <al-item expr="'statcols'">
+  <al-expand name="simplefield">
+    <table class="rowtable">
+     <al-for iter="statcol_i" expr="workspace.params.statcols">
+      <tr>
+       <td class="fill">
+        <al-select style="width: 34%" 
+         nameexpr="'workspace.params.statcols[%d][0]' % statcol_i.index()"
+         optionexpr="field.statmethods(workspace)" />
+        <al-select style="width: 33%" 
+         nameexpr="'workspace.params.statcols[%d][1]' % statcol_i.index()"
+         optionexpr="field.statcols(workspace)" />
+        <al-select style="width: 33%" 
+         nameexpr="'workspace.params.statcols[%d][2]' % statcol_i.index()"
+         optionexpr="field.weightcols(workspace)" />
+       </td>
+       <td>
+        <al-input class="submit" type="submit" value="Remove"
+         nameexpr="'statcoldel/%s/%d' % (field.param, statcol_i.index())" />
+       </td>
+      </tr>
+     </al-for>
+     <tr>
+      <td class="fill"></td>
+      <td>
+       <al-input class="submit" type="submit" value="Add" 
+        nameexpr="'statcoladd/' + field.param" />
+      </td>
+     </tr>
+    </table>
+  </al-expand>
+ </al-item>
+
+ <al-item expr="'propcols'">
+  <tr>
+   <td class="section"><al-value expr="field.label" />: <br />
+    <al-input class="submit" type="submit" name="refresh" value="Refresh" /></td>
+   <td>
+    <table class="rowtable">
+     <tr>
+      <td class="fill">
+       <al-select name="workspace.params.propcols" multiple="multiple"
+        optionexpr="field.propcols(workspace)" />
+      </td>
+      <td>
+       <al-input type="radio" name="workspace.params.proptype"
+         value="density" />&nbsp;Density<br />
+       <al-input type="radio" name="workspace.params.proptype"
+         value="percent" />&nbsp;Percent<br />
+       <al-input type="checkbox" name="workspace.params.heatmap"
+         value="True" />&nbsp;Heatmap<br />
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </al-item>
+
+ <al-item expr="'weightcol'">
+  <al-expand name="fillfield">
+    <al-select name="workspace.params.weightcol" 
+     optionexpr="field.weightcols(workspace)" />
+  </al-expand>
+ </al-item>
+
+ <al-item expr="'condcolparams'">
+  <al-expand name="rowtable">
+   <td class="fill">
+    <al-if expr="condcolparams">
+     <table>
+      <al-for iter="i" expr="condcolparams">
+       <al-exec expr="colparam = i.value()" />
+       <al-if expr="colparam.params">
+        <tr>
+         <td valign="baseline">
+          <al-value expr="colparam.label" />:&nbsp;
+         </td>
+         <td valign="baseline">
+          <table width="100%" cellspacing="0" cellpadding="0">
+           <al-for iter="ii" expr="colparam.describe(workspace)">
+            <tr>
+             <td valign="baseline"><al-value expr="ii.value()[0]" />:&nbsp;</td>
+             <td valign="baseline"><al-value expr="ii.value()[1]" /></td>
+            </tr>
+           </al-for>
+          </table>
+         </td>
+        </tr>
+       </al-if>
+      </al-for>
+     </table>
+    </al-if>
+   </td>
+   <td><al-input class="submit" type="submit" name="edit_condcolparams" value="Edit" /></td>
+  </al-expand>
+ </al-item>
+
+ <al-item expr="'output'">
+  <al-expand name="rowtable">
+      <td>
+       <al-select name="workspace.output.format" 
+        optionexpr="workspace.output.formats"
+        onchange="submit();" class="outputsel" /><br />
+       <al-input class="submit" type="submit" name="change_output" value="Change" 
+        class="outputsel" />
+      </td>
+      <td>
+<al-lookup name="output_opts">
+ <al-item expr="'PNG'">
+       <al-input type="radio" name="workspace.output.size" 
+        value="400x300">&nbsp;small
+       <al-input type="radio" name="workspace.output.size" 
+        value="750x550">&nbsp;medium
+       <al-input type="radio" name="workspace.output.size" 
+        value="1000x700">&nbsp;large
+       <al-input type="radio" name="workspace.output.size" 
+        value="1400x1200">&nbsp;extra&nbsp;large
+       <br />
+ </al-item>
+ <al-item expr="'PDF'">
+       <al-input type="radio" name="workspace.output.horizontal" 
+        value="False">&nbsp;Portrait
+       <al-input type="radio" name="workspace.output.horizontal" 
+        value="True">&nbsp;Landscape
+       <br />
+ </al-item>
+ <al-item expr="'SVG'">
+       <al-input type="radio" name="workspace.output.want_inline" 
+        value="True">&nbsp;Inline
+       <al-input type="radio" name="workspace.output.want_inline" 
+        value="False">&nbsp;Download
+       <br />
+ </al-item>
+</al-lookup>
+       <al-value expr="workspace.output.format" lookup="output_opts" />
+      </td>
+  </al-expand>
+ </al-item>
+
+ <al-item expr="'bool'">
+  <al-expand name="simplefield">
+   <al-input type="checkbox" value="True"
+    nameexpr="'workspace.params.%s' % field.param" />
+  </al-expand>
+ </al-item>
+
+ <al-item expr="'chooseone'">
+  <al-expand name="simplefield">
+   <al-for iter="choose_i" expr="field.options">
+    <al-input type="radio" valueexpr="choose_i.value()[0]"
+     nameexpr="'workspace.params.%s' % field.param" />
+     &nbsp;<al-value expr="choose_i.value()[1]" />
+    <al-if expr="str(choose_i.value()[0]).lower() == 'other'">
+     :&nbsp;<al-input nameexpr="'workspace.params.other_%s' % field.param" 
+        onchangeexpr="field.onchangejs()"/>
+    </al-if>
+    <al-if expr="field.horizontal">&nbsp;&nbsp;<al-else><br /></al-if>
+   </al-for>
+  </al-expand>
+ </al-item>
+
+ <al-item expr="'choosemany'">
+  <al-expand name="simplefield">
+   <al-for iter="choose_i" expr="field.options">
+    <al-input type="checkbox" list="list" valueexpr="choose_i.value()[0]"
+     nameexpr="'workspace.params.%s' % field.param" />
+     &nbsp;<al-value expr="choose_i.value()[1]" />
+    <al-if expr="field.horizontal">&nbsp;&nbsp;<al-else><br /></al-if>
+   </al-for>
+  </al-expand>
+ </al-item>
+
+ <al-item expr="'drop'">
+  <al-expand name="fillfield">
+   <al-select nameexpr="'workspace.params.%s' % field.param" 
+     optionexpr="field.options" onchange="submit();" />
+  </al-expand>
+ </al-item>
+
+ <al-item expr="'textarea'">
+  <al-expand name="fillfield">
+   <al-textarea cols="60" rows="2"
+    nameexpr="'workspace.params.%s' % field.param" />
+  </al-expand>
+ </al-item>
+
+ <al-item expr="'dataset'">
+  <al-expand name="fillfield">
+    <al-exec expr="available = field.availablesets(workspace)" />
+    <al-if expr="available">
+     <al-select nameexpr="'workspace.params.%s' % field.param" 
+      optionexpr="field.availablesets(workspace)" 
+      onchange="submit();" />
+    <al-else>
+     <div class="error">No datasets match</div>
+    </al-if>
+  </al-expand>
+ </al-item>
+
+ <al-item expr="'popdataset'">
+  <al-expand name="simplefield">
+    <al-exec expr="available = field.availablesets(workspace)" />
+    <al-if expr="available">
+     <al-select style="width: 50%;"
+      nameexpr="'workspace.params.%s' % field.param" 
+      optionexpr="field.availablesets(workspace)" 
+      onchange="submit();" />
+     <al-select style="width: 50%;"
+      nameexpr="'workspace.params.%s_popcol' % field.param" 
+      optionexpr="field.availablecols(workspace)" 
+      onchange="submit();" />
+    <al-else>
+     <div class="error">No datasets match</div>
+    </al-if>
+  </al-expand>
+ </al-item>
+
+ <!-- DEFAULT: text/float/int -->
+ <al-expand name="fillfield">
+  <al-input nameexpr="'workspace.params.%s' % field.param" />
+ </al-expand>
+
+</al-lookup>

@@ -1,0 +1,323 @@
+<al-comment>
+
+    The contents of this file are subject to the HACOS License Version 1.2
+    (the "License"); you may not use this file except in compliance with
+    the License.  Software distributed under the License is distributed
+    on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+    implied. See the LICENSE file for the specific language governing
+    rights and limitations under the License.  The Original Software
+    is "NetEpi Analysis". The Initial Developer of the Original
+    Software is the Health Administration Corporation, incorporated in
+    the State of New South Wales, Australia.  
+    
+    Copyright (C) 2004,2005 Health Administration Corporation. 
+    All Rights Reserved.
+
+</al-comment>
+
+<al-include name="colvalselect.html" />
+
+<al-macro name="colselect">
+ <table>
+  <tr>
+   <td nowrap align="right">
+    Date/Time:
+   </td>
+   <td>
+    <al-select class="sel" name="dtcol" 
+     optionexpr="edit_expr.colname_select('datetime')"
+     onchange="submit();" />
+   </td>
+  </tr>
+  <tr>
+   <td nowrap align="right">
+    Discrete:
+   </td>
+   <td>
+    <al-select class="sel" name="disccol" 
+     optionexpr="edit_expr.colname_select('discrete')"
+     onchange="submit();" />
+   </td>
+  </tr>
+  <tr>
+   <td nowrap align="right">
+    Text:
+   </td>
+   <td>
+    <al-select class="sel" name="textcol" 
+     optionexpr="edit_expr.colname_select('text')"
+     onchange="submit();" />
+   </td>
+  </tr>
+  <tr>
+   <td nowrap align="right">
+    Others:
+   </td>
+   <td>
+    <al-select class="sel" name="othercol" 
+     optionexpr="edit_expr.colname_select('other')"
+     onchange="submit();" />
+   </td>
+  </tr>
+ </table>
+</al-macro>
+
+<al-macro name="opselect">
+ <table>
+  <tr>
+   <td>
+    <al-select name="filter.edit_expr.op" onchange="submit();"
+     optionexpr="edit_expr.ops" />
+   </td>
+  </tr>
+ </table>
+</al-macro>
+
+<al-macro name="values">
+
+ <al-if expr="edit_expr.value.markup == 'general'">
+  <al-input name="filter.edit_expr.value.value" 
+   expr="filter.edit_expr.value.strval()" />
+ </al-if>
+
+ <al-if expr="edit_expr.value.markup == 'discrete'">
+  <al-expand name="value_edit" />
+ </al-if>
+
+ <al-if expr="edit_expr.value.markup == 'date'">
+  <al-select name="filter.edit_expr.value.year" 
+   optionexpr="edit_expr.value.yearopt()" />
+  <al-select name="filter.edit_expr.value.month" 
+   optionexpr="edit_expr.value.monthopt()" />
+  <al-select name="filter.edit_expr.value.day" 
+   optionexpr="edit_expr.value.dayopt()" />
+ </al-if>
+
+</al-macro>
+
+<al-macro name="filter_view">
+    <table class="filter">
+     <tr>
+      <al-tree iter="node_i" expr="filter.root">
+       <al-exec expr="node = node_i.value()" />
+       <al-if expr="not node.children">
+        <td colspan="<al-value expr='node_i.span()' />" 
+         class="<al-value expr='filter.node_is_selected(node) and "leafsel" or "leaf"'>">
+         <al-input nameexpr="'node/' + node.path" 
+          type="image" src="/nea/target.png" />&nbsp;<al-value 
+          expr="node.describe(filter.dsname)" />
+        </td>
+        </tr><tr>
+       <al-else>
+        <td rowspan="<al-value expr='node.height()' />"
+         class="<al-value expr='filter.node_is_selected(node) and "groupsel" or "group"'>">
+         <al-input nameexpr="'node/' + node.path" 
+          type="image" src="/nea/target.png" />&nbsp;<al-value 
+           expr="node.describe(filter.dsname)" /></td>
+       </al-if>
+      </al-tree>
+     </tr>
+    </table>
+</al-macro>
+
+<al-macro name="expression_view">
+ <al-exec expr="edit_expr = filter.edit_expr" />
+ <table class="exprview">
+  <tr>
+   <td colspan="3" align="right">
+    <al-input name="edit_node_close" type="image" src="/nea/close.png" />
+   </td>
+  </tr>
+  <tr>
+   <al-if expr="edit_expr.state == edit_expr.EDITCOL">
+    <th class="highlight">Column</th>
+   <al-else>
+    <th>Column</th>
+   </al-if>
+   <al-if expr="edit_expr.state == edit_expr.EDITOP">
+    <th class="highlight">Expr</th>
+   <al-else>
+    <th>Expr</th>
+   </al-if>
+   <al-if expr="edit_expr.state == edit_expr.EDITVALUE">
+    <th class="highlight">Value</th>
+   <al-else>
+    <th>Value</th>
+   </al-if>
+  </tr>
+  <tr>
+   <al-if expr="edit_expr.state == edit_expr.EDITCOL">
+    <td class="highlight">
+     <al-expand name="colselect" />
+    </td>
+   <al-else>
+    <td>
+     <al-value expr="edit_expr.get_column().label" />
+    </td>
+   </al-if>
+   <al-if expr="edit_expr.state == edit_expr.EDITOP">
+    <td align="center" class="highlight">
+     <al-expand name="opselect" />
+    </td>
+   <al-else>
+    <td align="center">
+     <al-if expr="edit_expr.op">
+      <al-value expr="edit_expr.op" />
+     </al-if>
+    </td>
+   </al-if>
+   <al-if expr="edit_expr.state == edit_expr.EDITVALUE">
+    <td class="highlight">
+     <al-expand name="values" />
+    </td>
+   <al-else>
+    <td>
+     <al-value expr="edit_expr.pretty_value(workspace)" />
+    </td>
+   </al-if>
+  </tr>
+  <tr>
+   <td colspan="3" align="center" class="butt">
+    <table cellpadding="0" cellspacing="0" border="0" width="100%">
+     <tr>
+      <td align="left">
+       <al-input name="add_and" type="submit" value="and" /><br />
+       <al-input name="add_or" type="submit" value="or" /><br />
+      </td>
+      <td align="center">
+       <al-input name="back" type="submit" value="<<" />
+       <al-input name="ok" type="submit" value=">>" />
+      </td>
+      <td align="right">
+       <al-input name="delete_node" type="submit" value="Delete" />
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+  <al-if expr="edit_expr.show_search_box(workspace)">
+   <tr>
+    <td colspan="3">
+     <al-expand  name="colval_search" />
+    </td>
+   </tr>
+  </al-if>
+ </table>
+</al-macro>
+
+<al-macro name="info_edit">
+ <table class="infoedit">
+  <tr>
+   <td class="bar" colspan="2" align="right">
+    <al-input name="info_edit_close" type="image" src="/nea/close.png" />
+   </td>
+  </tr>
+  <tr>
+   <td>Filter name:</td>
+   <td><al-input name="filter.edit_info.name" /></td>
+  </tr>
+  <tr>
+   <td>Filter label:</td>
+   <td><al-input name="filter.edit_info.label" /></td>
+  </tr>
+  <tr>
+   <td colspan="2" align="center">
+    <al-input type="submit" name="info_edit_apply" value="Apply" />
+   </td>
+  </tr>
+ </table>
+</al-macro>
+
+<al-macro name="andor_view">
+ <table class="exprview">
+  <tr>
+   <td colspan="3" align="right">
+    <al-input name="edit_node_close" type="image" src="/nea/close.png" />
+   </td>
+  </tr>
+  <tr>
+   <td class="butt">
+    <al-input type="submit" name="add_and" value="Insert And" /><br />
+    <al-input type="submit" name="add_or" value="Insert Or" /><br />
+   </td>
+   <td>
+    <al-select name="filter.edit_andor.name" optionexpr="['and', 'or']" 
+     onchange="submit();" />
+   </td>
+   <td class="butt">
+    <al-input type="submit" name="add_expr" value="Add Expr" />
+   </td>
+  </tr>
+ </table>
+</al-macro>
+
+<al-expand name="page_layout">
+ <table width="100%" cellspacing="0" cellpadding="0">
+  <tr class="filterlabel">
+   <td>
+    Editing filter: <al-value expr="filter.label or filter.name" />
+   </td>
+   <td align="right">
+    <al-if expr="not filter.edit_info">
+     <al-input type="submit" class="submit"
+      name="do_edit_info" value="Edit Info" />
+    </al-if>
+   </td>
+  </tr>
+  <al-if expr="errorstr">
+   <tr>
+    <td colspan="2" class="error" align="center">
+     <al-value expr="errorstr" />
+    </td>
+   </tr>
+  </al-if>
+  <tr>
+   <td valign="top">
+    <al-expand name="filter_view" />
+   </td>
+   <td valign="middle" align="right">
+    <al-input type="submit" class="submit" name="undo" value="Undo" /><br />
+    <al-input type="submit" class="submit" name="redo" value="Redo" /><br />
+   </td>
+  </tr>
+  <tr>
+   <al-if expr="filter.in_edit()">
+    <td valign="top" colspan="2">
+     <al-if expr="filter.edit_info">
+      <al-expand name="info_edit" />
+     <al-else>
+      <al-if expr="filter.edit_expr">
+       <al-expand name="expression_view" />
+      </al-if>
+      <al-if expr="filter.edit_andor">
+       <al-expand name="andor_view" />
+      </al-if>
+     </al-if>
+    </td>
+   <al-elif expr="delete_confirm">
+    <td colspan="2" class="error" align="center">
+     Delete this filter? 
+     <al-input type="submit" class="submit" name="delete_back" value="Cancel" />
+     <al-input type="submit" class="submit" name="delete_okay" value="Delete" />
+    </td>
+   <al-else>
+    <td colspan="2">
+     <table width="100%" cellpadding="0" cellspacing="0">
+      <tr>
+       <td align="left" width="33%">
+        <al-input type="submit" class="submit" name="cancel" value="Cancel" />
+       </td>
+       <td align="middle" width="33%">
+        <al-input type="submit" class="submit" name="okay" value="Okay" />
+        <al-input type="submit" class="submit" name="save" value="Save" />
+       </td>
+       <td align="right" width="33%">
+        <al-input type="submit" class="submit" name="delete" value="Del Filter" />
+       </td>
+      </tr>
+     </table>
+    </td>
+   </al-if>
+  </tr>
+ </table>
+</al-expand>

@@ -1,0 +1,56 @@
+A unified Python interface to R plots.
+
+The objects in the plotmethods module form the "user interface".
+Typically, a plot object is instantiated, filters, parameters and axes
+are added to it, and then the plot is rendered. This can either be done
+piecemeal, or by the __init__ method.
+
+An example of immediate plotting:
+
+    histogram(dataset, 'age', bins=5)
+
+By instantiating the plot object explicitly, users can interact with it:
+
+    >>> plot = histogram(dataset)
+    >>> plot.procargs(dataset, 'age', bins=8, sample=0.05)
+    >>> plot.get_title()
+    'Sampled (5%) Distribution of Age (years)'
+    >>> plot.set_params(title='Distribution of Age')
+    >>> plot.plot(dataset)
+    
+The plotmethods module uses a class "KWArgs" as a registry for plot
+method keyword arguments. This class assists in demultiplexing keyword
+arguments supplied by the user to the appropriate underlying methods.
+
+The plotmethods classes are build on the base classes in the rplot
+module. The class hierarchy looks like:
+
+    RPlotBase
+        RPlot
+            (piechart)
+        RLatticePlotBase
+            RLatticePlot
+                RLatticeMatrixPlot
+                    (scattermatrix)
+                RLatticeBinPlot
+                    (histogram)
+                    (densityplot)
+                RLatticeBoxPlot
+                    (boxplot)
+                (scatterplot)
+            RLatticeSummPlot
+                RLatticeCatPlot
+                    (barchart)
+                    (dotchart)
+                (lineplot)
+
+Axis object hierarchy:
+
+    RCondCol
+        RPercentAxisCol
+        RDensityAxisCol
+        RContinuousCondCol
+            RMeasureCondCol
+            RPropnMeasureCol
+        RDiscreteCondCol
+            RGroupByCol

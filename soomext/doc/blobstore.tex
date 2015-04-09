@@ -1,0 +1,178 @@
+%
+%   The contents of this file are subject to the HACOS License Version 1.2
+%   (the "License"); you may not use this file except in compliance with
+%   the License.  Software distributed under the License is distributed
+%   on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+%   implied. See the LICENSE file for the specific language governing
+%   rights and limitations under the License.  The Original Software
+%   is "NetEpi Analysis". The Initial Developer of the Original
+%   Software is the Health Administration Corporation, incorporated in
+%   the State of New South Wales, Australia.
+%
+%   Copyright (C) 2004,2005 Health Administration Corporation.
+%   All Rights Reserved.
+%
+\section{\module{blobstore}}
+
+\declaremodule{extension}{blobstore}
+
+The \module{blobstore} extension module contains a fairly thin wrapper
+on top of the memory mapped BLOB storage which is implemented in the
+Storage API.
+
+The \module{blobstore} module contains the following:
+
+\begin{datadesc}{__version__}
+A string which specifies the version of the \module{blobstore} module.
+\end{datadesc}
+
+\begin{funcdesc}{open}{filename \optional{, mode \code{= 'r'}}}
+Open the file named in the \var{filename} argument using the specified
+\var{mode}.  Returns a \class{BlobStore} object.
+
+\begin{verbatim}
+>>> import blobstore
+>>> bs = blobstore.open('file.dat')
+\end{verbatim}
+\end{funcdesc}
+
+\subsection{BlobStore Objects}
+
+These objects are used to manage a sequence of BLOB items.  The object
+behaves much like a Python list.  Each element in the list is a
+\class{Blob} object.
+
+\class{BlobStore} objects have the following interface:
+
+\begin{methoddesc}[BlobStore]{__len__}{}
+Returns the number of blobs in the blob store.
+\end{methoddesc}
+
+\begin{methoddesc}[BlobStore]{__getitem__}{i}
+Uses the blob store sequence to retrieve the blob descriptor indexed
+by \var{i} and returns it as a new instance of the \class{Blob} class.
+The blob data is accessed via the \class{Blob} object.
+\end{methoddesc}
+
+\begin{methoddesc}[BlobStore]{append}{}
+Reserves an index for a new blob in the blob store.  The reserved
+index is returned.  Note that no data will be allocated in the blob
+store until data is saved to that blob index.
+\end{methoddesc}
+
+\begin{methoddesc}[BlobStore]{get}{i}
+Retrieves the raw blob descriptor indexed by \var{i} and returns it as
+a new instance of the \class{Blob} class.  This by-passes the blob
+store sequence and indexes directly into the blob table.  This allows
+you to see the blobs which are used to store the blob sequence and
+table as well as free blobs.  The \class{Blob} objects obtained this
+way cannot be used to load or save data.
+\end{methoddesc}
+
+\begin{methoddesc}[BlobStore]{free}{i}
+Free the storage associated with the blob in the sequence at index
+\var{i}.
+\end{methoddesc}
+
+\begin{methoddesc}[BlobStore]{usage}{}
+Returns a tuple which contains two numbers; the amount of data storage
+allocated in the blob store, and the amount of space free or wasted in
+the blob store.
+\end{methoddesc}
+
+\begin{methoddesc}[BlobStore]{header}{}
+Returns a tuple containing the following values;
+\begin{longtable}{l|l}
+table_size  & Number of blob table entries allocated. \\
+table_len   & Number of blob table entries in use. \\
+table_index & Table index of the blob which contains the blob table. \\
+table_loc   & File offset of the start of the blob table. \\
+seq_size    & Number of blob sequence entries allocated. \\
+seq_len	    & Length of the blob sequence. \\
+seq_index   & Table index of the blob which contains the blob sequence. \\
+\end{longtable}
+
+To understand these numbers you should refer to the documentation of
+the Storage API.
+\end{methoddesc}
+
+\subsection{Blob Objects}
+
+Blobs retrieved from a \class{BlobStore} object are returned as
+\class{Blob} objects.  The \class{Blob} objects provide access to the
+data associated with a blob in a blob store.  The \class{Blob} object
+retains a reference to the containing \class{BlobStore} and they also
+store their index within the blob store.
+
+\class{Blob} objects have the following interface:
+
+\begin{memberdesc}[Blob]{len}
+This read-only member contains the length of the blob data.
+\end{memberdesc}
+
+\begin{memberdesc}[Blob]{size}
+This read-only member contains the allocated size of the blob.  The
+blob \member{size} will always be at least as large as the blob
+\member{len}.  Blob allocations are aligned to the size of an integer.
+
+When a blob is resized or freed it can leave some free space in the
+blob store.  When allocating a new blob, the smallest free area which
+can contain the new data will be used in preference to growing the
+file.
+\end{memberdesc}
+
+\begin{memberdesc}[Blob]{loc}
+This read-only member contains the offset within the file of the blob
+data.
+\end{memberdesc}
+
+\begin{memberdesc}[Blob]{status}
+This read-only member contains the status of the blob.  The values and
+their meaning are:
+
+\begin{longtable}{l|l}
+0 & The blob is free space. \\
+1 & The blob contains the blob table. \\
+2 & The blob contains the blob sequence. \\
+3 & The blob contains user data. \\
+\end{longtable}
+\end{memberdesc}
+
+\begin{memberdesc}[Blob]{other}
+This integer member can be used by your code.  The \class{ArrayDict}
+class uses it to link the mask and data parts of a masked array.
+\end{memberdesc}
+
+\begin{memberdesc}[Blob]{type}
+This integer member can be used by your code.
+\end{memberdesc}
+
+\begin{methoddesc}[Blob]{as_array}{}
+Returns a Numpy array object which uses the memory mapped blob data as
+the contents of the array.  The array object is cached internally, so
+you can call this without penalty.
+
+Every time you call this method the cached Numpy array will have its
+internal data pointer updated to protect against blob store resizing.
+\end{methoddesc}
+
+\begin{methoddesc}[Blob]{as_str}{}
+Returns a Python string which is constructed using the blob data.  The
+string allocates its own copy of the data.  The string is cached
+internally, so you can call this without penalty.
+\end{methoddesc}
+
+\begin{methoddesc}[Blob]{save_array}{a}
+Save the array passed in the \var{a} argument in the blob associated
+with this object.
+\end{methoddesc}
+
+\begin{methoddesc}[Blob]{append_array}{a}
+Append the array passed in the \var{a} argument to the blob associated
+with this object.
+\end{methoddesc}
+
+\begin{methoddesc}[Blob]{save_str}{s}
+Save the string passed in the \var{s} argument in the blob associated
+with this object.
+\end{methoddesc}

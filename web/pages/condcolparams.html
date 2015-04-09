@@ -1,0 +1,134 @@
+<al-comment>
+
+    The contents of this file are subject to the HACOS License Version 1.2
+    (the "License"); you may not use this file except in compliance with
+    the License.  Software distributed under the License is distributed
+    on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+    implied. See the LICENSE file for the specific language governing
+    rights and limitations under the License.  The Original Software
+    is "NetEpi Analysis". The Initial Developer of the Original
+    Software is the Health Administration Corporation, incorporated in
+    the State of New South Wales, Australia.  
+    
+    Copyright (C) 2004,2005 Health Administration Corporation. 
+    All Rights Reserved.
+
+</al-comment>
+
+<al-include name="colvalselect.html" />
+
+<al-macro name="condcolparams_buttons">
+  <tr>
+   <td colspan="3" class="buttons">
+    <table width="100%" cellpadding="0" cellspacing="0">
+     <tr>
+      <td align="left" class="butt">
+       <al-input type="submit" name="back" value="Cancel" />
+      </td>
+      <td align="center" class="butt">
+       <al-input type="submit" name="clear" value="Clear" />
+      </td>
+      <td align="right" class="butt">
+       <al-input type="submit" name="okay" value="Okay" />
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+</al-macro>
+
+<al-macro name="colbuttons">
+     <td class="butt" nowrap>
+      <al-if expr="not condcolparams.inhibit_suppress">
+       <al-input type="submit" value="Suppress" 
+         nameexpr="'col/suppress/%s' % colparams.name" />
+       <al-input type="submit" value="Retain" 
+         nameexpr="'col/retain/%s' % colparams.name" />
+       <br />
+      </al-if>
+      <al-input type="submit" value="Coalesce" 
+        nameexpr="'col/coalesce/%s' % colparams.name" />
+      <al-input type="submit" value="Clear" 
+        nameexpr="'col/clear/%s' % colparams.name" />
+     </td>
+</al-macro>
+
+<al-macro name="displaycol">
+      <table width="100%" class="display" cellpadding="0" cellspacing="0">
+       <al-exec expr="desc = colparams.describe(workspace)" />
+       <al-if expr="not desc or desc[0][0] not in ('suppress', 'retain')">
+        <tr>
+         <td></td><td width="100%"></td>
+         <al-expand name="colbuttons" />
+        </tr>
+       </al-if>
+       <al-for iter="ii" expr="desc">
+        <tr>
+         <td><al-value expr="ii.value()[0]" />:</td>
+         <td width="100%"><al-value expr="ii.value()[1]" /></td>
+         <al-if expr="ii.index() == 0 and ii.value()[0] in ('suppress', 'retain')">
+          <al-expand name="colbuttons" />
+         </al-if>
+         <al-if expr="ii.value()[0] == 'coalesce'">
+          <td class="butt">
+           <al-input type="submit" value="Edit" 
+             nameexpr="'col/coalesce/%s/%d' % (colparams.name, ii.index())" />
+           <al-input type="submit" value="Delete" 
+             nameexpr="'col/del/%s/%d' % (colparams.name, ii.index())" />
+          </td>
+         </al-if>
+        </tr>
+       </al-for>
+      </table>
+</al-macro>
+
+<al-macro name="editcol">
+ <table width="100%" cellpadding="0" cellspacing="0">
+  <al-if expr="colparams.edit.op == 'coalesce'">
+   <tr>
+    <td>Label:</td>
+    <td width="100%"><al-input name="condcolparams.edit_col.edit.label"></td>
+   </tr>
+  </al-if>
+  <tr>
+   <td></td>
+   <td width="100%">
+    <al-expand name="value_edit" />
+    <al-if expr="colvalselect.cardinality_is_high(workspace)">
+     <al-expand  name="colval_search" />
+    </al-if>
+   </td>
+   <td class="butt" valign="top" width="100%">
+    <al-input type="submit" value="Okay" name="edit_okay" />
+   </td>
+  </tr>
+ </table>
+</al-macro>
+
+<al-expand name="page_layout">
+ <table class="condcol">
+  <al-expand name="condcolparams_buttons" />
+  <tr>
+   <th>Column</th>
+   <th>Parameters</th>
+  </tr>
+  <al-for iter="i" expr="condcolparams">
+   <al-exec expr="colparams = i.value()" />
+   <tr>
+    <td><al-value expr="colparams.label" /></td>
+    <al-if expr="colparams.edit is None">
+     <td>
+      <al-expand name="displaycol" />
+     </td>
+    <al-else>
+     <td class="edit">
+      <b>Edit <al-value expr="colparams.edit.op" /></b><br />
+      <al-expand name="editcol" />
+     </td>
+    </al-if>
+   </tr>
+  </al-for>
+  <al-expand name="condcolparams_buttons" />
+ </table>
+</al-expand>
+

@@ -1,0 +1,137 @@
+<al-comment>
+
+    The contents of this file are subject to the HACOS License Version 1.2
+    (the "License"); you may not use this file except in compliance with
+    the License.  Software distributed under the License is distributed
+    on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+    implied. See the LICENSE file for the specific language governing
+    rights and limitations under the License.  The Original Software
+    is "NetEpi Analysis". The Initial Developer of the Original
+    Software is the Health Administration Corporation, incorporated in
+    the State of New South Wales, Australia.  
+    
+    Copyright (C) 2004,2005 Health Administration Corporation. 
+    All Rights Reserved.
+
+</al-comment>
+
+<al-include name="colvalselect.html" />
+
+<al-macro name="twobytwo_buttons">
+  <tr>
+   <td colspan="3" class="buttons">
+    <table width="100%" cellpadding="0" cellspacing="0">
+     <tr>
+      <td align="left" class="butt">
+       <al-input type="submit" name="back" value="Cancel" />
+      </td>
+      <td align="center" class="butt">
+       <al-input type="submit" name="swap" value="Swap" />
+      </td>
+      <td align="center" class="butt">
+       <al-input type="submit" name="clear" value="Clear" />
+      </td>
+      <td align="right" class="butt">
+       <al-input type="submit" name="okay" value="Okay" />
+      </td>
+     </tr>
+    </table>
+   </td>
+  </tr>
+</al-macro>
+
+<al-expand name="page_layout">
+  <table class="twobytwoparams">
+   <al-expand name="twobytwo_buttons" />
+   <tr>
+    <td>
+     <table>
+      <tr>
+       <td colspan="2" nowrap>
+        (Checked values are positive)<br />
+       </td>
+      </tr>
+      <al-if expr="params.high_cardinality">
+       <al-if expr="not params.inc">
+        <tr><td class="warn">No values selected</td></tr>
+       <al-else>
+        <al-for iter="vi" expr="params.inc_options(workspace)">
+         <tr>
+          <td width="1em" valign="baseline">
+           <al-input type="checkbox" name="params.inc" list
+            valueexpr="vi.value()[0]" />
+          </td>
+          <td valign="basline">
+           <al-value expr="vi.value()[1]" />
+          </td>
+         </tr>
+        </al-for>
+       </al-if>
+      <al-else>
+       <al-for iter="vi" expr="params.options(workspace)">
+        <tr>
+         <td width="1em" valign="baseline">
+          <al-input type="checkbox" name="params.inc" list
+           valueexpr="vi.value()[0]" />
+         </td>
+         <td valign="baseline">
+          <al-value expr="vi.value()[1]" />
+         </td>
+        </tr>
+       </al-for>
+      </al-if>
+     </table>
+    </td>
+    <td valign="top">
+     <table>
+      <tr>
+       <td>Positive label:</td>
+       <td><al-input name="params.positive_label"></td>
+      </tr>
+      <tr>
+       <td>Negative label:</td>
+       <td><al-input name="params.negative_label"></td>
+      </tr>
+     </table>
+    </td>
+   </tr>
+   <al-if expr="params.high_cardinality">
+    <tr>
+     <td colspan="2" class="result">
+      <b>Search: <al-input name="params.pattern" />
+       <al-input class="submit" name="search_go" type="submit" value="Search" />
+       <al-input class="submit" name="search_clear" type="submit" value="Clear" />
+       <br />
+      <al-if expr="params.search_error">
+       <div class="error"><al-value expr="params.search_error" /></div>
+      </al-if>
+      <al-if expr="params.result">
+       <table width="100%">
+        <al-for iter="pi" expr="params.result_options(workspace)">
+         <tr>
+          <td width="1em" valign="baseline">
+           <al-input type="checkbox" name="params.result_inc" list
+            valueexpr="pi.value()[0]" />
+          </td>
+          <td valign="baseline">
+           <al-value expr="pi.value()[1]" />
+          </td>
+          <al-if expr="pi.index() == 0">
+           <al-td rowspanexpr="len(params.result)" class="widebutt" align="right">
+            <al-input type="submit" name="res/add/checked" value="Add Checked" /><br />
+            <al-input type="submit" name="res/del/checked" value="Del Checked" /><br />
+            <al-input type="submit" name="res/add/all" value="Add All" /><br />
+            <al-input type="submit" name="res/del/all" value="Del All" /><br />
+           </al-td>
+          </al-if>
+         </tr>
+        </al-for>
+       </table>
+      </al-if>
+     </td>
+    </tr>
+   </al-if>
+   <al-expand name="twobytwo_buttons" />
+  </table>
+</al-expand>
+

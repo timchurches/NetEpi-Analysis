@@ -1,0 +1,113 @@
+All material associated with "NetEpi Analysis" is Copyright (C) 2004, 2005
+Health Administration Corporation (New South Wales Department of Health).
+
+NetEpi Analysis is licensed under the terms of the Health
+Administration Corporation Open Source License Version 1.2 (HACOS License
+V1.2), the full text of which can be found in the LICENSE file provided
+with NetEpi Analysis.
+
+Current for NetEpi-Analysis-0-1-20050223-01
+
+Since NetEpi-Analysis-0-1-20050216-01:
+
+- Copyright updated to include 2005.
+
+- Note about Numeric build problems added to README
+
+- added new column datatype "recodedate", which uses the new RecodeArray
+  storage method (see below), but also has date formatting support. NHDS
+  demo "randomdate" column changed to "recodedate" datatype.
+
+- disabled subset() method, which returned a realised subset of a
+  dataset, as it had not been maintained for some time. Future work will
+  add per-user workspaces, and at that time a realise() or deepcopy()
+  method will be added.
+
+- made FilteredDataset instances more dataset-like so they would be
+  printed correctly. Also fixed several bugs in their implementation.
+
+- demo data had nhds proceedure_all column as a string type, rather than
+  a tuple type (diagnosis_all was fixed in the previous snapshot).
+
+- soomarray changes:
+
+  - many more soomarray unit tests.
+
+  - ArrayString would cast values to str, which was hiding errors
+    elsewhere (for example, the incorrect datatype on diagnosis_all and
+    proceedure_all). Changed to only accept str or None (which becomes
+    a null string).
+
+  - arrays would raise exceptions when garbage collected under obscure
+    circumstances - trap and ignore. 
+    
+  - Also fixed typos in previous slice changes.
+  
+  - ArrayTime never worked - fixed implementation problems.
+
+- fixed masking bug introduced in previous snapshot.
+
+- several plot demos that raised exceptions have been disabled.
+
+Since NetEpi-Analysis-0-1-20050211-01:
+
+- Filter and DatasetSummary require that we fetch column data based
+  on a list of record ids (scatter-gather) - the Numeric "take()"
+  operation. Previously, the code to do this was duplicated in both
+  modules. It has now been pushed down into soomarray classes (where
+  appropriate), with the column datatype deciding which scheme should
+  be used. Soomarray types are now free to implement more efficient
+  scatter-gather methods.
+
+- soomarray types were still using the __getslice__ special method, even
+  though this was deprecated in Python 2.0. They have now been updated
+  to support slice objects passed to __getitem__.
+
+- a new column datatype has been added - "recode". Columns of this
+  type are mapped to a numeric code, and the result stored in a
+  Numeric.array().  Elements are allowed to be any hashable python type
+  (and no type checking is performed). This datatype is most useful
+  for low-cardinality discrete columns containing string or DateTime
+  data. The demo diagnosis[1-7] and proceedure[1-4] columns have been
+  changed to the 'recode' datatype.
+
+- soomext tests are now run by the main test driver.
+
+- the ChunkingLoader has been changed to yield column values via a
+  generator, rather than assembling a list and returning that and the
+  DatasetColumn.store_column() method has been updated to allow it to
+  work with iterables. Depending on the back-end data storage scheme,
+  this allows us to write the column data incrementally, which can result
+  in a significant reduction in process size.
+
+- bugfix: summary "_type_" column was 'int' when it should have been 'str'.
+
+Since NetEpi-Analysis-0-1-20041221-02:
+
+- dataset importing no longer attempts to keep all column data
+  loaded. Column data is unloaded after masking and saving, and will be
+  demand-loaded if need be.
+
+- fine-grained Timer code has been removed (performance impact was too
+  great) - column loading is now about 3x faster. Replaced with simpler
+  reporting of per column masking, indexing and saving timers.
+
+- extracting icd9cm map from RTF files consumes about 150MB in building
+  the parse tree. Due to memory fragmentation, this memory is largely
+  lost. The icd9cm rtf parsing process has been split into a separate
+  process to allow the memory to be reclaimed and not impact the loading
+  of the demo data.
+
+- icd9cm rtf parser reimplemented as a generator (via re.finditer),
+  rather than using re.split. The result is slightly slower, but the code
+  is easier to read and maintain and could potentially use less memory.
+
+- bugfix: FilteredDataset view was not recognising MmapArray as a
+  Numeric-like array type and was using slower list comprehension
+  filtering, rather than a Numeric.take.
+
+- bugfix: demo data had nhds diagnosis_all column as a string type,
+  rather than a tuple type.
+
+- New stats functions (including some Pyrex implementation) and associated
+  tests (!!NOTE!! not surfaced as stats methods yet)

@@ -1,0 +1,425 @@
+NetEpi Analysis V0.1 README
+===========================
+
+LICENSE
+=======
+
+All material associated with "NetEpi Analysis" is Copyright (C) 2004, 2005
+Health Administration Corporation (New South Wales Department of Health).
+
+NetEpi Analysis is licensed under the terms of the Health
+Administration Corporation Open Source License Version 1.2 (HACOS License
+V1.2), the full text of which can be found in the LICENSE file provided
+with NetEpi Analysis.
+
+Status of this release
+======================
+
+Version 0.1 should be considered a "technology preview" or "pre-alpha"
+release, intended to demonstrate the overall direction of the project.
+It should not be used ina production setting. Many aspects of the API and 
+Web interface are likely to chnage in future releases.
+
+Bug reports, feature requests and general discussion
+====================================================
+
+Please report all bugs, problems, feature requests and ideas to the
+NetEpi-discuss mailing list. You need to subscribe to this list in
+order to post messages to it - see the list management Web page at:
+
+    http://lists.sourceforge.net/mailman/listinfo/netepi-discuss
+
+SOOM
+====
+
+NetEpi Analysis uses several (somewhat) unusual techniques to ensure
+reasonable performance when dealing with moderately-sized datasets
+(up to about 10 million records), despite being programmed in a highly
+dynamic, late-binding, object-oriented programming language (Python). In
+particular, all datasets are stored in vertically partitioned form
+- that is, column-wise, not row-wise, and dataset summarisation is
+achieved using set-theoretic operations on ordinal mappings - that is,
+the ordinal row position in each column is used as an implicit row ID
+and set intersections (and other set operations) are performed on these
+row IDs. This approach, referred to as "SOOM" for short (Set Operations
+on Ordinal Mappings), differs from more commonly used bit-mapped indexes
+in that value indexes are stored as vectors of sorted integer indexes -
+an approach which sacrifices some performance on very large datasets,
+but which retains storage and processing efficiency even for columns with
+very high cardinality, without having to use complex bitmap compression
+schemes. High cardinality data are routinely encountered in health
+and epidemiological datasets. A peer-reviewed paper describing these
+techniques appeared in 2003 -  please see: Churches T. Exploratory data
+analysis using set operations and ordinal mapping. Comput Methods Programs
+Biomed 2003; 71(1):11-23.  Preprint copies of the paper in PDF format are
+available from the author on request (email: tchur@doh.health.nsw.gov.au)
+if your institution or organisation does not have access to this journal.
+
+Prerequisites
+=============
+
+NetEpi Analysis only runs under POSIX-compatible operating systems:
+Linux, Unix or Mac OS X at present. Later versions may run under
+Microsoft Windows. However, the demonstration Web interface can be
+accessed from any type of computer using a relatively recent Web browser.
+
+
+For the Analysis core, you'll need to have the following installed. Unless
+otherwise stated, these can either be packages provided by your operating
+system vendor, or source downloaded from from the project web page.
+
+  * Python 2.3.2 or later
+
+    NOTE: Python 2.4.0 is not suitable as it has a defect in its regular
+    expression library (bug #1088891), although this only effects the
+    web interface.
+
+  * Numeric Python
+  
+    Version 24.2 is recommended (23.8 and 23.1 are known to work also,
+    but 23.5 and 23.6 had build problems under RedHat linux)
+
+    NOTE - this is **NOT** numarray or numpy, which are available from
+    the same web site - conversion to use numpy will be undertaken for
+    a future version of NetEpi Analysis.
+
+      http://sourceforge.net/projects/numpy
+
+    If building Numeric from source, you will require development versions
+    of a number of scientific packages. If using Fedora Core Linux,
+    installing all development and scientific packages is recommended.
+
+  * mx.DateTime
+  
+      http://www.egenix.com/files/python/mxDateTime.html
+
+  * Oracle Berkeley DB (formerly Sleepycat DB)
+  
+      http://www.oracle.com/database/berkeley-db/index.html
+
+  * the "SOOM extensions", which are included in the "soomext"
+    directory of the NetEpi Analysis distribution.  To install,
+    change into the "soomext" directory, and as root, run:
+
+      python setup.py install
+
+*** Note that order matters: the soomext blobstore relies on the internal
+    structure of Numeric and if they get out of sync core dumps will
+    result.
+
+  * Psyco (optional - speeds up some operations on 32-bit X86 systems only)
+  
+      http://psyco.sourceforge.net/
+
+  * R (Debian: r-base) v2.0.0 or later (v2.4.0 or later recommended)
+
+      http://www.r-project.org/
+
+    NOTE: the RPM packages on the r-project.org site do not contain the
+    R shared library, which is needed for building RPy (see below) -
+    unless this is rectified, you will need to build R from source.
+
+    NOTE: when building R from source, configure should be given the
+    "--enable-R-shlib" option to indicate that you want the R shared
+    libraries to be built (necssary for building RPy).
+
+    NOTE: OS X does not supply g77 (a fortran compiler), which is
+    necessary for building R from source. There are instructions on the
+    R web site for building from scratch under OS X, but the pre-built
+    binaries should suffice.
+
+  * RPy v0.4 or later (v0.4.6 preferred)
+  
+      http://rpy.sourceforge.net/
+
+    NOTE: OS X uses an unusual shared library scheme - at this time, rpy
+    does not invoke the linker correctly. If the setup.py script
+    fails, copy the last link line and replace "-L<r_path> -lR" with
+    "-framework R".
+
+  * Xvfb - part of X11, Xvfb provides a virtual frame buffer device,
+    to allow R to generate raster graphics on a headless server etc.
+
+  * the RSvgDevice library (optional - allows the R plots to produce SVG
+    files as output).
+  
+      http://cran.r-project.org/
+
+  * yapps2 (only need if the filter grammar in soomparse.g is changed):
+
+      http://theory.stanford.edu/~amitp/Yapps/
+
+For the web interface to NetEpi Analysis, in addition to the above,
+you will also need:
+
+  * the Albatross web application framework from Object Craft Pty Ltd
+
+      http://www.object-craft.com.au/projects/albatross/
+
+
+Installation
+============
+
+After installing all of the prerequisites, install the SOOMv0 library
+by running, as root "python setup.py install" in the base directory of
+the installation.
+
+Unit tests
+==========
+
+Unit tests for most aspects of the SOOM data summarisation engine which
+underlies NetEpi Analysis are provided, although test coverage is not
+complete in this version.
+
+The tests, which may take up to 10 minutes to complete, can be run by
+issuing the following command:
+
+    python test.py
+
+Note that the "soomext" extensions have their own test suite. This can
+be run by issuing the following command:
+
+    python soomext/test/all.py
+
+
+Installing the Web interface
+============================
+
+The web NetEpi Analysis interface can either be run as a simple
+stand-alone python web server, or it can be run as a CGI or FastCGI
+script under a web server (for example Apache). The stand-alone server is
+quick and easy to deploy, but only services one request at a time. CGI
+deployment will handle any number of requests concurrently, but suffers
+due to the cost of starting a new NEA instance for each request. FastCGI
+is considerably harder to initially deploy, but NEA service processes
+are started on demand and continue to service web requests, amortising
+the startup cost.
+
+Stand-alone Web interface
+-------------------------
+
+To start the stand-alone server, run 
+
+  python web/nea-standalone.py
+
+The script accepts the following options:
+
+  -pPORT, --port=PORT   listen on PORT (default: 8080)
+  -SSOOMPATH, --soompath=SOOMPATH
+                        SOOM search path
+  -NAPPNAME, --appname=APPNAME
+                        application name (effects paths)
+  -TAPPTITLE, --apptitle=APPTITLE
+                        web application title
+  --datadir=DATA_DIR    A writable directory NOT published by the web server
+                        (contains private data)
+  --dynamicdir=DYNAMIC_TARGET
+                        A writable directory published by the web server,
+                        contains files generated by the application
+  --staticdir=STATIC_TARGET
+                        A UNwritable directory published by the web server,
+                        contains static content used by the application (CSS,
+                        images)
+
+Typically only the --soompath option and --port options will be used. The
+other options might be used if the script is installed, rather than
+being run from the source directory, although this is not a recommended
+configuration at this time.
+
+
+CGI or FastCGI installation
+---------------------------
+
+The script "web/install.py" is responsible for installing the web
+components of NEA. The install scripts know default paths and web
+user names for:
+
+        RedHat Linux
+        Debian Linux
+        Apple OS X
+
+Additional platforms can be added by editing simpleinst/platform.py
+
+    Configurable parameters include:
+
+        appname
+            Application name - effects install paths, cookies,
+            etc. Unfortunately, some application resources have to be
+            hard-wired due to limitations in the Albatross templating
+            system (which will be fixed, eventually), so this option
+            is not recommended at this time.
+
+        apptitle
+            User visible application name
+
+        cgi_dir
+            Application scripts and data will be placed into a
+            subdirectory "appname" off this directory.
+
+        html_dir
+            Fixed application content (images, help text, style sheets)
+            will be installed in an "appname" subdirectory of this
+            directory.
+
+        session_secret
+            This string is mixed with any session data that makes a
+            round trip via the user's browser to prevent unauthorised
+            modifications being made. The string must be kept secret,
+            and should not be shared with other applications.
+
+        soompath
+            A colon separated list of paths to directories containing
+            SOOM datasets.
+
+        web_user
+            User name to install files as - this should match the user
+            id your web server runs CGI scripts as.
+
+Click on the HELP link in the banner of the Web interface for a brief
+introduction to its capabilities. You can also access this introduction
+separately in the file web/static/help.html
+
+Loading test data
+=================
+
+The demo/SOOM_demo_data_load.py script automatically downloads a number
+of freely available datasets from a US CDC National Center for Health
+Statistics FTP server and loads them as NetEpi Analysis datasets. The
+datasets are:
+
+    nhds            US CDC National Hospital Discharge Surveys 1996-2002
+    
+Please be sure to observe the data use restrictions which the National
+Center for Health Statitics attaches to these files. See the various
+README files at:
+
+    ftp://ftp.cdc.gov/pub/Health_Statistics/NCHS/Dataset_Documentation/NHDS/
+
+For example, the data use restrictions for the 2002 data file are
+as follows:
+
+--- begin excerpt from US CDC NCHS data use restrictions ---
+!WARNING -- DATA USE RESTRICTIONS!
+READ CAREFULLY BEFORE USING
+
+The Public Health Service Act (Section 308(d)) provides that the data
+collected by the National Center for Health Statistics (NCHS), Centers
+for Disease Control and Prevention (CDC), may be used only for the
+purpose of health statistical reporting and analysis.  Any effort to 
+determine the identity of any reported case is prohibited by this law.
+
+NCHS does all it can to assure that the identity of data subjects
+cannot be disclosed. All direct identifiers, as well as any
+characteristics that might lead to identification, are omitted from the
+dataset. Any intentional identification or disclosure of a person or
+establishment violates the assurances of confidentiality given to the
+providers of the information. Therefore, users will:
+
+1. Use the data in this dataset for statistical reporting and analysis
+   only.
+2. Make no use of the identity of any person or establishment discovered
+   inadvertently and advise the Director, NCHS, of any such discovery.
+3. Not link this dataset with individually identifiable data from other
+   NCHS or non-NCHS datasets.
+
+BY USING THESE DATA, YOU SIGNIFY YOUR AGREEMENT TO COMPLY WITH
+THE ABOVE-STATED STATUTORILY-BASED AGREEMENTS."
+---end excerpt from US CDC NCHS data use restrictions ---
+
+In addition, copies of the following data are included under copyright
+fair dealing provisions:
+
+    who_indicators  WHO national health indicators 2000-2002
+    worldpop        WHO World Standard Population Proportions
+
+Instructions for obtaining the latest version of the WHO indicators
+can be found in the README file in the demo subdirectory.
+
+To run the loader:
+
+    python demo/SOOM_demo_data_load.py
+
+Running the script with no arguments will load the entire datasets,
+which can take around two hours (the nhds dataset contains slightly more
+than two million rows). For testing purposes, however, the --rowlimit
+option can be used to stop loading after the specified number of rows,
+for example --rowlimit=10000 will stop loading after the first ten
+thousand rows of each dataset.
+
+The --datasets option allows you to load only the NHDS data
+(--datasets=nhds), or the WHO data (--datasets=whopop) - the default is
+"all".
+
+To see all the options, run:
+
+   python demo/SOOM_demo_data_load.py --help
+   
+Note that the script automatically downloads the NHDS data files from the
+CDC Web site via FTP. If you do not have an Internet connection then it will
+fail. However, you can download the files manually and place them in the 
+demo/rawdata directory. The URLs for the required files can be gleaned from
+the source code for the programmes in the demo/loaders directory. The files
+occupy about 10 MB in compressed state.
+
+The script also downloads two RTF (Rich Text Format) files containing the US
+ICD-9-CM codes and labels, in order to construct an output translation for the
+diagnosis and procedure codes in the NHDS datasets. This is intended as a
+demonstration only, and you should be aware that te code labels may not be 
+complete or appropriate for the version of the US ICD-9-CM codes used when the
+NHDS data was collected - this may be corrected in future versions.
+
+Demo Applications
+=================
+
+Two simple applications are provided to demonstrate some of the
+capabilities of NetEpi Analysis. These applications operate on the NHDS
+demonstration data, which should be loaded prior to their use (see the
+previous section).
+
+API Demo
+--------
+
+The script demo/api_demo.py is intended to demonstrate the Python
+programming interface to NetEpi Analysis. The NetEpi Analysis API can
+either be used interactively from a Python interpreter, or used from
+Python programmes.
+
+To run the demo:
+
+    python demo/api_demo.py
+
+The demo accepts several command line options:
+
+  --soompath=SOOMPATH   SOOM dataset path
+  --writepath=WRITEPATH
+                        Dataset write path (for temporary objects, defaults to
+                        SOOMPATH)
+  --nopause             Don't pause for user after each step
+
+Plot Demo
+---------
+
+The script demo/plot_demo.py demonstrates a range of graphical plots of
+the NHDS demonstration dataset. This demonstration requires an X11 session.
+
+To run the demo:
+
+    python demo/plot_demo.py
+
+The demo will display some explanatory text and diagnostics in the
+terminal window, then open a new window and display a plot. The user
+can then step to the next or previous test by using their cursor keys,
+or quit by pressing 'q', in the terminal window. The user can also skip
+directly to a test by entering its number and pressing the Enter key.
+
+Note that some of the plot demonstrations fail - we know this, and it 
+serves to remind us that certain features which used to work need to be
+attended to. Both the api_demo.py and lot_demo.py programmes serve as 
+convenient, informal regression tests.
+
+Web Interface
+-------------
+
+See the help.html file in the web/static subdirectory of the NetEpi Analysis
+distribution for a brief introduction to the Web interface.
+

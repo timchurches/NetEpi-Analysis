@@ -1,0 +1,244 @@
+%
+%   The contents of this file are subject to the HACOS License Version 1.2
+%   (the "License"); you may not use this file except in compliance with
+%   the License.  Software distributed under the License is distributed
+%   on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+%   implied. See the LICENSE file for the specific language governing
+%   rights and limitations under the License.  The Original Software
+%   is "NetEpi Analysis". The Initial Developer of the Original
+%   Software is the Health Administration Corporation, incorporated in
+%   the State of New South Wales, Australia.
+%
+%   Copyright (C) 2004,2005 Health Administration Corporation.
+%   All Rights Reserved.
+%
+\section{Storage API}
+
+The \module{blobstore} extension module is built on top of the Storage
+API.  This API provides a blob storage via a memory mapped file.
+
+The memory mapped file managed by the Storage API is logically
+arranged like the following figure:
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics{storage}
+\caption{Memory Mapped File Layout}
+\end{center}
+\end{figure}
+
+There is a simplicifcation in the above diagram.  The blob containing
+the blob sequence (labelled ``seq'') contains blob numbers which are
+then used as indexes back into the blob table to locate the actual
+blob data.
+
+At offset zero in the file is the file header which is a
+\ctype{StoreHeader} structure from which everything else is located.
+
+\begin{ctypedesc}[StoreHeader]{StoreHeader}
+This structure which is contained at offset zero in the memory mapped
+file.  Its definition, found in \file{storage.h}, is:
+
+\begin{verbatim}
+typedef struct {
+    off_t table_loc;            /* where the blob table is stored */
+    int table_size;             /* allocated table size */
+    int table_len;              /* entries used in the table */
+    int table_index;            /* blob which contains the blob table */
+
+    int seq_index;              /* blob which contains the array lookup */
+    int seq_size;               /* allocated sequence size */
+    int seq_len;                /* number of blobs in the sequence */
+} StoreHeader;
+\end{verbatim}
+
+The \code{table_loc} member contains the file offset of a special blob
+which stores the blob table.  The blob table contains an array of
+\ctype{BlobDesc} structures.  Each \ctype{BlobDesc} describes one blob
+in the file.  All blob descriptors are kept together to minimise the
+amount of data which will be paged in while accessing the blob
+meta-data.
+
+As the blob table grows it will move around in the file.  The
+\code{table_size} member records the number of array elements
+allocated in the blob table while \code{table_len} records the length
+of the blob table.  Once allocated a blob cannot be deleted, it can
+only be marked as free space.
+
+The \code{table_index} member records the blob table index of the blob
+which contains the blob table.
+
+The blob table entries are always arranged in strict ascending
+sequence of the offset of the data that they describe.  This means
+that as blobs are resized they may be handled by different entries in
+the blob table.
+
+To present external code with blob numbers which do not change after
+the initial blob allocation, a blob sequence is maintained.  The blob
+sequence is a simple indirection table which translates external blob
+index into an internal blob table index.  This allows the table entry
+for a blob to change without affecting external code.
+
+The \code{seq_index} member records the blob table index of the blob
+which describes the blob sequence.
+\end{ctypedesc}
+
+\begin{ctypedesc}[BlobDesc]{BlobDesc}
+The blob table is constructed from an array of these structures.  Its
+definition, found in \file{storage.h}, is:
+
+\begin{verbatim}
+typedef struct {
+    off_t loc;                  /* location of the blob */
+    size_t size;                /* size of blob */
+    size_t len;                 /* length of blob */
+    int status;                 /* status of blob */
+    int type;                   /* user: type of blob */
+    int other;                  /* user: index of related blob */
+} BlobDesc;
+\end{verbatim}
+
+The \code{loc} member contains the file offset of the start of the
+blob data.  The \code{size} member contains the allocated size of the
+blob.  The \code{loc} member of the next \ctype{BlobDesc} \emph{is
+always equal to} \code{loc + size} of this \ctype{BlobDesc}.  The
+\code{len} member contains size of the blob requested by the external
+code.
+
+The \code{status} member records the status of this space controlled
+by this blob.  The value will be one of:
+
+\begin{longtable}{l|l}
+BLOB_FREE & The blob is free space. \\
+BLOB_TABLE & The blob contains the blob table. \\
+BLOB_SEQUENCE & The blob contains the blob sequence. \\
+BLOB_DATA & The blob contains user data. \\
+\end{longtable}
+
+The \code{type} and \code{other} members are not used by the Storage
+API.  Applications are free to store whatever they wish in these
+members.
+\end{ctypedesc}
+
+\begin{ctypedesc}[MmapBlobStore]{MmapBlobStore}
+This structure is allocated by the \cfunction{store_open} function
+when the blob storage is opened.  Its definition, found in
+\file{storage.h}, is:
+
+\begin{verbatim}
+typedef struct {
+    int mode;                   /* file open mode */
+    int fd;                     /* file descriptor */
+    int prot;                   /* mmap prot */
+    StoreHeader *header;        /* address of start of store */
+    size_t size;                /* size of file */
+    int cycle;                  /* increment when file remapped */
+} MmapBlobStore;
+\end{verbatim}
+\end{ctypedesc}
+
+\begin{cfuncdesc}{MmapBlobStore *}{store_open}{char *filename, char *mode}
+Opens the file specified in the \var{filename} argument using the mode
+specified in the \var{mode} argument.
+
+\begin{longtable}{l|l}
+\code{'r'} & Open an existing file in read only mode. \\
+\code{'r+'} & Open an existing file in read-write mode. \\
+\code{'w+'} & Create a new file in read-write mode. \\
+\end{longtable}
+
+If successful the function allocates and returns a
+\ctype{MmapBlobStore} structure which is passed as the first argument
+to all other Storage API functions.  If the operation fails for any
+reason the function will set a Python exception and will return
+\NULL{}.
+\end{cfuncdesc}
+
+\begin{cfuncdesc}{int}{store_close}{MmapBlobStore *sm}
+Closes the blob store and frees the \ctype{MmapBlobStore} structure.
+On failure the function will set a Python exception and will return
+\code{-1}.  On success the function returns \code{0}.
+\end{cfuncdesc}
+
+\begin{cfuncdesc}{int}{store_get_header}{MmapBlobStore *sm, StoreHeader *header}
+Copies the contents of the header at the start of the memory mapped
+file into the buffer supplied as the \var{header} argument.
+
+The function returns \code{0} on success and \code{-1} on failure.
+\end{cfuncdesc}
+
+\begin{cfuncdesc}{void}{store_usage}{MmapBlobStore *sm, size_t *used, size_t *unused}
+Traverses the blob table and returns the amount of space in use in the
+\var{usage} argument and the amount of space which is either free or
+wasted in the \var{unused} argument.
+\end{cfuncdesc}
+
+\begin{cfuncdesc}{size_t}{store_compress}{MmapBlobStore *sm}
+Compresses the blob store to remove any space contained in free blobs
+or at the end of existing blobs.  Note this function is not current
+implemented.
+
+Returns \code{0} on success and code{-1} on failure.
+\end{cfuncdesc}
+
+\begin{cfuncdesc}{int}{store_cycle}{MmapBlobStore *sm}
+Every time the file is remapped due to size changes, the \code{cycle}
+member of the \ctype{MmapBlobStore} is incremented.  This function
+returns the current value of the \code{cycle} member.
+\end{cfuncdesc}
+
+\begin{cfuncdesc}{int}{store_num_blobs}{MmapBlobStore *sm}
+Returns the number of blobs in the blob sequence.
+\end{cfuncdesc}
+
+\begin{cfuncdesc}{BlobDesc *}{store_get_blobdesc}{MmapBlobStore *sm, int index, int from_seq}
+Returns a pointer to the blob table entry which describes the blob
+specified by the \var{index} argument.  If the \var{from_seq} argument
+is non-zero then the \var{index} argument will be used to look up the
+blob sequence to obtain the index into the blob table.  When
+\var{from_seq} is zero the index is used directly to index the blob
+table.
+
+If the \var{index} argument is outside the bounds of the blob sequence
+or table the function will set a Python \exception{IndexError}
+exception and will return \NULL{}.
+\end{cfuncdesc}
+
+\begin{cfuncdesc}{void *}{store_blob_address}{MmapBlobStore *sm, BlobDesc *desc}
+Returns the address of the start of the data for the blob descriptor
+passed in \var{desc}.  The \cfunction{store_blob_blobdesc()} returns
+values suitable for use as the \var{desc} argument.
+
+The function preforms no checking on the arguments.
+\end{cfuncdesc}
+
+\begin{cfuncdesc}{int}{store_append}{MmapBlobStore *sm}
+Allocates a new entry in the blob sequence and returns the index.
+Note that no blob data is allocated until
+\cfunction{store_blob_resize()} is called to allocate some space for
+the blob.
+
+If the operation fails for any reason the function will set a Python
+exception and will return \code{-1}.
+\end{cfuncdesc}
+
+\begin{cfuncdesc}{int}{store_blob_size}{MmapBlobStore *sm, int index}
+Return the length of the blob identified by the blob sequence index in
+the \var{index} argument.
+\end{cfuncdesc}
+
+\begin{cfuncdesc}{int}{store_blob_resize}{MmapBlobStore *sm, int index, size_t data_len}
+Resize the blob identified by the blob sequence index in the
+\var{index} argument to be the new size specified in the
+\var{data_len} argument.
+
+If you are growing the blob, the address of the blob will almost
+certainly change after calling this function.  You must call
+\cfunction{store_blob_blobdesc()} and \cfunction{store_blob_address()}
+to obtain a valid address for the blob.
+\end{cfuncdesc}
+
+\begin{cfuncdesc}{int}{store_blob_free}{MmapBlobStore *sm, int index}
+Free the blob identified by the blob sequence index in the
+\var{index} argument.  The space will be reused.
+\end{cfuncdesc}

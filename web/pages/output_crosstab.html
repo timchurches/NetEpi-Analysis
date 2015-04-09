@@ -1,0 +1,105 @@
+<al-comment>
+
+    The contents of this file are subject to the HACOS License Version 1.2
+    (the "License"); you may not use this file except in compliance with
+    the License.  Software distributed under the License is distributed
+    on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+    implied. See the LICENSE file for the specific language governing
+    rights and limitations under the License.  The Original Software
+    is "NetEpi Analysis". The Initial Developer of the Original
+    Software is the Health Administration Corporation, incorporated in
+    the State of New South Wales, Australia.  
+    
+    Copyright (C) 2004,2005 Health Administration Corporation. 
+    All Rights Reserved.
+
+</al-comment>
+
+   <al-lookup name="data_style">
+    <al-item expr="'after', True, True"><td class="data-lt"></al-item>
+    <al-item expr="'after', True, False"><td class="data-t"></al-item>
+    <al-item expr="'after', False, True"><td class="data-l"></al-item>
+    <al-item expr="'before', True, True"><td class="data-br"></al-item>
+    <al-item expr="'before', True, False"><td class="data-b"></al-item>
+    <al-item expr="'before', False, True"><td class="data-r"></al-item>
+    <td class="data">
+   </al-lookup>
+
+   <al-exec expr="output = workspace.output" />
+   <div class="header"><al-value expr="workspace.output.title" /></div>
+   <al-if expr="workspace.output.simple_table">
+    <table width="100%" class="crosstab" style="table-layout: fixed;">
+   <al-else>
+    <table width="100%" class="crosstab">
+   </al-if>
+    <colgroup span="<al-value expr='len(output.row_axis)' />" />
+    <al-for iter="colgroup_i" expr="output.col_axis.col_group_count()">
+     <colgroup span="<al-value expr='colgroup_i.value()' />" class="cgroup" />
+    </al-for>
+    <thead>
+     <al-for iter="col_head_i" expr="output.col_axis.get_col_headers()">
+      <tr class="column">
+       <al-if expr="col_head_i.index() == 0">
+        <th colspan="<al-value expr='len(output.row_axis)' />"
+            rowspan="<al-value expr='len(output.col_axis) * 2' />">
+         <al-for iter="scol_i" expr="output.statcols">
+          <al-exec expr="col = output.summaryset[scol_i.value()]" />
+          <al-value expr="col.label"><br />
+         </al-for>
+         <al-for iter="pcol_i" expr="output.propcols">
+          <al-exec expr="col = output.summaryset[pcol_i.value()]" />
+          <al-value expr="col.label"><br />
+         </al-for>
+        </th>
+       </al-if>
+       <al-for iter="col_col_i" expr="col_head_i.value()">
+        <th colspan="<al-value expr='col_col_i.value().span' />" class="<al-value expr='col_col_i.value().markup' />"><al-value expr="col_col_i.value().label" /></th>
+       </al-for>
+      </tr>
+     </al-for>
+    </thead>
+    <tr class="row">
+     <al-for iter="row_label_i" expr="output.row_axis.get_row_headers()">
+      <th class="label"><al-value expr="row_label_i.value().label" /></th>
+     </al-for>
+    </tr>
+    <al-for iter="group_i" expr="output.row_axis.grouped_rows()">
+     <tbody class="rgroup">
+      <al-for iter="row_i" expr="group_i.value()">
+       <al-exec expr="row_headers, row_values = row_i.value()" />
+       <tr class="row">
+        <al-for iter="row_head_i" expr="row_headers">
+         <al-if expr="row_head_i.value()">
+          <th rowspan="<al-value expr='row_head_i.value().span' />" class="<al-value expr='row_head_i.value().markup' />"><al-value expr="row_head_i.value().label" /></th>
+         </al-if>
+        </al-for>
+        <al-for iter="col_i" expr="output.col_axis.header_and_values">
+         <al-exec expr="tot_col, col_values = col_i.value()" />
+         <al-exec expr="rownum = output.get_rownum(row_values, col_values)" />
+          <al-value lookup="data_style" expr="output.marginal_totals,row_headers[-1].total,tot_col" />
+          <al-for iter="scol_i" expr="output.statcols">
+           <al-value expr="output.format_cell(scol_i.value(), rownum)" /><br />
+          </al-for>
+          <al-for iter="pcol_i" expr="output.propcols">
+           <al-exec expr="col = output.summaryset[pcol_i.value()]" />
+           <al-if expr="output.heatmap">
+            <div style="background-color: <al-value expr='output.colours(col[rownum])' />;">
+           </al-if>
+            <al-if expr="output.proptype == 'percent'">
+             <al-value expr="output.propn2perc(col[rownum])" /><br />
+            <al-else>
+             <al-value expr="col.do_format(col[rownum])" /><br />
+            </al-if>
+           <al-if expr="output.heatmap">
+            </div>
+           </al-if>
+          </al-for>
+
+         </td>
+        </al-for>
+       </tr>
+      </al-for>
+     </tbody>
+    </al-for>
+   </table>
+   <div class="footer"><al-value expr="workspace.output.subtitle" /></div>

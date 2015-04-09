@@ -1,0 +1,461 @@
+body {
+    background-color: white;
+    color: black;
+    font-size: 11pt;
+    font-family: verdana, arial, sans-serif;
+}
+
+/* Banner */
+.bannerbox {
+    border-bottom: 1px solid black;
+    text-align: left;
+}
+.bannerbox .logo {
+    text-align: right;
+    border-right: 4px solid #ccc;
+    padding-right: 1ex;
+}
+.bannerbox .tit {
+    font-size: 24pt;
+}
+.bannerbox .subtit {
+    font-size: 8pt;
+}
+.bannerbox .copyright {
+    font-size: 6pt;
+}
+.bannerbox .copyright a {
+    text-decoration: none;
+    color: black;
+    background-color: inherit;
+}
+.bannerbox .copyright a:hover {
+    text-decoration: underline;
+}
+
+@media print {
+    .bannerbox {
+        display: none;
+    }
+}
+
+/* === */
+.explore {
+    text-align: left;
+}
+
+.explore th {
+    text-align: left;
+    font-weight: bold;
+}
+
+.explore .label {
+    text-align: right;
+}
+
+.explore .detail {
+    background-color: #eee;
+    color: inherit;
+}
+
+.scrolltab {
+    overflow: auto;
+    height: 20em;
+    width: 100%;
+    border-collapse: collapse;
+}
+.scrolltab th {
+    border: 1px solid black;
+    text-align: left;
+}
+.scrolltab td {
+    border: 1px solid black;
+    text-align: left;
+}
+
+.times {
+    font-size: 50%;
+    color: #888;
+}
+
+.submit {
+    width: 6em;
+}
+.bodytable {
+    width: 90%;
+    margin: auto;
+    border-collapse: separate;
+    border-spacing: 1ex;
+    text-align: left;
+}
+@media print {
+    .bodytable {
+        display: none;
+    }
+}
+.bodytable td {
+    vertical-align: top;
+}
+
+.bodytable .actions {
+    padding: 1ex;
+    border: 1px solid black;
+    background: #eee;
+}
+.bodytable .actions input {
+    width: 10em;
+}
+
+.bodytable .section {
+    width: 20%;
+    font-weight: bold;
+    padding-left: 4px;
+/*    font-size: 90%; */
+    white-space: nowrap;
+    background: #eee;
+    border-right: 4px solid #ccc;
+    padding-right: 1ex;
+}
+.bodytable .note {
+    font-size: 70%;
+    color: #888;
+}
+.rowtable {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0ex;
+    white-space: nowrap;
+}
+
+.fill, .fill * {
+    width: 100%;
+}
+
+.error {
+    color: white;
+    font-weight: bold;
+    background-color: #c33;
+}
+
+.warn {
+    color: white;
+    font-weight: bold;
+    background-color: #fc0;
+}
+
+.filterlabel {
+}
+
+.filter {
+    border-collapse: separate;
+    text-align: left;
+    width: 100%;
+}
+
+.filter .group {
+    background-color: #ccc;
+    color: inherit;
+    border-top: #933 2px solid;
+    border-left: #933 2px solid;
+    border-bottom: #933 2px solid;
+    width: 2em;
+    text-align: center;
+}
+.filter .groupsel {
+    background-color: #fcc;
+    color: inherit;
+    border-top: #933 2px solid;
+    border-left: #933 2px solid;
+    border-bottom: #933 2px solid;
+    width: 2em;
+    text-align: center;
+}
+.filter .leaf {
+    background-color: #ccc;
+    color: inherit;
+    border-top: #933 1px solid;
+    border-right: #933 1px solid;
+    border-bottom: #933 1px solid;
+    /*white-space: nowrap;*/
+}
+.filter .leafsel {
+    background-color: #fcc;
+    color: inherit;
+    border-top: #933 1px solid;
+    border-right: #933 1px solid;
+    border-bottom: #933 1px solid;
+}
+.exprview {
+    background-color: #c99;
+    color: inherit;
+    border: #933 1px solid;
+    margin-left: auto;
+    margin-right: auto;
+}
+.exprview .sel {
+    width: 14em;
+}
+.exprview .highlight {
+    background-color: #fcc;
+    color: inherit;
+}
+
+.search {
+    background-color: #ffc;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.infoedit {
+    border-collapse: collapse;
+    background-color: #ccf;
+    border: #339 1px solid;
+    margin-left: auto;
+    margin-right: auto;
+}
+.infoedit .bar {
+    background-color: #99f;
+}
+.butt input {
+    width: 6em;
+}
+
+.outputsel {
+    width: 6em;
+}
+
+.header {
+    font-weight: bold;
+    text-align: center;
+    font-size: 120%;
+    white-space: pre;
+}
+.footer {
+    font-weight: bold;
+    text-align: center;
+    white-space: pre;
+}
+
+.tableout {
+    border: solid #999;
+    border-collapse: collapse;
+}
+.tableout th {
+    border-bottom: double #ccc;
+    border-left: solid 1px #ccc;
+    border-right: solid 1px #ccc;
+    font-weight: bold;
+}
+.tableout td {
+    border-left: solid 1px #ccc;
+    border-right: solid 1px #ccc;
+    border-bottom: solid 1px #ccc;
+    text-align: left;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.tableout .numeric {
+    text-align: right;
+}
+
+.crosstab {
+    border-collapse: collapse;
+}
+
+.crosstab .rgroup {
+    border: solid 1px black;
+}
+
+.crosstab .cgroup {
+    border: solid 1px black;
+}
+.crosstab .row .label {
+    border: solid 2px black;
+    font-weight: bold;
+    white-space: normal;
+}
+
+.crosstab .row .value {
+    border: solid 1px black;
+    font-weight: bold;
+    font-size: 80%;
+    white-space: normal;
+}
+
+.crosstab .column .label {
+    border: solid 2px black;
+    font-weight: bold;
+    white-space: normal;
+}
+
+.crosstab .column .value {
+    border: solid 1px black;
+    font-weight: bold;
+    font-size: 80%;
+    white-space: normal;
+}
+.crosstab .data {
+    border: dotted 1px #99f;
+    font-size: 80%;
+    white-space: nowrap;
+}
+.crosstab .data-t {
+    border: dotted 1px #99f;
+    border-top: solid 1px #99f;
+    font-size: 80%;
+    white-space: nowrap;
+}
+.crosstab .data-l {
+    border: dotted 1px #99f;
+    border-left: solid 1px #99f;
+    font-size: 80%;
+    white-space: nowrap;
+}
+.crosstab .data-lt {
+    border: dotted 1px #99f;
+    border-left: solid 1px #99f;
+    border-top: solid 1px #99f;
+    font-size: 80%;
+    white-space: nowrap;
+}
+.crosstab .data-b {
+    border: dotted 1px #99f;
+    border-bottom: solid 1px #99f;
+    font-size: 80%;
+    white-space: nowrap;
+}
+.crosstab .data-r {
+    border: dotted 1px #99f;
+    border-right: solid 1px #99f;
+    font-size: 80%;
+    white-space: nowrap;
+}
+.crosstab .data-br {
+    border: dotted 1px #99f;
+    border-bottom: solid 1px #99f;
+    border-right: solid 1px #99f;
+    font-size: 80%;
+    white-space: nowrap;
+}
+
+.condcol {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    padding: 2px;
+}
+
+.condcol .buttons {
+    background-color: #ddd;
+}
+
+.condcol td {
+    border-width: 1px;
+    border-color: #888;
+    border-style: none solid solid solid;
+    vertical-align: top;
+}
+.condcol th {
+    border-width: 1px;
+    border-color: #888;
+    border-style: solid solid none solid;
+    border-bottom: 3px double #888;
+}
+.condcol table td {
+    /* we'd rather use a child selector above, but IE doesn't support them, so
+     * we explicitly reset stuff */
+    border-style: none;
+}
+.condcol .edit {
+    background-color: #fdd;
+    width: 100%;
+}
+.condcol .display td {
+    border-collapse: collapse;
+    border-width: 1px;
+    border-color: #888;
+    border-style: none none solid none;
+    vertical-align: top;
+}
+
+.leftcol {
+    width: 50%; 
+    display: block; 
+    float: left;
+    white-space: normal;
+}
+.rightcol {
+    width: 50%; 
+    display: block; 
+    float: left;
+    white-space: normal;
+}
+
+.twobytwoparams {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+.twobytwoparams th {
+    text-align: left;
+}
+.twobytwoparams .ops {
+    vertical-align: top;
+    white-space: nowrap;
+}
+.twobytwoparams .inc {
+    width: 50%;
+    vertical-align: top;
+}
+.twobytwoparams .exc {
+    vertical-align: top;
+}
+.twobytwoparams .buttons {
+    background-color: #ccc;
+}
+.twobytwoparams .widebutt input {
+    width: 8em;
+}
+.twobytwoparams .result {
+    background-color: #ffc;
+}
+
+.twobytwo {
+    text-align: left;
+}
+.twobytwo td {
+    vertical-align: top;
+}
+.twobytwo .sechead {
+    font-size: 120%;
+    font-weight: bold;
+    background-color: #ddd;
+    border-top: 2px solid black;
+}
+.twobytwo .subsechead {
+    font-size: 120%;
+    font-weight: bold;
+    background-color: #eee;
+}
+
+.twobytwo .twobytwotab {
+    border-collapse: collapse;
+}
+.twobytwo .twobytwotab .cell {
+    border: 1px solid black;
+    width: 10em;
+}
+.twobytwo .twobytwotab td {
+    text-align: center;
+}
+.twobytwo .twobytwotab .side {
+    text-align: right;
+}
+.twobytwo .twobytwotab .top {
+    text-align: center;
+}
+.twobytwo .twobytwotab .mt {
+    border: 1px solid black;
+    background-color: #eee;
+    width: 10em;
+}

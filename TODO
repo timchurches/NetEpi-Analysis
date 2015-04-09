@@ -1,0 +1,288 @@
+#
+#   The contents of this file are subject to the HACOS License Version 1.2
+#   (the "License"); you may not use this file except in compliance with
+#   the License.  Software distributed under the License is distributed
+#   on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+#   implied. See the LICENSE file for the specific language governing
+#   rights and limitations under the License.  The Original Software
+#   is "NetEpi Analysis". The Initial Developer of the Original
+#   Software is the Health Administration Corporation, incorporated in
+#   the State of New South Wales, Australia.
+#
+#   Copyright (C) 2004,2005 Health Administration Corporation.
+#   All Rights Reserved.
+
+This file contains a collection of ideas, in no particular order, for
+future enhancements to NetEpi Analysis. Some ideas which have alreday
+been implemented.
+
+= Confidence Limits ===========================================================
+* Need to support display of mean and conf limits in crosstabs. Generally
+  the format is:
+
+    mean (lower, upper)
+
+    eg 
+
+    23.4 (17.9, 27.8)
+
+* need a mechnism to set the number of decimal places displayed
+  for means and confidence limits (in web crosstab?).
+
+* See the last example in teh __main__ part of PopRate.py in 20050829-01.
+  Want to be able to use aus01stdpop_mf for persons-level standardisation,
+  not a special non-sex-specific version of the std pops.
+
+= SOOM engine =================================================================
+
+* Implement more demo's/tests using the NIST Mathematical and
+  Computational Sciences Division Statistical Reference Datasets:
+
+    http://www.itl.nist.gov/div898/strd/index.html
+
+* review api_demo and plot_demo for things that don't work or need to be
+  reinstated.
+
+* quantiles (plural) to be provided as a stat method. Will require some
+  minor refactoring to support a method that results in multiple output
+  cols.
+
+* likewise correlation co-efficients (will require passing multiple scaler
+  column names to stats function). 
+
+* ability to specify resulting column name and label when calling stat methods.
+
+* encode kwargs to stat methods in resulting column name and label - this is
+  needed to make the column name unique if used more than once with different
+  parameters. Other possibilities could include requiring the user to specify
+  the column name in this case.
+
+* Allow code objects to be saved with data set, for things like outtrans
+  to use complex programmes for output value transformation (it can
+  already, but the code is not stored with the dataset, unlike the case
+  when dictionaries are used for outtrans etc).
+
+* comparisons between columns, eg:
+
+    "weight_after > weight_before"
+
+* further investigate storing date and time vales as complex Numpy arrays.
+
+* consider this recipe for printing large numbers (will need some work for
+  floats):
+    
+    http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/302035
+
+* Support for sort orders - both in the SOOM engine and in the UI - so 
+  datasets can be processed in sorted order, and/or the values along a 
+  given axis of a table or graph can be arranged in a specific order.
+
+* Transparent support for calculation of rates, including standardised 
+  rates. That means building in knowledge about populations into a dataset
+  subclass. Complex but doable. If not, then a UI for manually going
+  through the steps needed to calculate datasets containing rates. The
+  prototype mortality analysis system which used SOOM did standardised
+  rate calculations, so it is not entirely new ground.
+
+* additional dataset and column metadata, eg:
+    copyright, date of production, source/producer, years covered,
+    geographical coverage
+
+* additional column metadata, indicating whether scalars are summable or not
+  (i.e. can the quantities be added up).
+  
+* add ability to calculate proportions not just of frequencies (counts)
+  but also of other quantities which are summable (see above)
+
+* add binning facility so that scalar columns can be converted into 
+  discrete values (bins) - including support for overlapping bins (by
+  using a tuple column data type).
+
+* add support for calculating correct variance from sampled surveys
+  with non-simple designs, via Taylor series linearisation in the Stats.py
+  module, and/or via Thomas Lumley's survey library in R.
+
+* further investigate changing the back-end storage from memory-mapped
+  Numeric arrays to HDF5 files via PyTables - this would allow
+  platform-independent storage, and avoid the current 2GB or 4GB limit on
+  32 bit systems. However, would need a) addition of datetime data type
+  to PyTable b) conversion of SOOM from Numeric Python to numarray, c)
+  conversion of RPy from Numeric Python to numarray. None of these are
+  huge tasks, as numarray was designed to be highly backwardly compatible
+  with Numeric Python.
+
+* experimant with parallelising SOOM via PyPar and MPI - an initial
+  experiment with this yielded excellent results, although a high-speed
+  network substrate for the cluster is necessary in order to avoid
+  network bottlenecks.
+
+* ability to publish and import metadata in ISO metadata standard formats
+
+* further work on the way dataset paths are overlayed, where data gets
+  written, private workspaces, etc. The code currently should allow you
+  point at a read-only dataset, and write local changes to an alternate
+  location - some directory creation bugs are preventing this. Another
+  option is to go the database route, and have an opaque store in which
+  dataset objects (private and public) are stored. More thought needed.
+
+* when printing or slicing a dataset, operate col by col, allowing cols
+  to be aggressively unmapped on platforms with restricted address space.
+
+* access control lists for datasets.
+
+* ability to select previous versions of a dataset (web also).
+
+* PopRate.calc_directly_std_rates() does not cope with marginal totals in
+  summarised data. This could be fixed by ignoring all rows with level < number
+  of condcols.
+
+= plotting ====================================================================
+
+* when paneling, value labels are line wrapped by R, but R doesn't allow enough
+  vertical space for more than one line. Determine feasibility of expanding
+  panel label, or abreviating values or allowing short and long outtrans
+  (urgh).
+
+* pie chart support, as a template for support for many old-style R
+  graphics types
+
+* Need to be able to override axis labels via args.
+
+* Plot method argument checking:
+
+* Plot methods to accept already summarised dataset (where that makes sense)
+  and automatically use appropriate weighting 
+
+* implement common (and perhaps custom) plot types in matplotlib, which
+  is a Python charting library which uses Antigrain and/or Cairo as the
+  raster back-end to produce beautiful quality charts (which put those
+  produced by R in the shade), as well as PS/PDF and SVG.  If only R
+  used Cairo or Antigrain as its rendering engine...
+
+= web interface ===============================================================
+
+* make help button dependent on analysis type.
+
+* support for combining and coalescing categorical (and ordinal) 
+  values, and engine and UI support for "binning" or "discretising" 
+  continuous values.
+
+* support for supressing certain values from appearing in graphs and 
+  tables (but not from the underlying summary - that can already done via
+  filters) - thus NOT excluding them from marginal totals etc. Strictly
+  speaking, bad practice, but in reality, it is a very common requirement
+  to want to present only some values as the detail on a graph or table.
+  This is related to binning above and probably best tackled together.
+  Note that a note should appear on tables and graphs to indicate that
+  values are being suppressed.
+
+* ability to override x and y axis labels.
+
+* NOT operator for AND/OR in filter builder (Tim prefers NOT .. AND
+  button - maybe better to open conjunction edit dialog with NOT checkbox
+  or pulldown).
+
+* add a button to save just the crosstab HTML table part of the page to
+  a file (in HTML or CSV format)
+
+* Row (or column) only crosstabs (add dummy column (row)) - could then
+  remove "summary tables" type and offer its output format as an option
+  in crosstabs
+
+* authentication (use .htaccess, PAM->ldap)
+
+* user groups with dataset and column group ACLs
+
+* One parameter which would be useful to expose in the UI is the layout
+  settings for panelled graphs. There is support for this in the graph
+  functions. In particular, it is very helpful to be able to stack all
+  the panels for time-series and other line graphs in a single vertical
+  column, so the x-axes line up. Also useful for comparing histograms,
+  for that matter.
+
+* options for "landscape" and "portrait" options for the PNG
+  graphs ought to be offered - the aspect ratios for these should be
+  about the same as for an A4 page.
+
+* line listing report facility (print dataset, grouping by values,
+  select columns)
+
+* ability to set colours, line and symbol types, fonts, font sizes etc
+  in graphs.
+
+* "Help" and "Copyright" links in the header bar
+
+* make the user interface less "modal" eg ability to change analysis
+  type while retaining as many parameter values as possible
+
+* categorical value aggregation and recoding facility
+
+* ability to specify sort orders in output (eg bar order in barcharts,
+  row or col order in tables)
+
+* ability to store sets of analysis parameters as "analysis objects",
+  and be able to recall them, or schedule them for automatic execution
+  at intervals, and share them with others. Note that there is already
+  support in the filters module for specifying relative datetime
+  comparisons.
+
+* 2x2xk: it would be useful to be able to specify a) several exposure
+  columns (each one "editable" with respect to +ve and -ve assignemnt as
+  at present); b) possibly several outcomes columns (similarly "editable")
+  and then c) run the 2x2xk analysis on the pairwise combinations of
+  the exposure and outcome columns. Rather than calculate (or display)
+  all the measures of association and related statistics, the user would
+  need to be able to select only some calculated measures/statistics of
+  interest (to avoid being overwhelmed with information), with the output
+  appearing perhaps in a crosstabulation. Such a facility would be very
+  useful in outbreak investigations (eg the Oswego data) where possible
+  causes for the illness in question are being sought, and there are many
+  exposures to screen for positive associations with the outcome. When
+  making such multiple comparisons, it is wise to employ techniques to
+  further adjust the p-values eg Bonferroni or Tukey adjustments (R has
+  functions to do these). Clearly a somewhat modified 2x2xk interface
+  would be needed to accomodate this, but the underlying mechnics of
+  calculation etc would all be the same.
+
+* 2x2xk cotabplots
+
+= epidemiological analysis ====================================================
+
+* replicate much of what OpenEpi does, but do the calculations on the
+  server, not the client. calculations to be done in Numeric Python,
+  or R via RPy where necessary.
+
+* add a 2x2 and r x c cross tab type - which are simplified crosstabs,
+  and calculate epidemiological quantities for them - this is contingent
+  on a the value aggregation and recoding facility mentioned above being
+  in place.
+
+* add dataset metadata to capture sample design information, to enable
+  automatic selection of correct method for variance calculation
+
+* add association and mosaic plots, and implement colour coding of table
+  cells depending on variation from expectation as per Epi Info etc.
+
+* add support (via R) for more complex analysis eg logistic regression,
+  survival analysis
+
+* add data mining facilities (association rules in Python, also via
+  Orange and R)
+
+* add some specific epidemioogic plot types, including association and
+  mosaic plots (via R), various epidemic curve (time-series bar charts),
+  and things like population pyramid charts etc.
+
+* add ability to combine several plot types on a single chart
+
+* add ability to combine multiple analysis objects (plots, tables, line
+  listing reports) with text into a formatted report (HTML, possibly
+  re-rendering to RTF or MS-Word .doc formats via OpenOffice acting as
+  a headless server, driven via PyUNO). Ability to interpolate Python
+  variables into the text for automatically updated reports.
+
+* tighter integration with NetEpi Case Manager
+
+* ability to read .REC files produced by Epi Infor for DOS and EpiData.
+
+* ability to consume SAS XML files.

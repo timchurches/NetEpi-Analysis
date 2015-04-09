@@ -1,0 +1,138 @@
+<al-comment>
+
+    The contents of this file are subject to the HACOS License Version 1.2
+    (the "License"); you may not use this file except in compliance with
+    the License.  Software distributed under the License is distributed
+    on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+    implied. See the LICENSE file for the specific language governing
+    rights and limitations under the License.  The Original Software
+    is "NetEpi Analysis". The Initial Developer of the Original
+    Software is the Health Administration Corporation, incorporated in
+    the State of New South Wales, Australia.  
+    
+    Copyright (C) 2004,2005 Health Administration Corporation. 
+    All Rights Reserved.
+
+</al-comment>
+
+<al-macro name="stratacounts">
+      <al-if expr="xtab.label">
+       <tr>
+        <th colspan="2" class="subsechead">
+         <al-value expr="xtab.label" />
+        </th>
+       </tr>
+      </al-if>
+      <tr>
+       <td colspan="2">
+        <table class="twobytwotab">
+         <tr>
+          <th></th>
+          <th></th>
+          <th colspan="2"><al-value expr="display.axislabels[0].label" /></th>
+         </tr>
+         <tr>
+          <th></th>
+          <th></th>
+          <th class="top">
+           <al-value expr="display.axislabels[0].values[0]" />
+          </th>
+          <th class="top">
+           <al-value expr="display.axislabels[0].values[1]" />
+          </th>
+         </tr>
+         <tr>
+          <th class="side" rowspan="2">
+           <al-value expr="display.axislabels[1].label" />
+          </th>
+          <th class="side">
+           <al-value expr="display.axislabels[1].values[0]" />
+          </th>
+          <td class="cell"><al-value expr="xtab.data[0,0]" /></td>
+          <td class="cell"><al-value expr="xtab.data[1,0]" /></td>
+          <td class="mt"><al-value expr="xtab.htot[0]" /></td>
+         </tr>
+         <tr>
+          <th class="side">
+           <al-value expr="display.axislabels[1].values[1]" />
+          </th>
+          <td class="cell"><al-value expr="xtab.data[0,1]" /></td>
+          <td class="cell"><al-value expr="xtab.data[1,1]" /></td>
+          <td class="mt"><al-value expr="xtab.htot[1]" /></td>
+         </tr>
+         <tr>
+          <td></td>
+          <td></td>
+          <td class="mt"><al-value expr="xtab.vtot[0]" /></td>
+          <td class="mt"><al-value expr="xtab.vtot[1]" /></td>
+          <td class="mt"><al-value expr="xtab.tot" /></td>
+         </tr>
+        </table>
+       </td>
+      </tr>
+</al-macro>
+
+   <al-exec expr="output = workspace.output" />
+   <div class="header"><al-value expr="workspace.output.title" /></div>
+   <div class="footer"><al-value expr="workspace.output.subtitle" /></div>
+   <table class="twobytwo">
+    <al-exec expr="display = workspace.output.display()" />
+
+    <al-if expr="workspace.output.have_files()">
+     <tbody class="section">
+      <th colspan="2" class="sechead">Fourfold Plots</th>
+      <al-for iter="ii" expr="workspace.output.files()">
+       <tr>
+        <th colspan="2" class="subsechead">
+         <al-value expr="ii.value().label" />
+        </th>
+       </tr>
+       <tr>
+        <td colspan="2" align="center">
+         <al-img expr="ii.value().url()" />
+        </td>
+       </tr>
+      </al-for>
+     </tbody>
+    </al-if>
+
+    <tbody class="section">
+     <th colspan="2" class="sechead">Counts</th>
+     <al-for iter="s_i" expr="display.xtabs">
+      <al-exec expr="xtab = s_i.value()" />
+      <al-expand name="stratacounts" />
+     </al-for>
+    </tbody>
+
+    <al-for iter="section_i" expr="display.report" >
+     <al-exec expr="section = section_i.value()" />
+     <tbody class="section">
+      <tr>
+       <th colspan="2" class="sechead"><al-value expr="section.label" /></th>
+      </tr>
+      <al-for iter="sub_i" expr="section.contents">
+       <al-exec expr="subsec = sub_i.value()" />
+       <al-if expr="subsec.label">
+        <tr>
+         <th colspan="2" class="subsechead">
+          <al-value expr="subsec.label" />
+         </th>
+        </tr>
+       </al-if>
+       <al-for iter="lines_i" expr="subsec.contents">
+        <tr>
+         <al-exec expr="fields = lines_i.value().split(':', 1)" />
+         <al-if expr="len(fields) == 1">
+          <td colspan="2">
+           <al-value expr="fields[0]" />
+          </td>
+         <al-else>
+          <td><al-value expr="fields[0]" />:</td>
+          <td><al-value expr="fields[1]" /></td>
+         </al-if>
+        </tr>
+       </al-for>
+      </al-for>
+     </tbody>
+    </al-for>
+   </table>

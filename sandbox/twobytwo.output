@@ -1,0 +1,2371 @@
+OpenEpi example values
+
+Tabulated values
+================
+Stratum 1:
+a (exposed, disease): 66
+b (unexposed, disease): 36
+c (exposed, no disease): 28
+d (unexposed, no disease): 32
+-----------------------
+Stratum 2:
+a (exposed, disease): 139
+b (unexposed, disease): 93
+c (exposed, no disease): 61
+d (unexposed, no disease): 54
+-----------------------
+Unstratified (crude):
+a (exposed, disease): 205
+b (unexposed, disease): 129
+c (exposed, no disease): 89
+d (unexposed, no disease): 86
+-----------------------
+
+Measures of association
+=======================
+Stratum 1:
+Chi sq: 5.04737, p=0.02466
+Yates-corrected Chi sq: 4.33389, p=0.03736
+M-H Chi sq: 5.01621, p=0.02511
+Fisher's exact test: one-sided p=0.01881, two-sided (twice one-sided): p=0.03762, two-sided (as extreme): p=0.03204
+mid-p: one-sided p=0.01341, two-sided p=0.02682
+-----------------------
+Stratum 2:
+Chi sq: 1.48635, p=0.22278
+Yates-corrected Chi sq: 1.21829, p=0.26970
+M-H Chi sq: 1.48207, p=0.22345
+Fisher's exact test: one-sided p=0.13492, two-sided (twice one-sided): p=0.26984, two-sided (as extreme): p=0.24897
+mid-p: one-sided p=0.11306, two-sided p=0.22612
+-----------------------
+Unstratified (crude):
+Chi sq: 5.20903, p=0.02247
+Yates-corrected Chi sq: 4.78676, p=0.02868
+M-H Chi sq: 5.19879, p=0.02260
+Fisher's exact test: one-sided p=0.01448, two-sided (twice one-sided): p=0.02895, two-sided (as extreme): p=0.02371
+mid-p: one-sided p=0.01166, two-sided p=0.02331
+-----------------------
+Adjusted:
+Mantel-Haenszel chi square with continuity correction: 4.78871 (p=0.02865)
+Mantel-Haenszel chi square without continuity correction: 5.21052 (p=0.02245)
+Fisher exact test: one-sided: p=0.01438, two-sided (twice one-sided): p=0.02876, two-sided (as extreme): p=0.02371
+Mid-p exact test: one-sided: p=0.01158, two-sided: p=0.02316
+-----------------------
+
+Risk-based measures
+===================
+Stratum 1:
+Risk in exposed: 0.70213 (0.60290, 0.78549)
+Risk in unexposed: 0.52941 (0.41240, 0.64328)
+Risk in overall population: 0.62963 (0.55301, 0.70024)
+Risk ratio: 1.32624 (1.02269, 1.71988)
+Risk difference: 0.17272 (0.02231, 0.32312)
+-----------------------
+Stratum 2:
+Risk in exposed: 0.69500 (0.62791, 0.75474)
+Risk in unexposed: 0.63265 (0.55220, 0.70635)
+Risk in overall population: 0.66859 (0.61742, 0.71607)
+Risk ratio: 1.09855 (0.94210, 1.28097)
+Risk difference: 0.06235 (-0.03837, 0.16307)
+-----------------------
+Unstratified (crude):
+Risk in exposed: 0.69728 (0.64243, 0.74703)
+Risk in unexposed: 0.60000 (0.53329, 0.66320)
+Risk in overall population: 0.65619 (0.61388, 0.69616)
+Risk ratio: 1.16213 (1.01781, 1.32692)
+Risk difference: 0.09728 (0.01334, 0.18122)
+Aetiological fraction in the population: 0.08563 (0.01098, 0.16028)
+Aetiological fraction in the exposed: 0.13951 (0.01750, 0.24638)
+Prevented fraction in the population: -0.09365 (-0.19087, -0.01110)
+Prevented fraction in the exposed: -0.16213 (-0.32692, -0.01781)
+-----------------------
+Adjusted:
+Directly adjusted risk ratio: 1.15345 (1.01056, 1.31655)
+Mantel-Haenszel adjusted risk ratio: 1.16240 (1.01794, 1.32736)
+Breslow-Day chi square test for homogeneity of RR across strata: 1.49516 (p=0.22142)
+Directly adjusted risk difference: 0.09652 (0.01283, 0.18021)
+Breslow-Day chi square test for homogeneity of RD across strata: 1.42813 (p=0.23207)
+-----------------------
+
+Odds-based measures
+===================
+Stratum 1:
+Sample odds ratio: 2.09524 (1.09410, 4.01244)
+CMLE odds ratio: 2.08538 (1.03962, 4.22297)
+mid-p CMLE odds ratio: 2.08281 (1.08768, 4.02798)
+-----------------------
+Stratum 2:
+Sample odds ratio: 1.32311 (0.84313, 2.07633)
+CMLE odds ratio: 1.32201 (0.82130, 2.12749)
+mid-p CMLE odds ratio: 1.32208 (0.84088, 2.07825)
+-----------------------
+Unstratified (crude):
+Sample odds ratio: 1.53558 (1.06147, 2.22145)
+CMLE odds ratio: 1.53422 (1.04302, 2.25869)
+mid-p CMLE odds ratio: 1.53406 (1.05993, 2.22253)
+Aetiological fraction in the population: 0.21407 (0.05494, 0.37320)
+Aetiological fraction in the exposed: 0.34878 (0.05791, 0.54984)
+Prevented fraction in the population: -0.27238 (-0.59540, -0.05814)
+Prevented fraction in the exposed :-0.53558 (-1.22145, -0.06147)
+-----------------------
+Adjusted:
+Directly adjusted common odds ratio: 1.53615 (1.06078, 2.22456)
+Mantel-Haenszel common odds ratio: 1.53597 (1.06192, 2.22163)
+CMLE common odds ratio: 1.53481 (1.04352, 2.25940)
+Breslow-Day chi square test for homogeneity of OR across strata: 1.29834 (p=0.25452)
+Woolf chi square test for homogeneity of OR across strata: 1.29834, df=1.00000 (p=0.25452)
+-----------------------
+Armitage and Berry example
+
+Tabulated values
+================
+Stratum 1:
+a (exposed, disease): 1
+b (unexposed, disease): 21
+c (exposed, no disease): 4
+d (unexposed, no disease): 16
+-----------------------
+
+Measures of association
+=======================
+Stratum 1:
+Chi sq: 2.38585, p=0.12244
+Yates-corrected Chi sq: 1.13978, p=0.28570
+M-H Chi sq: 2.32904, p=0.12698
+Fisher's exact test: one-sided p=0.14353, two-sided (twice one-sided): p=0.28705, two-sided (as extreme): p=0.17448
+mid-p: one-sided p=0.08088, two-sided p=0.16175
+-----------------------
+
+Risk-based measures
+===================
+Stratum 1:
+Risk in exposed: 0.20000 (0.02032, 0.64037)
+Risk in unexposed: 0.56757 (0.40902, 0.71340)
+Risk in overall population: 0.52381 (0.37721, 0.66642)
+Risk ratio: 0.35238 (0.05970, 2.08011)
+Risk difference: -0.36757 (-0.75281, 0.01767)
+-----------------------
+
+Odds-based measures
+===================
+Stratum 1:
+Sample odds ratio: 0.19048 (0.01937, 1.87304)
+CMLE odds ratio: 0.19763 (0.00370, 2.25204)
+mid-p CMLE odds ratio: 0.21562 (0.00738, 1.74494)
+-----------------------
+
+==============================================================
+StatExact example 14.4.1 Alcohol and Oesophageal cancer values
+Breslow-Day homogeneity of OR chi-sq should be 9.323,p=0.0968
+CMLE common OR should be 5.251 with exact CI of (3.572, 7.757)
+and mid-p exact CI of (3.630, 7.629)
+Mantel-Haenszel common OR should be 5.158 with RGB CO of (3.562, 7.468)
+All p-values should be < 0.0000
+==============================================================
+
+Tabulated values
+================
+Stratum 1:
+a (exposed, disease): 1
+b (unexposed, disease): 0
+c (exposed, no disease): 9
+d (unexposed, no disease): 106
+-----------------------
+Stratum 2:
+a (exposed, disease): 4
+b (unexposed, disease): 5
+c (exposed, no disease): 26
+d (unexposed, no disease): 164
+-----------------------
+Stratum 3:
+a (exposed, disease): 25
+b (unexposed, disease): 21
+c (exposed, no disease): 29
+d (unexposed, no disease): 138
+-----------------------
+Stratum 4:
+a (exposed, disease): 42
+b (unexposed, disease): 34
+c (exposed, no disease): 27
+d (unexposed, no disease): 139
+-----------------------
+Stratum 5:
+a (exposed, disease): 19
+b (unexposed, disease): 36
+c (exposed, no disease): 18
+d (unexposed, no disease): 88
+-----------------------
+Stratum 6:
+a (exposed, disease): 5
+b (unexposed, disease): 8
+c (exposed, no disease): 0
+d (unexposed, no disease): 31
+-----------------------
+Unstratified (crude):
+a (exposed, disease): 96
+b (unexposed, disease): 104
+c (exposed, no disease): 109
+d (unexposed, no disease): 666
+-----------------------
+
+Measures of association
+=======================
+Stratum 1:
+Chi sq: 10.69217, p=0.00108
+Yates-corrected Chi sq: 2.19249, p=0.13869
+M-H Chi sq: 10.60000, p=0.00113
+Fisher's exact test: one-sided p=0.08621, two-sided (twice one-sided): p=0.17241, two-sided (as extreme): p=0.08621
+mid-p: one-sided p=0.04310, two-sided p=0.08621
+-----------------------
+Stratum 2:
+Chi sq: 6.35068, p=0.01173
+Yates-corrected Chi sq: 4.17529, p=0.04102
+M-H Chi sq: 6.31877, p=0.01195
+Fisher's exact test: one-sided p=0.03103, two-sided (twice one-sided): p=0.06206, two-sided (as extreme): p=0.03103
+mid-p: one-sided p=0.01782, two-sided p=0.03564
+-----------------------
+Stratum 3:
+Chi sq: 26.06495, p=0.00000
+Yates-corrected Chi sq: 24.14739, p=0.00000
+M-H Chi sq: 25.94258, p=0.00000
+Fisher's exact test: one-sided p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+mid-p: one-sided p=0.00000, two-sided p=0.00000
+-----------------------
+Stratum 4:
+Chi sq: 38.89813, p=0.00000
+Yates-corrected Chi sq: 37.00837, p=0.00000
+M-H Chi sq: 38.73739, p=0.00000
+Fisher's exact test: one-sided p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+mid-p: one-sided p=0.00000, two-sided p=0.00000
+-----------------------
+Stratum 5:
+Chi sq: 6.31152, p=0.01200
+Yates-corrected Chi sq: 5.35819, p=0.02063
+M-H Chi sq: 6.27232, p=0.01226
+Fisher's exact test: one-sided p=0.01123, two-sided (twice one-sided): p=0.02247, two-sided (as extreme): p=0.01726
+mid-p: one-sided p=0.00754, two-sided p=0.01507
+-----------------------
+Stratum 6:
+Chi sq: 13.45168, p=0.00024
+Yates-corrected Chi sq: 9.90413, p=0.00165
+M-H Chi sq: 13.14596, p=0.00029
+Fisher's exact test: one-sided p=0.00119, two-sided (twice one-sided): p=0.00237, two-sided (as extreme): p=0.00119
+mid-p: one-sided p=0.00059, two-sided p=0.00119
+-----------------------
+Unstratified (crude):
+Chi sq: 110.25539, p=0.00000
+Yates-corrected Chi sq: 108.22115, p=0.00000
+M-H Chi sq: 110.14230, p=0.00000
+Fisher's exact test: one-sided p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+mid-p: one-sided p=0.00000, two-sided p=0.00000
+-----------------------
+Adjusted:
+Warning: expected values in some strata are < 5: use of exact statistics recommended.
+Mantel-Haenszel chi square with continuity correction: 83.21453 (p=0.00000)
+Mantel-Haenszel chi square without continuity correction: 85.00950 (p=0.00000)
+Fisher exact test: one-sided: p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+Mid-p exact test: one-sided: p=0.00000, two-sided: p=0.00000
+-----------------------
+
+Risk-based measures
+===================
+Stratum 1:
+Risk in exposed: 0.10000 (0.00000, 0.42597)
+Risk in unexposed: 0.00000 (0.00000, 0.04200)
+Risk in overall population: 0.00862 (0.00000, 0.05198)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: 0.10000 (-0.08594, 0.28594)
+-----------------------
+Stratum 2:
+Risk in exposed: 0.13333 (0.04695, 0.30296)
+Risk in unexposed: 0.02959 (0.01081, 0.06927)
+Risk in overall population: 0.04523 (0.02278, 0.08490)
+Risk ratio: 4.50667 (1.28328, 15.82663)
+Risk difference: 0.10375 (-0.02055, 0.22804)
+-----------------------
+Stratum 3:
+Risk in exposed: 0.46296 (0.33688, 0.59397)
+Risk in unexposed: 0.13208 (0.08734, 0.19417)
+Risk in overall population: 0.21596 (0.16577, 0.27622)
+Risk ratio: 3.50529 (2.14484, 5.72867)
+Risk difference: 0.33089 (0.18786, 0.47391)
+-----------------------
+Stratum 4:
+Risk in exposed: 0.60870 (0.49060, 0.71533)
+Risk in unexposed: 0.19653 (0.14383, 0.26242)
+Risk in overall population: 0.31405 (0.25879, 0.37512)
+Risk ratio: 3.09719 (2.17000, 4.42053)
+Risk difference: 0.41216 (0.28268, 0.54165)
+-----------------------
+Stratum 5:
+Risk in exposed: 0.51351 (0.35894, 0.66554)
+Risk in unexposed: 0.29032 (0.21744, 0.37580)
+Risk in overall population: 0.34161 (0.27272, 0.41789)
+Risk ratio: 1.76877 (1.16538, 2.68457)
+Risk difference: 0.22319 (0.04341, 0.40297)
+-----------------------
+Stratum 6:
+Risk in exposed: 1.00000 (0.51095, 1.00000)
+Risk in unexposed: 0.20513 (0.10525, 0.35788)
+Risk in overall population: 0.29545 (0.18061, 0.44315)
+Risk ratio: 4.87500 (2.62824, 9.04241)
+Risk difference: 0.79487 (0.66814, 0.92160)
+-----------------------
+Unstratified (crude):
+Risk in exposed: 0.46829 (0.40119, 0.53656)
+Risk in unexposed: 0.13506 (0.11266, 0.16109)
+Risk in overall population: 0.20513 (0.18094, 0.23163)
+Risk ratio: 3.46717 (2.75284, 4.36685)
+Risk difference: 0.33323 (0.26078, 0.40568)
+Aetiological fraction in the population: 0.34156 (0.26368, 0.41944)
+Aetiological fraction in the exposed: 0.71158 (0.63674, 0.77100)
+Prevented fraction in the population: -0.51874 (-0.72247, -0.35811)
+Prevented fraction in the exposed: -2.46717 (-3.36685, -1.75284)
+-----------------------
+Adjusted:
+Directly adjusted risk ratio: undefined (undefined, undefined)
+Mantel-Haenszel adjusted risk ratio: 2.88779 (2.31537, 3.60174)
+Breslow-Day chi square test for homogeneity of RR across strata: undefined (p=undefined)
+Directly adjusted risk difference: 0.36144 (0.30326, 0.41962)
+Breslow-Day chi square test for homogeneity of RD across strata: 72.07754 (p=0.00000)
+-----------------------
+
+Odds-based measures
+===================
+Stratum 1:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (0.27179, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 2:
+Sample odds ratio: 5.04615 (1.27161, 20.02475)
+CMLE odds ratio: 4.98366 (0.92680, 24.85832)
+mid-p CMLE odds ratio: 5.01580 (1.12490, 20.93448)
+-----------------------
+Stratum 3:
+Sample odds ratio: 5.66502 (2.79941, 11.46401)
+CMLE odds ratio: 5.60611 (2.63074, 12.15651)
+mid-p CMLE odds ratio: 5.59363 (2.77052, 11.49883)
+-----------------------
+Stratum 4:
+Sample odds ratio: 6.35948 (3.44904, 11.72585)
+CMLE odds ratio: 6.29985 (3.29887, 12.28189)
+mid-p CMLE odds ratio: 6.28295 (3.43102, 11.75666)
+-----------------------
+Stratum 5:
+Sample odds ratio: 2.58025 (1.21602, 5.47497)
+CMLE odds ratio: 2.56375 (1.13146, 5.85642)
+mid-p CMLE odds ratio: 2.56110 (1.20101, 5.50720)
+-----------------------
+Stratum 6:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (2.76183, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Unstratified (crude):
+Sample odds ratio: 5.64008 (4.00059, 7.95147)
+CMLE odds ratio: 5.62677 (3.93682, 8.06148)
+mid-p CMLE odds ratio: 5.62477 (3.99201, 7.94716)
+Aetiological fraction in the population: 0.39489 (0.31250, 0.47729)
+Aetiological fraction in the exposed: 0.82270 (0.75004, 0.87424)
+Prevented fraction in the population: -0.65261 (-0.91310, -0.45455)
+Prevented fraction in the exposed :-4.64008 (-6.95147, -3.00059)
+-----------------------
+Adjusted:
+Directly adjusted common odds ratio: undefined (undefined, undefined)
+Mantel-Haenszel common odds ratio: 5.15762 (3.56213, 7.46774)
+CMLE common odds ratio: 5.25095 (3.57214, 7.75832)
+Breslow-Day chi square test for homogeneity of OR across strata: undefined (p=undefined)
+Woolf chi square test for homogeneity of OR across strata: 6.93094, df=5.00000 (p=0.22583)
+-----------------------
+
+StatExact example values
+
+Tabulated values
+================
+Stratum 1:
+a (exposed, disease): 1
+b (unexposed, disease): 0
+c (exposed, no disease): 9
+d (unexposed, no disease): 106
+-----------------------
+
+Measures of association
+=======================
+Stratum 1:
+Chi sq: 10.69217, p=0.00108
+Yates-corrected Chi sq: 2.19249, p=0.13869
+M-H Chi sq: 10.60000, p=0.00113
+Fisher's exact test: one-sided p=0.08621, two-sided (twice one-sided): p=0.17241, two-sided (as extreme): p=0.08621
+mid-p: one-sided p=0.04310, two-sided p=0.08621
+-----------------------
+
+Risk-based measures
+===================
+Stratum 1:
+Risk in exposed: 0.10000 (0.00000, 0.42597)
+Risk in unexposed: 0.00000 (0.00000, 0.04200)
+Risk in overall population: 0.00862 (0.00000, 0.05198)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: 0.10000 (-0.08594, 0.28594)
+-----------------------
+
+Odds-based measures
+===================
+Stratum 1:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (0.27179, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+
+==============================================================
+StatExact example 14.5.3 Extremely imbalanced minority hiring
+CMLE common OR should be +Inf with exact CI of (1.819, +Inf)
+and mid-p exact CI of (3.069, +Inf)
+Mantel-Haenszel common OR cannot be estimated
+One-sided exact p-value for common OR=1.0 should be 0.0022
+Two-sided exact p-value for common OR=1.0 should be 0.0043 or 0.0044
+MH two-sided p-value for common OR=1.0 should be 0.0063
+==============================================================
+
+Tabulated values
+================
+Stratum 1:
+a (exposed, disease): 4
+b (unexposed, disease): 0
+c (exposed, no disease): 16
+d (unexposed, no disease): 7
+-----------------------
+Stratum 2:
+a (exposed, disease): 4
+b (unexposed, disease): 0
+c (exposed, no disease): 13
+d (unexposed, no disease): 7
+-----------------------
+Stratum 3:
+a (exposed, disease): 2
+b (unexposed, disease): 0
+c (exposed, no disease): 13
+d (unexposed, no disease): 8
+-----------------------
+Stratum 4:
+a (exposed, disease): 1
+b (unexposed, disease): 0
+c (exposed, no disease): 17
+d (unexposed, no disease): 8
+-----------------------
+Stratum 5:
+a (exposed, disease): 1
+b (unexposed, disease): 0
+c (exposed, no disease): 17
+d (unexposed, no disease): 8
+-----------------------
+Stratum 6:
+a (exposed, disease): 1
+b (unexposed, disease): 0
+c (exposed, no disease): 29
+d (unexposed, no disease): 10
+-----------------------
+Stratum 7:
+a (exposed, disease): 2
+b (unexposed, disease): 0
+c (exposed, no disease): 29
+d (unexposed, no disease): 10
+-----------------------
+Stratum 8:
+a (exposed, disease): 1
+b (unexposed, disease): 0
+c (exposed, no disease): 30
+d (unexposed, no disease): 10
+-----------------------
+Stratum 9:
+a (exposed, disease): 1
+b (unexposed, disease): 0
+c (exposed, no disease): 30
+d (unexposed, no disease): 10
+-----------------------
+Stratum 10:
+a (exposed, disease): 1
+b (unexposed, disease): 0
+c (exposed, no disease): 33
+d (unexposed, no disease): 13
+-----------------------
+Unstratified (crude):
+a (exposed, disease): 18
+b (unexposed, disease): 0
+c (exposed, no disease): 227
+d (unexposed, no disease): 91
+-----------------------
+
+Measures of association
+=======================
+Stratum 1:
+Chi sq: 1.64348, p=0.19985
+Yates-corrected Chi sq: 0.44074, p=0.50676
+M-H Chi sq: 1.58261, p=0.20839
+Fisher's exact test: one-sided p=0.27607, two-sided (twice one-sided): p=0.55214, two-sided (as extreme): p=0.54530
+mid-p: one-sided p=0.13803, two-sided p=0.27607
+-----------------------
+Stratum 2:
+Chi sq: 1.97647, p=0.15976
+Yates-corrected Chi sq: 0.64538, p=0.42177
+M-H Chi sq: 1.89412, p=0.16874
+Fisher's exact test: one-sided p=0.22398, two-sided (twice one-sided): p=0.44796, two-sided (as extreme): p=0.28327
+mid-p: one-sided p=0.11199, two-sided p=0.22398
+-----------------------
+Stratum 3:
+Chi sq: 1.16825, p=0.27976
+Yates-corrected Chi sq: 0.09241, p=0.76113
+M-H Chi sq: 1.11746, p=0.29047
+Fisher's exact test: one-sided p=0.41502, two-sided (twice one-sided): p=0.83004, two-sided (as extreme): p=0.52569
+mid-p: one-sided p=0.20751, two-sided p=0.41502
+-----------------------
+Stratum 4:
+Chi sq: 0.46222, p=0.49659
+Yates-corrected Chi sq: 0.18056, p=0.67090
+M-H Chi sq: 0.44444, p=0.50499
+Fisher's exact test: one-sided p=0.69231, two-sided (twice one-sided): p=1.38462, two-sided (as extreme): p=1.00000
+mid-p: one-sided p=0.34615, two-sided p=0.69231
+-----------------------
+Stratum 5:
+Chi sq: 0.46222, p=0.49659
+Yates-corrected Chi sq: 0.18056, p=0.67090
+M-H Chi sq: 0.44444, p=0.50499
+Fisher's exact test: one-sided p=0.69231, two-sided (twice one-sided): p=1.38462, two-sided (as extreme): p=1.00000
+mid-p: one-sided p=0.34615, two-sided p=0.69231
+-----------------------
+Stratum 6:
+Chi sq: 0.34188, p=0.55875
+Yates-corrected Chi sq: 0.34188, p=0.55875
+M-H Chi sq: 0.33333, p=0.56370
+Fisher's exact test: one-sided p=0.75000, two-sided (twice one-sided): p=1.50000, two-sided (as extreme): p=1.00000
+mid-p: one-sided p=0.37500, two-sided p=0.75000
+-----------------------
+Stratum 7:
+Chi sq: 0.67825, p=0.41019
+Yates-corrected Chi sq: 0.00042, p=0.98357
+M-H Chi sq: 0.66170, p=0.41596
+Fisher's exact test: one-sided p=0.56707, two-sided (twice one-sided): p=1.13415, two-sided (as extreme): p=1.00000
+mid-p: one-sided p=0.28354, two-sided p=0.56707
+-----------------------
+Stratum 8:
+Chi sq: 0.33065, p=0.56528
+Yates-corrected Chi sq: 0.36454, p=0.54600
+M-H Chi sq: 0.32258, p=0.57006
+Fisher's exact test: one-sided p=0.75610, two-sided (twice one-sided): p=1.51220, two-sided (as extreme): p=1.00000
+mid-p: one-sided p=0.37805, two-sided p=0.75610
+-----------------------
+Stratum 9:
+Chi sq: 0.33065, p=0.56528
+Yates-corrected Chi sq: 0.36454, p=0.54600
+M-H Chi sq: 0.32258, p=0.57006
+Fisher's exact test: one-sided p=0.75610, two-sided (twice one-sided): p=1.51220, two-sided (as extreme): p=1.00000
+mid-p: one-sided p=0.37805, two-sided p=0.75610
+-----------------------
+Stratum 10:
+Chi sq: 0.39066, p=0.53195
+Yates-corrected Chi sq: 0.25486, p=0.61368
+M-H Chi sq: 0.38235, p=0.53635
+Fisher's exact test: one-sided p=0.72340, two-sided (twice one-sided): p=1.44681, two-sided (as extreme): p=1.00000
+mid-p: one-sided p=0.36170, two-sided p=0.72340
+-----------------------
+Unstratified (crude):
+Chi sq: 7.06415, p=0.00786
+Yates-corrected Chi sq: 5.68940, p=0.01707
+M-H Chi sq: 7.04313, p=0.00796
+Fisher's exact test: one-sided p=0.00285, two-sided (twice one-sided): p=0.00569, two-sided (as extreme): p=0.00476
+mid-p: one-sided p=0.00142, two-sided p=0.00285
+-----------------------
+Adjusted:
+Warning: expected values in some strata are < 5: use of exact statistics recommended.
+Mantel-Haenszel chi square with continuity correction: 6.04838 (p=0.01392)
+Mantel-Haenszel chi square without continuity correction: 7.46154 (p=0.00630)
+Fisher exact test: one-sided: p=0.00216, two-sided (twice one-sided): p=0.00433, two-sided (as extreme): p=0.00444
+Mid-p exact test: one-sided: p=0.00108, two-sided: p=0.00216
+-----------------------
+
+Risk-based measures
+===================
+Stratum 1:
+Risk in exposed: 0.20000 (0.07491, 0.42176)
+Risk in unexposed: 0.00000 (0.00000, 0.40444)
+Risk in overall population: 0.14815 (0.05297, 0.33097)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: 0.20000 (0.02470, 0.37530)
+-----------------------
+Stratum 2:
+Risk in exposed: 0.23529 (0.09047, 0.47770)
+Risk in unexposed: 0.00000 (0.00000, 0.40444)
+Risk in overall population: 0.16667 (0.06067, 0.36465)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: 0.23529 (0.03365, 0.43693)
+-----------------------
+Stratum 3:
+Risk in exposed: 0.13333 (0.02479, 0.39139)
+Risk in unexposed: 0.00000 (0.00000, 0.37217)
+Risk in overall population: 0.08696 (0.01246, 0.27968)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: 0.13333 (-0.03869, 0.30536)
+-----------------------
+Stratum 4:
+Risk in exposed: 0.05556 (0.00000, 0.27646)
+Risk in unexposed: 0.00000 (0.00000, 0.37217)
+Risk in overall population: 0.03846 (0.00000, 0.20449)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: 0.05556 (-0.05026, 0.16137)
+-----------------------
+Stratum 5:
+Risk in exposed: 0.05556 (0.00000, 0.27646)
+Risk in unexposed: 0.00000 (0.00000, 0.37217)
+Risk in overall population: 0.03846 (0.00000, 0.20449)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: 0.05556 (-0.05026, 0.16137)
+-----------------------
+Stratum 6:
+Risk in exposed: 0.03333 (0.00000, 0.18092)
+Risk in unexposed: 0.00000 (0.00000, 0.32089)
+Risk in overall population: 0.02500 (0.00000, 0.14043)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: 0.03333 (-0.03090, 0.09757)
+-----------------------
+Stratum 7:
+Risk in exposed: 0.06452 (0.00760, 0.21746)
+Risk in unexposed: 0.00000 (0.00000, 0.32089)
+Risk in overall population: 0.04878 (0.00476, 0.17011)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: 0.06452 (-0.02196, 0.15100)
+-----------------------
+Stratum 8:
+Risk in exposed: 0.03226 (0.00000, 0.17585)
+Risk in unexposed: 0.00000 (0.00000, 0.32089)
+Risk in overall population: 0.02439 (0.00000, 0.13736)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: 0.03226 (-0.02994, 0.09445)
+-----------------------
+Stratum 9:
+Risk in exposed: 0.03226 (0.00000, 0.17585)
+Risk in unexposed: 0.00000 (0.00000, 0.32089)
+Risk in overall population: 0.02439 (0.00000, 0.13736)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: 0.03226 (-0.02994, 0.09445)
+-----------------------
+Stratum 10:
+Risk in exposed: 0.02941 (0.00000, 0.16222)
+Risk in unexposed: 0.00000 (0.00000, 0.26586)
+Risk in overall population: 0.02128 (0.00000, 0.12141)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: 0.02941 (-0.02738, 0.08620)
+-----------------------
+Unstratified (crude):
+Risk in exposed: 0.07347 (0.04634, 0.11377)
+Risk in unexposed: 0.00000 (0.00000, 0.04860)
+Risk in overall population: 0.05357 (0.03364, 0.08359)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: 0.07347 (0.04080, 0.10614)
+Aetiological fraction in the population: 1.00000 (1.00000, 1.00000)
+Aetiological fraction in the exposed: undefined (undefined, undefined)
+Prevented fraction in the population: undefined (undefined, undefined)
+Prevented fraction in the exposed: undefined (undefined, undefined)
+-----------------------
+Adjusted:
+Directly adjusted risk ratio: undefined (undefined, undefined)
+Mantel-Haenszel adjusted risk ratio: undefined (undefined, undefined)
+Breslow-Day chi square test for homogeneity of RR across strata: undefined (p=undefined)
+Directly adjusted risk difference: 0.04701 (0.02095, 0.07307)
+Breslow-Day chi square test for homogeneity of RD across strata: 8.42520 (p=0.49193)
+-----------------------
+
+Odds-based measures
+===================
+Stratum 1:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (0.22521, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 2:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (0.27102, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 3:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (0.09860, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 4:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (0.01141, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 5:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (0.01141, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 6:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (0.00856, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 7:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (0.05909, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 8:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (0.00829, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 9:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (0.00829, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 10:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (0.00982, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Unstratified (crude):
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (1.71298, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+Aetiological fraction in the population: undefined (undefined, undefined)
+Aetiological fraction in the exposed: undefined (undefined, undefined)
+Prevented fraction in the population: undefined (undefined, undefined)
+Prevented fraction in the exposed :undefined (undefined, undefined)
+-----------------------
+Adjusted:
+Directly adjusted common odds ratio: undefined (undefined, undefined)
+Mantel-Haenszel common odds ratio: inf (nan, nan)
+CMLE common odds ratio: inf (1.81920, inf)
+Breslow-Day chi square test for homogeneity of OR across strata: undefined (p=undefined)
+Woolf chi square test for homogeneity of OR across strata: 1.23379, df=9.00000 (p=0.99868)
+-----------------------
+
+==============================================================
+Another extremely ill-conditioned data example - all zeros in cell A
+==============================================================
+
+Tabulated values
+================
+Stratum 1:
+a (exposed, disease): 0
+b (unexposed, disease): 4
+c (exposed, no disease): 16
+d (unexposed, no disease): 7
+-----------------------
+Stratum 2:
+a (exposed, disease): 0
+b (unexposed, disease): 4
+c (exposed, no disease): 13
+d (unexposed, no disease): 7
+-----------------------
+Stratum 3:
+a (exposed, disease): 0
+b (unexposed, disease): 2
+c (exposed, no disease): 13
+d (unexposed, no disease): 8
+-----------------------
+Stratum 4:
+a (exposed, disease): 0
+b (unexposed, disease): 1
+c (exposed, no disease): 17
+d (unexposed, no disease): 8
+-----------------------
+Stratum 5:
+a (exposed, disease): 0
+b (unexposed, disease): 1
+c (exposed, no disease): 17
+d (unexposed, no disease): 8
+-----------------------
+Stratum 6:
+a (exposed, disease): 0
+b (unexposed, disease): 1
+c (exposed, no disease): 29
+d (unexposed, no disease): 10
+-----------------------
+Stratum 7:
+a (exposed, disease): 0
+b (unexposed, disease): 2
+c (exposed, no disease): 29
+d (unexposed, no disease): 10
+-----------------------
+Stratum 8:
+a (exposed, disease): 0
+b (unexposed, disease): 1
+c (exposed, no disease): 30
+d (unexposed, no disease): 10
+-----------------------
+Stratum 9:
+a (exposed, disease): 0
+b (unexposed, disease): 1
+c (exposed, no disease): 30
+d (unexposed, no disease): 10
+-----------------------
+Stratum 10:
+a (exposed, disease): 0
+b (unexposed, disease): 1
+c (exposed, no disease): 33
+d (unexposed, no disease): 13
+-----------------------
+Unstratified (crude):
+a (exposed, disease): 0
+b (unexposed, disease): 18
+c (exposed, no disease): 227
+d (unexposed, no disease): 91
+-----------------------
+
+Measures of association
+=======================
+Stratum 1:
+Chi sq: 6.83004, p=0.00896
+Yates-corrected Chi sq: 4.25252, p=0.03919
+M-H Chi sq: 6.57708, p=0.01033
+Fisher's exact test: one-sided p=0.01880, two-sided (twice one-sided): p=0.03761, two-sided (as extreme): p=0.01880
+mid-p: one-sided p=0.00940, two-sided p=0.01880
+-----------------------
+Stratum 2:
+Chi sq: 5.67273, p=0.01723
+Yates-corrected Chi sq: 3.35664, p=0.06693
+M-H Chi sq: 5.43636, p=0.01972
+Fisher's exact test: one-sided p=0.03106, two-sided (twice one-sided): p=0.06211, two-sided (as extreme): p=0.03106
+mid-p: one-sided p=0.01553, two-sided p=0.03106
+-----------------------
+Stratum 3:
+Chi sq: 2.84762, p=0.09151
+Yates-corrected Chi sq: 0.88567, p=0.34665
+M-H Chi sq: 2.72381, p=0.09886
+Fisher's exact test: one-sided p=0.17787, two-sided (twice one-sided): p=0.35573, two-sided (as extreme): p=0.17787
+mid-p: one-sided p=0.08893, two-sided p=0.17787
+-----------------------
+Stratum 4:
+Chi sq: 1.96444, p=0.16104
+Yates-corrected Chi sq: 0.10876, p=0.74156
+M-H Chi sq: 1.88889, p=0.16933
+Fisher's exact test: one-sided p=0.34615, two-sided (twice one-sided): p=0.69231, two-sided (as extreme): p=0.34615
+mid-p: one-sided p=0.17308, two-sided p=0.34615
+-----------------------
+Stratum 5:
+Chi sq: 1.96444, p=0.16104
+Yates-corrected Chi sq: 0.10876, p=0.74156
+M-H Chi sq: 1.88889, p=0.16933
+Fisher's exact test: one-sided p=0.34615, two-sided (twice one-sided): p=0.69231, two-sided (as extreme): p=0.34615
+mid-p: one-sided p=0.17308, two-sided p=0.34615
+-----------------------
+Stratum 6:
+Chi sq: 2.70396, p=0.10010
+Yates-corrected Chi sq: 0.26043, p=0.60983
+M-H Chi sq: 2.63636, p=0.10444
+Fisher's exact test: one-sided p=0.27500, two-sided (twice one-sided): p=0.55000, two-sided (as extreme): p=0.27500
+mid-p: one-sided p=0.13750, two-sided p=0.27500
+-----------------------
+Stratum 7:
+Chi sq: 5.08120, p=0.02419
+Yates-corrected Chi sq: 2.12409, p=0.14500
+M-H Chi sq: 4.95726, p=0.02598
+Fisher's exact test: one-sided p=0.08049, two-sided (twice one-sided): p=0.16098, two-sided (as extreme): p=0.08049
+mid-p: one-sided p=0.04024, two-sided p=0.08049
+-----------------------
+Stratum 8:
+Chi sq: 2.79545, p=0.09453
+Yates-corrected Chi sq: 0.28032, p=0.59649
+M-H Chi sq: 2.72727, p=0.09865
+Fisher's exact test: one-sided p=0.26829, two-sided (twice one-sided): p=0.53659, two-sided (as extreme): p=0.26829
+mid-p: one-sided p=0.13415, two-sided p=0.26829
+-----------------------
+Stratum 9:
+Chi sq: 2.79545, p=0.09453
+Yates-corrected Chi sq: 0.28032, p=0.59649
+M-H Chi sq: 2.72727, p=0.09865
+Fisher's exact test: one-sided p=0.26829, two-sided (twice one-sided): p=0.53659, two-sided (as extreme): p=0.26829
+mid-p: one-sided p=0.13415, two-sided p=0.26829
+-----------------------
+Stratum 10:
+Chi sq: 2.40839, p=0.12069
+Yates-corrected Chi sq: 0.19959, p=0.65505
+M-H Chi sq: 2.35714, p=0.12471
+Fisher's exact test: one-sided p=0.29787, two-sided (twice one-sided): p=0.59574, two-sided (as extreme): p=0.29787
+mid-p: one-sided p=0.14894, two-sided p=0.29787
+-----------------------
+Unstratified (crude):
+Chi sq: 39.60810, p=0.00000
+Yates-corrected Chi sq: 36.41801, p=0.00000
+M-H Chi sq: 39.49022, p=0.00000
+Fisher's exact test: one-sided p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+mid-p: one-sided p=0.00000, two-sided p=0.00000
+-----------------------
+Adjusted:
+Warning: expected values in some strata are < 5: use of exact statistics recommended.
+Mantel-Haenszel chi square with continuity correction: 30.22947 (p=0.00000)
+Mantel-Haenszel chi square without continuity correction: 33.09863 (p=0.00000)
+Fisher exact test: one-sided: p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+Mid-p exact test: one-sided: p=0.00000, two-sided: p=0.00000
+-----------------------
+
+Risk-based measures
+===================
+Stratum 1:
+Risk in exposed: 0.00000 (0.00000, 0.22691)
+Risk in unexposed: 0.36364 (0.14980, 0.64806)
+Risk in overall population: 0.14815 (0.05297, 0.33097)
+Risk ratio: 0.00000 (undefined, undefined)
+Risk difference: -0.36364 (-0.64791, -0.07936)
+-----------------------
+Stratum 2:
+Risk in exposed: 0.00000 (0.00000, 0.26586)
+Risk in unexposed: 0.36364 (0.14980, 0.64806)
+Risk in overall population: 0.16667 (0.06067, 0.36465)
+Risk ratio: 0.00000 (undefined, undefined)
+Risk difference: -0.36364 (-0.64791, -0.07936)
+-----------------------
+Stratum 3:
+Risk in exposed: 0.00000 (0.00000, 0.26586)
+Risk in unexposed: 0.20000 (0.04589, 0.52063)
+Risk in overall population: 0.08696 (0.01246, 0.27968)
+Risk ratio: 0.00000 (undefined, undefined)
+Risk difference: -0.20000 (-0.44792, 0.04792)
+-----------------------
+Stratum 4:
+Risk in exposed: 0.00000 (0.00000, 0.21634)
+Risk in unexposed: 0.11111 (0.00000, 0.45671)
+Risk in overall population: 0.03846 (0.00000, 0.20449)
+Risk ratio: 0.00000 (undefined, undefined)
+Risk difference: -0.11111 (-0.31643, 0.09421)
+-----------------------
+Stratum 5:
+Risk in exposed: 0.00000 (0.00000, 0.21634)
+Risk in unexposed: 0.11111 (0.00000, 0.45671)
+Risk in overall population: 0.03846 (0.00000, 0.20449)
+Risk ratio: 0.00000 (undefined, undefined)
+Risk difference: -0.11111 (-0.31643, 0.09421)
+-----------------------
+Stratum 6:
+Risk in exposed: 0.00000 (0.00000, 0.13874)
+Risk in unexposed: 0.09091 (0.00000, 0.39906)
+Risk in overall population: 0.02500 (0.00000, 0.14043)
+Risk ratio: 0.00000 (undefined, undefined)
+Risk difference: -0.09091 (-0.26080, 0.07898)
+-----------------------
+Stratum 7:
+Risk in exposed: 0.00000 (0.00000, 0.13874)
+Risk in unexposed: 0.16667 (0.03498, 0.46001)
+Risk in overall population: 0.04878 (0.00476, 0.17011)
+Risk ratio: 0.00000 (undefined, undefined)
+Risk difference: -0.16667 (-0.37753, 0.04419)
+-----------------------
+Stratum 8:
+Risk in exposed: 0.00000 (0.00000, 0.13471)
+Risk in unexposed: 0.09091 (0.00000, 0.39906)
+Risk in overall population: 0.02439 (0.00000, 0.13736)
+Risk ratio: 0.00000 (undefined, undefined)
+Risk difference: -0.09091 (-0.26080, 0.07898)
+-----------------------
+Stratum 9:
+Risk in exposed: 0.00000 (0.00000, 0.13471)
+Risk in unexposed: 0.09091 (0.00000, 0.39906)
+Risk in overall population: 0.02439 (0.00000, 0.13736)
+Risk ratio: 0.00000 (undefined, undefined)
+Risk difference: -0.09091 (-0.26080, 0.07898)
+-----------------------
+Stratum 10:
+Risk in exposed: 0.00000 (0.00000, 0.12392)
+Risk in unexposed: 0.07143 (0.00000, 0.33539)
+Risk in overall population: 0.02128 (0.00000, 0.12141)
+Risk ratio: 0.00000 (undefined, undefined)
+Risk difference: -0.07143 (-0.20633, 0.06348)
+-----------------------
+Unstratified (crude):
+Risk in exposed: 0.00000 (0.00000, 0.02004)
+Risk in unexposed: 0.16514 (0.10619, 0.24689)
+Risk in overall population: 0.05357 (0.03364, 0.08359)
+Risk ratio: 0.00000 (undefined, undefined)
+Risk difference: -0.16514 (-0.23484, -0.09543)
+Aetiological fraction in the population: -1.00000 (-1.00000, -0.52435)
+Aetiological fraction in the exposed: undefined (undefined, undefined)
+Prevented fraction in the population: 0.67560 (0.34398, 0.50000)
+Prevented fraction in the exposed: 1.00000 (undefined, undefined)
+-----------------------
+Adjusted:
+Directly adjusted risk ratio: undefined (undefined, undefined)
+Mantel-Haenszel adjusted risk ratio: undefined (undefined, undefined)
+Breslow-Day chi square test for homogeneity of RR across strata: undefined (p=undefined)
+Directly adjusted risk difference: -0.12840 (-0.18927, -0.06752)
+Breslow-Day chi square test for homogeneity of RD across strata: 7.00864 (p=0.63622)
+-----------------------
+
+Odds-based measures
+===================
+Stratum 1:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 0.88436)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 2:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 1.10322)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 3:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 3.98270)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 4:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 20.64714)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 5:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 20.64714)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 6:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 14.79313)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 7:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 2.12558)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 8:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 14.30002)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 9:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 14.30002)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 10:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 16.54549)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Unstratified (crude):
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 0.09437)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+Aetiological fraction in the population: -1.00000 (-1.00000, -0.39339)
+Aetiological fraction in the exposed: undefined (undefined, undefined)
+Prevented fraction in the population: 0.71384 (0.28232, 0.50000)
+Prevented fraction in the exposed :1.00000 (undefined, undefined)
+-----------------------
+Adjusted:
+Directly adjusted common odds ratio: undefined (undefined, undefined)
+Mantel-Haenszel common odds ratio: 0.00000 (nan, nan)
+CMLE common odds ratio: 0.00000 (0.00000, 0.11373)
+Breslow-Day chi square test for homogeneity of OR across strata: undefined (p=undefined)
+Woolf chi square test for homogeneity of OR across strata: 0.57230, df=9.00000 (p=0.99995)
+-----------------------
+
+==============================================================
+Another extremely ill-conditioned data example - all zeros in cell C
+==============================================================
+
+Tabulated values
+================
+Stratum 1:
+a (exposed, disease): 16
+b (unexposed, disease): 4
+c (exposed, no disease): 0
+d (unexposed, no disease): 7
+-----------------------
+Stratum 2:
+a (exposed, disease): 13
+b (unexposed, disease): 4
+c (exposed, no disease): 0
+d (unexposed, no disease): 7
+-----------------------
+Stratum 3:
+a (exposed, disease): 13
+b (unexposed, disease): 2
+c (exposed, no disease): 0
+d (unexposed, no disease): 8
+-----------------------
+Stratum 4:
+a (exposed, disease): 17
+b (unexposed, disease): 1
+c (exposed, no disease): 0
+d (unexposed, no disease): 8
+-----------------------
+Stratum 5:
+a (exposed, disease): 17
+b (unexposed, disease): 1
+c (exposed, no disease): 0
+d (unexposed, no disease): 8
+-----------------------
+Stratum 6:
+a (exposed, disease): 29
+b (unexposed, disease): 1
+c (exposed, no disease): 0
+d (unexposed, no disease): 10
+-----------------------
+Stratum 7:
+a (exposed, disease): 29
+b (unexposed, disease): 2
+c (exposed, no disease): 0
+d (unexposed, no disease): 10
+-----------------------
+Stratum 8:
+a (exposed, disease): 30
+b (unexposed, disease): 1
+c (exposed, no disease): 0
+d (unexposed, no disease): 10
+-----------------------
+Stratum 9:
+a (exposed, disease): 30
+b (unexposed, disease): 1
+c (exposed, no disease): 0
+d (unexposed, no disease): 10
+-----------------------
+Stratum 10:
+a (exposed, disease): 33
+b (unexposed, disease): 1
+c (exposed, no disease): 0
+d (unexposed, no disease): 13
+-----------------------
+Unstratified (crude):
+a (exposed, disease): 227
+b (unexposed, disease): 18
+c (exposed, no disease): 0
+d (unexposed, no disease): 91
+-----------------------
+
+Measures of association
+=======================
+Stratum 1:
+Chi sq: 13.74545, p=0.00021
+Yates-corrected Chi sq: 10.63152, p=0.00111
+M-H Chi sq: 13.23636, p=0.00027
+Fisher's exact test: one-sided p=0.00037, two-sided (twice one-sided): p=0.00074, two-sided (as extreme): p=0.00037
+mid-p: one-sided p=0.00019, two-sided p=0.00037
+-----------------------
+Stratum 2:
+Chi sq: 11.67914, p=0.00063
+Yates-corrected Chi sq: 8.80202, p=0.00301
+M-H Chi sq: 11.19251, p=0.00082
+Fisher's exact test: one-sided p=0.00095, two-sided (twice one-sided): p=0.00191, two-sided (as extreme): p=0.00095
+mid-p: one-sided p=0.00048, two-sided p=0.00095
+-----------------------
+Stratum 3:
+Chi sq: 15.94667, p=0.00007
+Yates-corrected Chi sq: 12.61498, p=0.00038
+M-H Chi sq: 15.25333, p=0.00009
+Fisher's exact test: one-sided p=0.00009, two-sided (twice one-sided): p=0.00018, two-sided (as extreme): p=0.00009
+mid-p: one-sided p=0.00005, two-sided p=0.00009
+-----------------------
+Stratum 4:
+Chi sq: 21.82716, p=0.00000
+Yates-corrected Chi sq: 17.85376, p=0.00002
+M-H Chi sq: 20.98765, p=0.00000
+Fisher's exact test: one-sided p=0.00001, two-sided (twice one-sided): p=0.00001, two-sided (as extreme): p=0.00001
+mid-p: one-sided p=0.00000, two-sided p=0.00001
+-----------------------
+Stratum 5:
+Chi sq: 21.82716, p=0.00000
+Yates-corrected Chi sq: 17.85376, p=0.00002
+M-H Chi sq: 20.98765, p=0.00000
+Fisher's exact test: one-sided p=0.00001, two-sided (twice one-sided): p=0.00001, two-sided (as extreme): p=0.00001
+mid-p: one-sided p=0.00000, two-sided p=0.00001
+-----------------------
+Stratum 6:
+Chi sq: 35.15152, p=0.00000
+Yates-corrected Chi sq: 30.47022, p=0.00000
+M-H Chi sq: 34.27273, p=0.00000
+Fisher's exact test: one-sided p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+mid-p: one-sided p=0.00000, two-sided p=0.00000
+-----------------------
+Stratum 7:
+Chi sq: 31.96237, p=0.00000
+Yates-corrected Chi sq: 27.60327, p=0.00000
+M-H Chi sq: 31.18280, p=0.00000
+Fisher's exact test: one-sided p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+mid-p: one-sided p=0.00000, two-sided p=0.00000
+-----------------------
+Stratum 8:
+Chi sq: 36.07038, p=0.00000
+Yates-corrected Chi sq: 31.30919, p=0.00000
+M-H Chi sq: 35.19062, p=0.00000
+Fisher's exact test: one-sided p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+mid-p: one-sided p=0.00000, two-sided p=0.00000
+-----------------------
+Stratum 9:
+Chi sq: 36.07038, p=0.00000
+Yates-corrected Chi sq: 31.30919, p=0.00000
+M-H Chi sq: 35.19062, p=0.00000
+Fisher's exact test: one-sided p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+mid-p: one-sided p=0.00000, two-sided p=0.00000
+-----------------------
+Stratum 10:
+Chi sq: 42.35924, p=0.00000
+Yates-corrected Chi sq: 37.84559, p=0.00000
+M-H Chi sq: 41.45798, p=0.00000
+Fisher's exact test: one-sided p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+mid-p: one-sided p=0.00000, two-sided p=0.00000
+-----------------------
+Unstratified (crude):
+Chi sq: 259.90459, p=0.00000
+Yates-corrected Chi sq: 255.69426, p=0.00000
+M-H Chi sq: 259.13106, p=0.00000
+Fisher's exact test: one-sided p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+mid-p: one-sided p=0.00000, two-sided p=0.00000
+-----------------------
+Adjusted:
+Warning: expected values in some strata are < 5: use of exact statistics recommended.
+Mantel-Haenszel chi square with continuity correction: 248.67814 (p=0.00000)
+Mantel-Haenszel chi square without continuity correction: 252.80495 (p=0.00000)
+Fisher exact test: one-sided: p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+Mid-p exact test: one-sided: p=0.00000, two-sided: p=0.00000
+-----------------------
+
+Risk-based measures
+===================
+Stratum 1:
+Risk in exposed: 1.00000 (0.77309, 1.00000)
+Risk in unexposed: 0.36364 (0.14980, 0.64806)
+Risk in overall population: 0.74074 (0.55074, 0.87077)
+Risk ratio: 2.75000 (1.25841, 6.00959)
+Risk difference: 0.63636 (0.35209, 0.92064)
+-----------------------
+Stratum 2:
+Risk in exposed: 1.00000 (0.73414, 1.00000)
+Risk in unexposed: 0.36364 (0.14980, 0.64806)
+Risk in overall population: 0.70833 (0.50626, 0.85292)
+Risk ratio: 2.75000 (1.25841, 6.00959)
+Risk difference: 0.63636 (0.35209, 0.92064)
+-----------------------
+Stratum 3:
+Risk in exposed: 1.00000 (0.73414, 1.00000)
+Risk in unexposed: 0.20000 (0.04589, 0.52063)
+Risk in overall population: 0.65217 (0.44779, 0.81300)
+Risk ratio: 5.00000 (1.44751, 17.27099)
+Risk difference: 0.80000 (0.55208, 1.04792)
+-----------------------
+Stratum 4:
+Risk in exposed: 1.00000 (0.78366, 1.00000)
+Risk in unexposed: 0.11111 (0.00000, 0.45671)
+Risk in overall population: 0.69231 (0.49853, 0.83657)
+Risk ratio: 9.00000 (1.41815, 57.11669)
+Risk difference: 0.88889 (0.68357, 1.09421)
+-----------------------
+Stratum 5:
+Risk in exposed: 1.00000 (0.78366, 1.00000)
+Risk in unexposed: 0.11111 (0.00000, 0.45671)
+Risk in overall population: 0.69231 (0.49853, 0.83657)
+Risk ratio: 9.00000 (1.41815, 57.11669)
+Risk difference: 0.88889 (0.68357, 1.09421)
+-----------------------
+Stratum 6:
+Risk in exposed: 1.00000 (0.86126, 1.00000)
+Risk in unexposed: 0.09091 (0.00000, 0.39906)
+Risk in overall population: 0.75000 (0.59639, 0.85980)
+Risk ratio: 11.00000 (1.69748, 71.28227)
+Risk difference: 0.90909 (0.73920, 1.07898)
+-----------------------
+Stratum 7:
+Risk in exposed: 1.00000 (0.86126, 1.00000)
+Risk in unexposed: 0.16667 (0.03498, 0.46001)
+Risk in overall population: 0.75610 (0.60485, 0.86346)
+Risk ratio: 6.00000 (1.69318, 21.26177)
+Risk difference: 0.83333 (0.62247, 1.04419)
+-----------------------
+Stratum 8:
+Risk in exposed: 1.00000 (0.86529, 1.00000)
+Risk in unexposed: 0.09091 (0.00000, 0.39906)
+Risk in overall population: 0.75610 (0.60485, 0.86346)
+Risk ratio: 11.00000 (1.69748, 71.28227)
+Risk difference: 0.90909 (0.73920, 1.07898)
+-----------------------
+Stratum 9:
+Risk in exposed: 1.00000 (0.86529, 1.00000)
+Risk in unexposed: 0.09091 (0.00000, 0.39906)
+Risk in overall population: 0.75610 (0.60485, 0.86346)
+Risk ratio: 11.00000 (1.69748, 71.28227)
+Risk difference: 0.90909 (0.73920, 1.07898)
+-----------------------
+Stratum 10:
+Risk in exposed: 1.00000 (0.87608, 1.00000)
+Risk in unexposed: 0.07143 (0.00000, 0.33539)
+Risk in overall population: 0.72340 (0.58136, 0.83169)
+Risk ratio: 14.00000 (2.11782, 92.54786)
+Risk difference: 0.92857 (0.79367, 1.06348)
+-----------------------
+Unstratified (crude):
+Risk in exposed: 1.00000 (0.97996, 1.00000)
+Risk in unexposed: 0.16514 (0.10619, 0.24689)
+Risk in overall population: 0.72917 (0.67919, 0.77396)
+Risk ratio: 6.05556 (3.97042, 9.23573)
+Risk difference: 0.83486 (0.76516, 0.90457)
+Aetiological fraction in the population: 0.77353 (0.68401, 0.86304)
+Aetiological fraction in the exposed: 0.83486 (0.74814, 0.89172)
+Prevented fraction in the population: -3.41551 (-6.30161, -2.16463)
+Prevented fraction in the exposed: -5.05556 (-8.23573, -2.97042)
+-----------------------
+Adjusted:
+Directly adjusted risk ratio: 4.59323 (3.08122, 6.84722)
+Mantel-Haenszel adjusted risk ratio: 6.40835 (4.12307, 9.96030)
+Breslow-Day chi square test for homogeneity of RR across strata: 8.36993 (p=0.49734)
+Directly adjusted risk difference: 0.87160 (0.81073, 0.93248)
+Breslow-Day chi square test for homogeneity of RD across strata: 7.00864 (p=0.63622)
+-----------------------
+
+Odds-based measures
+===================
+Stratum 1:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (3.56090, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 2:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (2.84581, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 3:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (5.09426, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 4:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (9.32047, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 5:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (9.32047, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 6:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (21.00941, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 7:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (15.39757, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 8:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (21.76866, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 9:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (21.76866, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 10:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (32.15157, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Unstratified (crude):
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: inf (262.56410, inf)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+Aetiological fraction in the population: undefined (undefined, undefined)
+Aetiological fraction in the exposed: undefined (undefined, undefined)
+Prevented fraction in the population: undefined (undefined, undefined)
+Prevented fraction in the exposed :undefined (undefined, undefined)
+-----------------------
+Adjusted:
+Directly adjusted common odds ratio: undefined (undefined, undefined)
+Mantel-Haenszel common odds ratio: inf (nan, nan)
+CMLE common odds ratio: inf (235.90559, inf)
+Breslow-Day chi square test for homogeneity of OR across strata: undefined (p=undefined)
+Woolf chi square test for homogeneity of OR across strata: 2.88945, df=9.00000 (p=0.96852)
+-----------------------
+
+==============================================================
+Another extremely ill-conditioned data example - all zeros in cell D
+==============================================================
+
+Tabulated values
+================
+Stratum 1:
+a (exposed, disease): 16
+b (unexposed, disease): 4
+c (exposed, no disease): 7
+d (unexposed, no disease): 0
+-----------------------
+Stratum 2:
+a (exposed, disease): 13
+b (unexposed, disease): 4
+c (exposed, no disease): 7
+d (unexposed, no disease): 0
+-----------------------
+Stratum 3:
+a (exposed, disease): 13
+b (unexposed, disease): 2
+c (exposed, no disease): 8
+d (unexposed, no disease): 0
+-----------------------
+Stratum 4:
+a (exposed, disease): 17
+b (unexposed, disease): 1
+c (exposed, no disease): 8
+d (unexposed, no disease): 0
+-----------------------
+Stratum 5:
+a (exposed, disease): 17
+b (unexposed, disease): 1
+c (exposed, no disease): 8
+d (unexposed, no disease): 0
+-----------------------
+Stratum 6:
+a (exposed, disease): 29
+b (unexposed, disease): 1
+c (exposed, no disease): 10
+d (unexposed, no disease): 0
+-----------------------
+Stratum 7:
+a (exposed, disease): 29
+b (unexposed, disease): 2
+c (exposed, no disease): 10
+d (unexposed, no disease): 0
+-----------------------
+Stratum 8:
+a (exposed, disease): 30
+b (unexposed, disease): 1
+c (exposed, no disease): 10
+d (unexposed, no disease): 0
+-----------------------
+Stratum 9:
+a (exposed, disease): 30
+b (unexposed, disease): 1
+c (exposed, no disease): 10
+d (unexposed, no disease): 0
+-----------------------
+Stratum 10:
+a (exposed, disease): 33
+b (unexposed, disease): 1
+c (exposed, no disease): 13
+d (unexposed, no disease): 0
+-----------------------
+Unstratified (crude):
+a (exposed, disease): 227
+b (unexposed, disease): 18
+c (exposed, no disease): 91
+d (unexposed, no disease): 0
+-----------------------
+
+Measures of association
+=======================
+Stratum 1:
+Chi sq: 1.64348, p=0.19985
+Yates-corrected Chi sq: 0.44074, p=0.50676
+M-H Chi sq: 1.58261, p=0.20839
+Fisher's exact test: one-sided p=0.27607, two-sided (twice one-sided): p=0.55214, two-sided (as extreme): p=0.54530
+mid-p: one-sided p=0.13803, two-sided p=0.27607
+-----------------------
+Stratum 2:
+Chi sq: 1.97647, p=0.15976
+Yates-corrected Chi sq: 0.64538, p=0.42177
+M-H Chi sq: 1.89412, p=0.16874
+Fisher's exact test: one-sided p=0.22398, two-sided (twice one-sided): p=0.44796, two-sided (as extreme): p=0.28327
+mid-p: one-sided p=0.11199, two-sided p=0.22398
+-----------------------
+Stratum 3:
+Chi sq: 1.16825, p=0.27976
+Yates-corrected Chi sq: 0.09241, p=0.76113
+M-H Chi sq: 1.11746, p=0.29047
+Fisher's exact test: one-sided p=0.41502, two-sided (twice one-sided): p=0.83004, two-sided (as extreme): p=0.52569
+mid-p: one-sided p=0.20751, two-sided p=0.41502
+-----------------------
+Stratum 4:
+Chi sq: 0.46222, p=0.49659
+Yates-corrected Chi sq: 0.18056, p=0.67090
+M-H Chi sq: 0.44444, p=0.50499
+Fisher's exact test: one-sided p=0.69231, two-sided (twice one-sided): p=1.38462, two-sided (as extreme): p=1.00000
+mid-p: one-sided p=0.34615, two-sided p=0.69231
+-----------------------
+Stratum 5:
+Chi sq: 0.46222, p=0.49659
+Yates-corrected Chi sq: 0.18056, p=0.67090
+M-H Chi sq: 0.44444, p=0.50499
+Fisher's exact test: one-sided p=0.69231, two-sided (twice one-sided): p=1.38462, two-sided (as extreme): p=1.00000
+mid-p: one-sided p=0.34615, two-sided p=0.69231
+-----------------------
+Stratum 6:
+Chi sq: 0.34188, p=0.55875
+Yates-corrected Chi sq: 0.34188, p=0.55875
+M-H Chi sq: 0.33333, p=0.56370
+Fisher's exact test: one-sided p=0.75000, two-sided (twice one-sided): p=1.50000, two-sided (as extreme): p=1.00000
+mid-p: one-sided p=0.37500, two-sided p=0.75000
+-----------------------
+Stratum 7:
+Chi sq: 0.67825, p=0.41019
+Yates-corrected Chi sq: 0.00042, p=0.98357
+M-H Chi sq: 0.66170, p=0.41596
+Fisher's exact test: one-sided p=0.56707, two-sided (twice one-sided): p=1.13415, two-sided (as extreme): p=1.00000
+mid-p: one-sided p=0.28354, two-sided p=0.56707
+-----------------------
+Stratum 8:
+Chi sq: 0.33065, p=0.56528
+Yates-corrected Chi sq: 0.36454, p=0.54600
+M-H Chi sq: 0.32258, p=0.57006
+Fisher's exact test: one-sided p=0.75610, two-sided (twice one-sided): p=1.51220, two-sided (as extreme): p=1.00000
+mid-p: one-sided p=0.37805, two-sided p=0.75610
+-----------------------
+Stratum 9:
+Chi sq: 0.33065, p=0.56528
+Yates-corrected Chi sq: 0.36454, p=0.54600
+M-H Chi sq: 0.32258, p=0.57006
+Fisher's exact test: one-sided p=0.75610, two-sided (twice one-sided): p=1.51220, two-sided (as extreme): p=1.00000
+mid-p: one-sided p=0.37805, two-sided p=0.75610
+-----------------------
+Stratum 10:
+Chi sq: 0.39066, p=0.53195
+Yates-corrected Chi sq: 0.25486, p=0.61368
+M-H Chi sq: 0.38235, p=0.53635
+Fisher's exact test: one-sided p=0.72340, two-sided (twice one-sided): p=1.44681, two-sided (as extreme): p=1.00000
+mid-p: one-sided p=0.36170, two-sided p=0.72340
+-----------------------
+Unstratified (crude):
+Chi sq: 7.06415, p=0.00786
+Yates-corrected Chi sq: 5.68940, p=0.01707
+M-H Chi sq: 7.04313, p=0.00796
+Fisher's exact test: one-sided p=0.00285, two-sided (twice one-sided): p=0.00569, two-sided (as extreme): p=0.00476
+mid-p: one-sided p=0.00142, two-sided p=0.00285
+-----------------------
+Adjusted:
+Warning: expected values in some strata are < 5: use of exact statistics recommended.
+Mantel-Haenszel chi square with continuity correction: 6.04838 (p=0.01392)
+Mantel-Haenszel chi square without continuity correction: 7.46154 (p=0.00630)
+Fisher exact test: one-sided: p=0.00216, two-sided (twice one-sided): p=0.00433, two-sided (as extreme): p=0.00444
+Mid-p exact test: one-sided: p=0.00108, two-sided: p=0.00216
+-----------------------
+
+Risk-based measures
+===================
+Stratum 1:
+Risk in exposed: 0.69565 (0.48945, 0.84585)
+Risk in unexposed: 1.00000 (0.45405, 1.00000)
+Risk in overall population: 0.74074 (0.55074, 0.87077)
+Risk ratio: 0.69565 (0.53088, 0.91157)
+Risk difference: -0.30435 (-0.49239, -0.11630)
+-----------------------
+Stratum 2:
+Risk in exposed: 0.65000 (0.43159, 0.82007)
+Risk in unexposed: 1.00000 (0.45405, 1.00000)
+Risk in overall population: 0.70833 (0.50626, 0.85292)
+Risk ratio: 0.65000 (0.47124, 0.89656)
+Risk difference: -0.35000 (-0.55904, -0.14096)
+-----------------------
+Stratum 3:
+Risk in exposed: 0.61905 (0.40804, 0.79324)
+Risk in unexposed: 1.00000 (0.29023, 1.00000)
+Risk in overall population: 0.65217 (0.44779, 0.81300)
+Risk ratio: 0.61905 (0.44260, 0.86584)
+Risk difference: -0.38095 (-0.58865, -0.17325)
+-----------------------
+Stratum 4:
+Risk in exposed: 0.68000 (0.48266, 0.82939)
+Risk in unexposed: 1.00000 (0.16750, 1.00000)
+Risk in overall population: 0.69231 (0.49853, 0.83657)
+Risk ratio: 0.68000 (0.51967, 0.88980)
+Risk difference: -0.32000 (-0.50286, -0.13714)
+-----------------------
+Stratum 5:
+Risk in exposed: 0.68000 (0.48266, 0.82939)
+Risk in unexposed: 1.00000 (0.16750, 1.00000)
+Risk in overall population: 0.69231 (0.49853, 0.83657)
+Risk ratio: 0.68000 (0.51967, 0.88980)
+Risk difference: -0.32000 (-0.50286, -0.13714)
+-----------------------
+Stratum 6:
+Risk in exposed: 0.74359 (0.58756, 0.85594)
+Risk in unexposed: 1.00000 (0.16750, 1.00000)
+Risk in overall population: 0.75000 (0.59639, 0.85980)
+Risk ratio: 0.74359 (0.61844, 0.89407)
+Risk difference: -0.25641 (-0.39345, -0.11937)
+-----------------------
+Stratum 7:
+Risk in exposed: 0.74359 (0.58756, 0.85594)
+Risk in unexposed: 1.00000 (0.29023, 1.00000)
+Risk in overall population: 0.75610 (0.60485, 0.86346)
+Risk ratio: 0.74359 (0.61844, 0.89407)
+Risk difference: -0.25641 (-0.39345, -0.11937)
+-----------------------
+Stratum 8:
+Risk in exposed: 0.75000 (0.59639, 0.85980)
+Risk in unexposed: 1.00000 (0.16750, 1.00000)
+Risk in overall population: 0.75610 (0.60485, 0.86346)
+Risk ratio: 0.75000 (0.62713, 0.89694)
+Risk difference: -0.25000 (-0.38419, -0.11581)
+-----------------------
+Stratum 9:
+Risk in exposed: 0.75000 (0.59639, 0.85980)
+Risk in unexposed: 1.00000 (0.16750, 1.00000)
+Risk in overall population: 0.75610 (0.60485, 0.86346)
+Risk ratio: 0.75000 (0.62713, 0.89694)
+Risk difference: -0.25000 (-0.38419, -0.11581)
+-----------------------
+Stratum 10:
+Risk in exposed: 0.71739 (0.57349, 0.82778)
+Risk in unexposed: 1.00000 (0.16750, 1.00000)
+Risk in overall population: 0.72340 (0.58136, 0.83169)
+Risk ratio: 0.71739 (0.59839, 0.86006)
+Risk difference: -0.28261 (-0.41273, -0.15249)
+-----------------------
+Unstratified (crude):
+Risk in exposed: 0.71384 (0.66178, 0.76079)
+Risk in unexposed: 1.00000 (0.79329, 1.00000)
+Risk in overall population: 0.72917 (0.67919, 0.77396)
+Risk ratio: 0.71384 (0.66585, 0.76528)
+Risk difference: -0.28616 (-0.33584, -0.23649)
+Aetiological fraction in the population: -0.37143 (-0.46080, -0.28206)
+Aetiological fraction in the exposed: -0.40088 (-0.50184, -0.30671)
+Prevented fraction in the population: 0.27083 (0.22000, 0.31544)
+Prevented fraction in the exposed: 0.28616 (0.23472, 0.33415)
+-----------------------
+Adjusted:
+Directly adjusted risk ratio: 0.71985 (0.67203, 0.77107)
+Mantel-Haenszel adjusted risk ratio: 0.69216 (0.62619, 0.76508)
+Breslow-Day chi square test for homogeneity of RR across strata: 2.21323 (p=0.98763)
+Directly adjusted risk difference: -0.28325 (-0.33258, -0.23391)
+Breslow-Day chi square test for homogeneity of RD across strata: 2.36692 (p=0.98425)
+-----------------------
+
+Odds-based measures
+===================
+Stratum 1:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 4.44021)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 2:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 3.68979)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 3:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 10.14190)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 4:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 87.63122)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 5:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 87.63122)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 6:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 116.78832)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 7:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 16.92419)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 8:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 120.67392)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 9:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 120.67392)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 10:
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 101.83928)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Unstratified (crude):
+Sample odds ratio: 0.00000 (undefined, undefined)
+CMLE odds ratio: 0.00000 (0.00000, 0.58378)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+Aetiological fraction in the population: undefined (undefined, undefined)
+Aetiological fraction in the exposed: undefined (undefined, undefined)
+Prevented fraction in the population: 1.00000 (undefined, undefined)
+Prevented fraction in the exposed :1.00000 (undefined, undefined)
+-----------------------
+Adjusted:
+Directly adjusted common odds ratio: undefined (undefined, undefined)
+Mantel-Haenszel common odds ratio: 0.00000 (nan, nan)
+CMLE common odds ratio: 0.00000 (0.00000, 0.54969)
+Breslow-Day chi square test for homogeneity of OR across strata: undefined (p=undefined)
+Woolf chi square test for homogeneity of OR across strata: 1.23379, df=9.00000 (p=0.99868)
+-----------------------
+
+==============================================================
+Another extremely ill-conditioned data example - zeros in all cells in one stratum
+==============================================================
+
+Tabulated values
+================
+Stratum 1:
+a (exposed, disease): 16
+b (unexposed, disease): 4
+c (exposed, no disease): 7
+d (unexposed, no disease): 7
+-----------------------
+Stratum 2:
+a (exposed, disease): 0
+b (unexposed, disease): 0
+c (exposed, no disease): 0
+d (unexposed, no disease): 0
+-----------------------
+Stratum 3:
+a (exposed, disease): 13
+b (unexposed, disease): 2
+c (exposed, no disease): 8
+d (unexposed, no disease): 8
+-----------------------
+Unstratified (crude):
+a (exposed, disease): 29
+b (unexposed, disease): 6
+c (exposed, no disease): 15
+d (unexposed, no disease): 15
+-----------------------
+
+Measures of association
+=======================
+Stratum 1:
+Chi sq: 3.38656, p=0.06573
+Yates-corrected Chi sq: 2.15452, p=0.14215
+M-H Chi sq: 3.28696, p=0.06983
+Fisher's exact test: one-sided p=0.07149, two-sided (twice one-sided): p=0.14297, two-sided (as extreme): p=0.13454
+mid-p: one-sided p=0.04243, two-sided p=0.08485
+-----------------------
+Stratum 2:
+Chi sq: undefined, p=undefined
+Yates-corrected Chi sq: undefined, p=undefined
+M-H Chi sq: undefined, p=undefined
+Fisher's exact test: one-sided p=1.00000, two-sided (twice one-sided): p=2.00000, two-sided (as extreme): p=undefined
+mid-p: one-sided p=0.50000, two-sided p=1.00000
+-----------------------
+Stratum 3:
+Chi sq: 4.76317, p=0.02907
+Yates-corrected Chi sq: 3.23301, p=0.07217
+M-H Chi sq: 4.60952, p=0.03179
+Fisher's exact test: one-sided p=0.03452, two-sided (twice one-sided): p=0.06904, two-sided (as extreme): p=0.05380
+mid-p: one-sided p=0.01928, two-sided p=0.03857
+-----------------------
+Unstratified (crude):
+Chi sq: 7.97426, p=0.00474
+Yates-corrected Chi sq: 6.54263, p=0.01053
+M-H Chi sq: 7.85158, p=0.00508
+Fisher's exact test: one-sided p=0.00504, two-sided (twice one-sided): p=0.01007, two-sided (as extreme): p=0.00742
+mid-p: one-sided p=0.00296, two-sided p=0.00593
+-----------------------
+Adjusted:
+Warning: expected values in some strata are < 5: use of exact statistics recommended.
+Mantel-Haenszel chi square with continuity correction: undefined (p=undefined)
+Mantel-Haenszel chi square without continuity correction: undefined (p=undefined)
+Fisher exact test: one-sided: p=undefined, two-sided (twice one-sided): p=undefined, two-sided (as extreme): p=undefined
+Mid-p exact test: one-sided: p=undefined, two-sided: p=undefined
+-----------------------
+
+Risk-based measures
+===================
+Stratum 1:
+Risk in exposed: 0.69565 (0.48945, 0.84585)
+Risk in unexposed: 0.36364 (0.14980, 0.64806)
+Risk in overall population: 0.58824 (0.42199, 0.73657)
+Risk ratio: 1.91304 (0.83654, 4.37483)
+Risk difference: 0.33202 (-0.00883, 0.67286)
+-----------------------
+Stratum 2:
+Risk in exposed: undefined (undefined, undefined)
+Risk in unexposed: undefined (undefined, undefined)
+Risk in overall population: undefined (undefined, undefined)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: undefined (undefined, undefined)
+-----------------------
+Stratum 3:
+Risk in exposed: 0.61905 (0.40804, 0.79324)
+Risk in unexposed: 0.20000 (0.04589, 0.52063)
+Risk in overall population: 0.48387 (0.31969, 0.65160)
+Risk ratio: 3.09524 (0.85699, 11.17924)
+Risk difference: 0.41905 (0.09562, 0.74247)
+-----------------------
+Unstratified (crude):
+Risk in exposed: 0.65909 (0.51084, 0.78180)
+Risk in unexposed: 0.28571 (0.13559, 0.50211)
+Risk in overall population: 0.53846 (0.41852, 0.65412)
+Risk ratio: 2.30682 (1.13543, 4.68668)
+Risk difference: 0.37338 (0.13474, 0.61202)
+Aetiological fraction in the population: 0.46939 (0.15495, 0.78383)
+Aetiological fraction in the exposed: 0.56650 (0.11928, 0.78663)
+Prevented fraction in the population: -0.88462 (-3.62600, -0.18336)
+Prevented fraction in the exposed: -1.30682 (-3.68668, -0.13543)
+-----------------------
+Adjusted:
+Directly adjusted risk ratio: undefined (undefined, undefined)
+Mantel-Haenszel adjusted risk ratio: undefined (undefined, undefined)
+Breslow-Day chi square test for homogeneity of RR across strata: undefined (p=undefined)
+Directly adjusted risk difference: undefined (undefined, undefined)
+Breslow-Day chi square test for homogeneity of RD across strata: undefined (p=undefined)
+-----------------------
+
+Odds-based measures
+===================
+Stratum 1:
+Sample odds ratio: 4.00000 (0.87842, 18.21445)
+CMLE odds ratio: 3.82472 (0.70209, 24.37976)
+mid-p CMLE odds ratio: 3.77316 (0.83636, 19.59694)
+-----------------------
+Stratum 2:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: undefined (undefined, undefined)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 3:
+Sample odds ratio: 6.50000 (1.09363, 38.63280)
+CMLE odds ratio: 6.10005 (0.89956, 73.42698)
+mid-p CMLE odds ratio: 5.85904 (1.09068, 51.23738)
+-----------------------
+Unstratified (crude):
+Sample odds ratio: 4.83333 (1.55582, 15.01533)
+CMLE odds ratio: 4.70752 (1.38054, 18.10658)
+mid-p CMLE odds ratio: 4.65107 (1.53799, 15.73656)
+Aetiological fraction in the population: 0.65714 (0.37891, 0.93537)
+Aetiological fraction in the exposed: 0.79310 (0.35725, 0.93340)
+Prevented fraction in the population: -1.91667 (-14.47321, -0.61008)
+Prevented fraction in the exposed :-3.83333 (-14.01533, -0.55582)
+-----------------------
+Adjusted:
+Directly adjusted common odds ratio: undefined (undefined, undefined)
+Mantel-Haenszel common odds ratio: undefined (undefined, undefined)
+CMLE common odds ratio: undefined (undefined, undefined)
+Breslow-Day chi square test for homogeneity of OR across strata: undefined (p=undefined)
+Woolf chi square test for homogeneity of OR across strata: 0.37847, df=2.00000 (p=0.82759)
+-----------------------
+
+==============================================================
+Another extremely ill-conditioned data example - zeros in all cells in all strata
+==============================================================
+
+Tabulated values
+================
+Stratum 1:
+a (exposed, disease): 0
+b (unexposed, disease): 0
+c (exposed, no disease): 0
+d (unexposed, no disease): 0
+-----------------------
+Stratum 2:
+a (exposed, disease): 0
+b (unexposed, disease): 0
+c (exposed, no disease): 0
+d (unexposed, no disease): 0
+-----------------------
+Unstratified (crude):
+a (exposed, disease): 0
+b (unexposed, disease): 0
+c (exposed, no disease): 0
+d (unexposed, no disease): 0
+-----------------------
+
+Measures of association
+=======================
+Stratum 1:
+Chi sq: undefined, p=undefined
+Yates-corrected Chi sq: undefined, p=undefined
+M-H Chi sq: undefined, p=undefined
+Fisher's exact test: one-sided p=1.00000, two-sided (twice one-sided): p=2.00000, two-sided (as extreme): p=undefined
+mid-p: one-sided p=0.50000, two-sided p=1.00000
+-----------------------
+Stratum 2:
+Chi sq: undefined, p=undefined
+Yates-corrected Chi sq: undefined, p=undefined
+M-H Chi sq: undefined, p=undefined
+Fisher's exact test: one-sided p=1.00000, two-sided (twice one-sided): p=2.00000, two-sided (as extreme): p=undefined
+mid-p: one-sided p=0.50000, two-sided p=1.00000
+-----------------------
+Unstratified (crude):
+Chi sq: undefined, p=undefined
+Yates-corrected Chi sq: undefined, p=undefined
+M-H Chi sq: undefined, p=undefined
+Fisher's exact test: one-sided p=1.00000, two-sided (twice one-sided): p=2.00000, two-sided (as extreme): p=undefined
+mid-p: one-sided p=0.50000, two-sided p=1.00000
+-----------------------
+Adjusted:
+Warning: expected values in some strata are < 5: use of exact statistics recommended.
+Mantel-Haenszel chi square with continuity correction: undefined (p=undefined)
+Mantel-Haenszel chi square without continuity correction: undefined (p=undefined)
+Fisher exact test: one-sided: p=undefined, two-sided (twice one-sided): p=undefined, two-sided (as extreme): p=undefined
+Mid-p exact test: one-sided: p=undefined, two-sided: p=undefined
+-----------------------
+
+Risk-based measures
+===================
+Stratum 1:
+Risk in exposed: undefined (undefined, undefined)
+Risk in unexposed: undefined (undefined, undefined)
+Risk in overall population: undefined (undefined, undefined)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: undefined (undefined, undefined)
+-----------------------
+Stratum 2:
+Risk in exposed: undefined (undefined, undefined)
+Risk in unexposed: undefined (undefined, undefined)
+Risk in overall population: undefined (undefined, undefined)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: undefined (undefined, undefined)
+-----------------------
+Unstratified (crude):
+Risk in exposed: undefined (undefined, undefined)
+Risk in unexposed: undefined (undefined, undefined)
+Risk in overall population: undefined (undefined, undefined)
+Risk ratio: undefined (undefined, undefined)
+Risk difference: undefined (undefined, undefined)
+Aetiological fraction in the population: undefined (undefined, undefined)
+Aetiological fraction in the exposed: undefined (undefined, undefined)
+Prevented fraction in the population: undefined (undefined, undefined)
+Prevented fraction in the exposed: undefined (undefined, undefined)
+-----------------------
+Adjusted:
+Directly adjusted risk ratio: undefined (undefined, undefined)
+Mantel-Haenszel adjusted risk ratio: undefined (undefined, undefined)
+Breslow-Day chi square test for homogeneity of RR across strata: undefined (p=undefined)
+Directly adjusted risk difference: undefined (undefined, undefined)
+Breslow-Day chi square test for homogeneity of RD across strata: undefined (p=undefined)
+-----------------------
+
+Odds-based measures
+===================
+Stratum 1:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: undefined (undefined, undefined)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 2:
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: undefined (undefined, undefined)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Unstratified (crude):
+Sample odds ratio: undefined (undefined, undefined)
+CMLE odds ratio: undefined (undefined, undefined)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+Aetiological fraction in the population: undefined (undefined, undefined)
+Aetiological fraction in the exposed: undefined (undefined, undefined)
+Prevented fraction in the population: undefined (undefined, undefined)
+Prevented fraction in the exposed :undefined (undefined, undefined)
+-----------------------
+Adjusted:
+Directly adjusted common odds ratio: undefined (undefined, undefined)
+Mantel-Haenszel common odds ratio: undefined (undefined, undefined)
+CMLE common odds ratio: undefined (undefined, undefined)
+Breslow-Day chi square test for homogeneity of OR across strata: undefined (p=undefined)
+Woolf chi square test for homogeneity of OR across strata: 0.00000, df=1.00000 (p=1.00000)
+-----------------------
+
+==============================================================
+Large single stratum
+==============================================================
+
+Tabulated values
+================
+Stratum 1:
+a (exposed, disease): 950
+b (unexposed, disease): 999
+c (exposed, no disease): 234
+d (unexposed, no disease): 789
+-----------------------
+
+Measures of association
+=======================
+Stratum 1:
+Chi sq: 187.31728, p=0.00000
+Yates-corrected Chi sq: 186.23950, p=0.00000
+M-H Chi sq: 187.25425, p=0.00000
+Fisher's exact test: one-sided p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+mid-p: one-sided p=0.00000, two-sided p=0.00000
+-----------------------
+
+Risk-based measures
+===================
+Stratum 1:
+Risk in exposed: 0.80236 (0.77870, 0.82407)
+Risk in unexposed: 0.55872 (0.53561, 0.58159)
+Risk in overall population: 0.65579 (0.63851, 0.67266)
+Risk ratio: 1.43606 (1.36608, 1.50963)
+Risk difference: 0.24364 (0.21133, 0.27595)
+-----------------------
+
+Odds-based measures
+===================
+Stratum 1:
+Sample odds ratio: 3.20641 (2.70296, 3.80363)
+CMLE odds ratio: 3.20517 (2.69469, 3.82075)
+mid-p CMLE odds ratio: 3.20401 (2.70440, 3.80622)
+-----------------------
+
+==============================================================
+Large single stratum with one small cell
+==============================================================
+
+Tabulated values
+================
+Stratum 1:
+a (exposed, disease): 950
+b (unexposed, disease): 999
+c (exposed, no disease): 23
+d (unexposed, no disease): 789
+-----------------------
+
+Measures of association
+=======================
+Stratum 1:
+Chi sq: 529.39117, p=0.00000
+Yates-corrected Chi sq: 527.38138, p=0.00000
+M-H Chi sq: 529.19943, p=0.00000
+Fisher's exact test: one-sided p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+mid-p: one-sided p=0.00000, two-sided p=0.00000
+-----------------------
+
+Risk-based measures
+===================
+Stratum 1:
+Risk in exposed: 0.97636 (0.96460, 0.98438)
+Risk in unexposed: 0.55872 (0.53561, 0.58159)
+Risk in overall population: 0.70590 (0.68863, 0.72261)
+Risk ratio: 1.74748 (1.67504, 1.82305)
+Risk difference: 0.41764 (0.39272, 0.44255)
+-----------------------
+
+Odds-based measures
+===================
+Stratum 1:
+Sample odds ratio: 32.62175 (21.34841, 49.84814)
+CMLE odds ratio: 32.59245 (21.32196, 52.15658)
+mid-p CMLE odds ratio: 32.37603 (21.69607, 50.95631)
+-----------------------
+
+==============================================================
+Very large single stratum with a small cell
+==============================================================
+
+Tabulated values
+================
+Stratum 1:
+a (exposed, disease): 9504
+b (unexposed, disease): 8997
+c (exposed, no disease): 43
+d (unexposed, no disease): 7892
+-----------------------
+
+Measures of association
+=======================
+Stratum 1:
+Chi sq: 6218.39167, p=0.00000
+Yates-corrected Chi sq: 6216.18880, p=0.00000
+M-H Chi sq: 6218.15644, p=0.00000
+Fisher's exact test: one-sided p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+mid-p: one-sided p=0.00000, two-sided p=0.00000
+-----------------------
+
+Risk-based measures
+===================
+Stratum 1:
+Risk in exposed: 0.99550 (0.99392, 0.99667)
+Risk in unexposed: 0.53271 (0.52518, 0.54023)
+Risk in overall population: 0.69984 (0.69429, 0.70534)
+Risk ratio: 1.86873 (1.84240, 1.89543)
+Risk difference: 0.46278 (0.45514, 0.47043)
+-----------------------
+
+Odds-based measures
+===================
+Stratum 1:
+Sample odds ratio: 193.87746 (143.47173, 261.99218)
+CMLE odds ratio: 193.77910 (143.05865, 269.55986)
+mid-p CMLE odds ratio: 193.12102 (144.91267, 264.16474)
+-----------------------
+
+==============================================================
+Very large single stratum
+==============================================================
+
+Tabulated values
+================
+Stratum 1:
+a (exposed, disease): 9504
+b (unexposed, disease): 8997
+c (exposed, no disease): 8943
+d (unexposed, no disease): 7892
+-----------------------
+
+Measures of association
+=======================
+Stratum 1:
+Chi sq: 10.83442, p=0.00100
+Yates-corrected Chi sq: 10.76435, p=0.00103
+M-H Chi sq: 10.83411, p=0.00100
+Fisher's exact test: one-sided p=undefined, two-sided (twice one-sided): p=undefined, two-sided (as extreme): p=undefined
+mid-p: one-sided p=undefined, two-sided p=undefined
+-----------------------
+
+Risk-based measures
+===================
+Stratum 1:
+Risk in exposed: 0.51521 (0.50799, 0.52241)
+Risk in unexposed: 0.53271 (0.52518, 0.54023)
+Risk in overall population: 0.52357 (0.51836, 0.52878)
+Risk ratio: 0.96713 (0.94809, 0.98656)
+Risk difference: -0.01751 (-0.02793, -0.00709)
+-----------------------
+
+Odds-based measures
+===================
+Stratum 1:
+Sample odds ratio: 0.93221 (0.89404, 0.97200)
+CMLE odds ratio: undefined (undefined, undefined)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+
+==============================================================
+Two very large single strata with small cells
+==============================================================
+
+Tabulated values
+================
+Stratum 1:
+a (exposed, disease): 9504
+b (unexposed, disease): 8997
+c (exposed, no disease): 43
+d (unexposed, no disease): 7892
+-----------------------
+Stratum 2:
+a (exposed, disease): 9763
+b (unexposed, disease): 8345
+c (exposed, no disease): 27
+d (unexposed, no disease): 8765
+-----------------------
+Unstratified (crude):
+a (exposed, disease): 19267
+b (unexposed, disease): 17342
+c (exposed, no disease): 70
+d (unexposed, no disease): 16657
+-----------------------
+
+Measures of association
+=======================
+Stratum 1:
+Chi sq: 6218.39167, p=0.00000
+Yates-corrected Chi sq: 6216.18880, p=0.00000
+M-H Chi sq: 6218.15644, p=0.00000
+Fisher's exact test: one-sided p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+mid-p: one-sided p=0.00000, two-sided p=0.00000
+-----------------------
+Stratum 2:
+Chi sq: 7347.53732, p=0.00000
+Yates-corrected Chi sq: 7345.22169, p=0.00000
+M-H Chi sq: 7347.26418, p=0.00000
+Fisher's exact test: one-sided p=0.00000, two-sided (twice one-sided): p=0.00000, two-sided (as extreme): p=0.00000
+mid-p: one-sided p=0.00000, two-sided p=0.00000
+-----------------------
+Unstratified (crude):
+Chi sq: 13542.20306, p=0.00000
+Yates-corrected Chi sq: 13539.94400, p=0.00000
+M-H Chi sq: 13541.94915, p=0.00000
+Fisher's exact test: one-sided p=undefined, two-sided (twice one-sided): p=undefined, two-sided (as extreme): p=undefined
+mid-p: one-sided p=undefined, two-sided p=undefined
+-----------------------
+Adjusted:
+Mantel-Haenszel chi square with continuity correction: undefined (p=undefined)
+Mantel-Haenszel chi square without continuity correction: undefined (p=undefined)
+Fisher exact test: one-sided: p=undefined, two-sided (twice one-sided): p=undefined, two-sided (as extreme): p=undefined
+Mid-p exact test: one-sided: p=undefined, two-sided: p=undefined
+-----------------------
+
+Risk-based measures
+===================
+Stratum 1:
+Risk in exposed: 0.99550 (0.99392, 0.99667)
+Risk in unexposed: 0.53271 (0.52518, 0.54023)
+Risk in overall population: 0.69984 (0.69429, 0.70534)
+Risk ratio: 1.86873 (1.84240, 1.89543)
+Risk difference: 0.46278 (0.45514, 0.47043)
+-----------------------
+Stratum 2:
+Risk in exposed: 0.99724 (0.99597, 0.99812)
+Risk in unexposed: 0.48773 (0.48024, 0.49522)
+Risk in overall population: 0.67316 (0.66753, 0.67874)
+Risk ratio: 2.04467 (2.01345, 2.07639)
+Risk difference: 0.50952 (0.50195, 0.51708)
+-----------------------
+Unstratified (crude):
+Risk in exposed: 0.99638 (0.99542, 0.99714)
+Risk in unexposed: 0.51007 (0.50476, 0.51539)
+Risk in overall population: 0.68638 (0.68243, 0.69031)
+Risk ratio: 1.95340 (1.93309, 1.97393)
+Risk difference: 0.48631 (0.48093, 0.49169)
+Aetiological fraction in the population: 0.25687 (0.25225, 0.26149)
+Aetiological fraction in the exposed: 0.48807 (0.48269, 0.49340)
+Prevented fraction in the population: -0.34566 (-0.35407, -0.33735)
+Prevented fraction in the exposed: -0.95340 (-0.97393, -0.93309)
+-----------------------
+Adjusted:
+Directly adjusted risk ratio: 1.94760 (1.92739, 1.96802)
+Mantel-Haenszel adjusted risk ratio: 1.95373 (1.93341, 1.97427)
+Breslow-Day chi square test for homogeneity of RR across strata: 70.97309 (p=0.00000)
+Directly adjusted risk difference: 0.48640 (0.48103, 0.49178)
+Breslow-Day chi square test for homogeneity of RD across strata: 72.57661 (p=0.00000)
+-----------------------
+
+Odds-based measures
+===================
+Stratum 1:
+Sample odds ratio: 193.87746 (143.47173, 261.99218)
+CMLE odds ratio: 193.77910 (143.05865, 269.55986)
+mid-p CMLE odds ratio: 193.12102 (144.91267, 264.16474)
+-----------------------
+Stratum 2:
+Sample odds ratio: 379.79138 (260.00945, 554.75480)
+CMLE odds ratio: 381.08695 (258.42271, 568.77081)
+mid-p CMLE odds ratio: 377.44889 (264.15755, 567.00305)
+-----------------------
+Unstratified (crude):
+Sample odds ratio: 264.37091 (208.86876, 334.62150)
+CMLE odds ratio: undefined (undefined, undefined)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+Aetiological fraction in the population: 0.52430 (0.51914, 0.52946)
+Aetiological fraction in the exposed: 0.99622 (0.99521, 0.99701)
+Prevented fraction in the population: -1.10217 (-1.12521, -1.07962)
+Prevented fraction in the exposed :-263.37091 (-333.62150, -207.86876)
+-----------------------
+Adjusted:
+Directly adjusted common odds ratio: 251.50739 (198.68996, 318.36520)
+Mantel-Haenszel common odds ratio: undefined (undefined, undefined)
+CMLE common odds ratio: undefined (undefined, undefined)
+Breslow-Day chi square test for homogeneity of OR across strata: 7.41511 (p=0.00647)
+Woolf chi square test for homogeneity of OR across strata: 7.41511, df=1.00000 (p=0.00647)
+-----------------------
+
+==============================================================
+Two very large single strata
+==============================================================
+
+Tabulated values
+================
+Stratum 1:
+a (exposed, disease): 9504
+b (unexposed, disease): 8997
+c (exposed, no disease): 8943
+d (unexposed, no disease): 7892
+-----------------------
+Stratum 2:
+a (exposed, disease): 9763
+b (unexposed, disease): 8345
+c (exposed, no disease): 7827
+d (unexposed, no disease): 8765
+-----------------------
+Unstratified (crude):
+a (exposed, disease): 19267
+b (unexposed, disease): 17342
+c (exposed, no disease): 16770
+d (unexposed, no disease): 16657
+-----------------------
+
+Measures of association
+=======================
+Stratum 1:
+Chi sq: 10.83442, p=0.00100
+Yates-corrected Chi sq: 10.76435, p=0.00103
+M-H Chi sq: 10.83411, p=0.00100
+Fisher's exact test: one-sided p=undefined, two-sided (twice one-sided): p=undefined, two-sided (as extreme): p=undefined
+mid-p: one-sided p=undefined, two-sided p=undefined
+-----------------------
+Stratum 2:
+Chi sq: 157.45921, p=0.00000
+Yates-corrected Chi sq: 157.18959, p=0.00000
+M-H Chi sq: 157.45467, p=0.00000
+Fisher's exact test: one-sided p=undefined, two-sided (twice one-sided): p=undefined, two-sided (as extreme): p=undefined
+mid-p: one-sided p=undefined, two-sided p=undefined
+-----------------------
+Unstratified (crude):
+Chi sq: 42.33512, p=0.00000
+Yates-corrected Chi sq: 42.23669, p=0.00000
+M-H Chi sq: 42.33452, p=0.00000
+Fisher's exact test: one-sided p=undefined, two-sided (twice one-sided): p=undefined, two-sided (as extreme): p=undefined
+mid-p: one-sided p=undefined, two-sided p=undefined
+-----------------------
+Adjusted:
+Mantel-Haenszel chi square with continuity correction: undefined (p=undefined)
+Mantel-Haenszel chi square without continuity correction: undefined (p=undefined)
+Fisher exact test: one-sided: p=undefined, two-sided (twice one-sided): p=undefined, two-sided (as extreme): p=undefined
+Mid-p exact test: one-sided: p=undefined, two-sided: p=undefined
+-----------------------
+
+Risk-based measures
+===================
+Stratum 1:
+Risk in exposed: 0.51521 (0.50799, 0.52241)
+Risk in unexposed: 0.53271 (0.52518, 0.54023)
+Risk in overall population: 0.52357 (0.51836, 0.52878)
+Risk ratio: 0.96713 (0.94809, 0.98656)
+Risk difference: -0.01751 (-0.02793, -0.00709)
+-----------------------
+Stratum 2:
+Risk in exposed: 0.55503 (0.54768, 0.56236)
+Risk in unexposed: 0.48773 (0.48024, 0.49522)
+Risk in overall population: 0.52184 (0.51659, 0.52710)
+Risk ratio: 1.13800 (1.11516, 1.16130)
+Risk difference: 0.06730 (0.05682, 0.07779)
+-----------------------
+Unstratified (crude):
+Risk in exposed: 0.53464 (0.52949, 0.53979)
+Risk in unexposed: 0.51007 (0.50476, 0.51539)
+Risk in overall population: 0.52272 (0.51902, 0.52641)
+Risk ratio: 1.04817 (1.03340, 1.06315)
+Risk difference: 0.02457 (0.01717, 0.03197)
+Aetiological fraction in the population: 0.02419 (0.01690, 0.03148)
+Aetiological fraction in the exposed: 0.04596 (0.03233, 0.05940)
+Prevented fraction in the population: -0.02479 (-0.03250, -0.01719)
+Prevented fraction in the exposed: -0.04817 (-0.06315, -0.03340)
+-----------------------
+Adjusted:
+Directly adjusted risk ratio: 1.04746 (1.03270, 1.06244)
+Mantel-Haenszel adjusted risk ratio: 1.04810 (1.03334, 1.06307)
+Breslow-Day chi square test for homogeneity of RR across strata: 126.08734 (p=0.00000)
+Directly adjusted risk difference: 0.02463 (0.01723, 0.03202)
+Breslow-Day chi square test for homogeneity of RD across strata: 126.36931 (p=0.00000)
+-----------------------
+
+Odds-based measures
+===================
+Stratum 1:
+Sample odds ratio: 0.93221 (0.89404, 0.97200)
+CMLE odds ratio: undefined (undefined, undefined)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Stratum 2:
+Sample odds ratio: 1.31013 (1.25596, 1.36663)
+CMLE odds ratio: undefined (undefined, undefined)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+-----------------------
+Unstratified (crude):
+Sample odds ratio: 1.10352 (1.07125, 1.13675)
+CMLE odds ratio: undefined (undefined, undefined)
+mid-p CMLE odds ratio: undefined (undefined, undefined)
+Aetiological fraction in the population: 0.04937 (0.03488, 0.06386)
+Aetiological fraction in the exposed: 0.09381 (0.06651, 0.12030)
+Prevented fraction in the population: -0.05193 (-0.06821, -0.03614)
+Prevented fraction in the exposed :-0.10352 (-0.13675, -0.07125)
+-----------------------
+Adjusted:
+Directly adjusted common odds ratio: 1.10324 (1.07095, 1.13651)
+Mantel-Haenszel common odds ratio: undefined (undefined, undefined)
+CMLE common odds ratio: undefined (undefined, undefined)
+Breslow-Day chi square test for homogeneity of OR across strata: 126.02768 (p=0.00000)
+Woolf chi square test for homogeneity of OR across strata: 126.02768, df=1.00000 (p=0.00000)
+-----------------------

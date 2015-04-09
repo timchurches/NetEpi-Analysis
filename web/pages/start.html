@@ -1,0 +1,65 @@
+<al-comment>
+
+    The contents of this file are subject to the HACOS License Version 1.2
+    (the "License"); you may not use this file except in compliance with
+    the License.  Software distributed under the License is distributed
+    on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+    implied. See the LICENSE file for the specific language governing
+    rights and limitations under the License.  The Original Software
+    is "NetEpi Analysis". The Initial Developer of the Original
+    Software is the Health Administration Corporation, incorporated in
+    the State of New South Wales, Australia.  
+    
+    Copyright (C) 2004,2005 Health Administration Corporation. 
+    All Rights Reserved.
+
+</al-comment>
+<al-expand name="body">
+ <al-expand name="helpbutt" />
+ <div align="center">
+  <table class="bodytable">
+   <tr class="bannerbox">
+    <td class="logo">
+      <img src="/nea/Netepi_logo_m.png" 
+       width="120" height="120" alt="Netepi Logo" />
+    </td>
+    <td>
+     <div class="tit">NetEpi Analysis</div>
+     <div class="subtit">Network-enabled tools for epidemiology and public health practice</div>
+     <div class="copyright"><a href="/nea/copyright.html" target="_blank">Copyright &copy; 2004, 2005 NSW Department of Health. All Rights Reserved</a></div>
+     <div class="subtit">Version <al-value expr="soomversion" /></div>
+    </td>
+   </tr>
+   <tr>
+    <td class="section" nowrap>Dataset:</td>
+    <td class="fill">
+     <al-select name="workspace.dsname"  
+      optionexpr="workspace.available_datasets()" />
+    </td>
+    <td>
+     <al-input class="submit" type="submit" name="explore" value="Explore"
+      onmouseover="document.forms[0].target = '_blank'"
+      onmouseout="document.forms[0].target = '_self'" />
+    </td>
+   </tr>
+   <tr>
+    <td class="section" nowrap>Analysis type:</td>
+    <td class="fill">
+     <al-select name="workspace.plottype_name" onchange="submit();"
+      optionexpr="workspace.available_plottypes()" />
+    </td>
+    <td>
+     <al-input class="submit" type="submit" name="ok" value="Analyse" />
+    </td>
+   </tr>
+   <al-if expr="workspace.errorstr">
+    <tr>
+     <td></td>
+     <td class="error">
+      <al-value expr="workspace.errorstr" />
+     </td>
+    </tr>
+   </al-if>
+  </table>
+ </div>
+</al-expand>

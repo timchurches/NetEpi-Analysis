@@ -1,0 +1,27 @@
+exclude SOOM_objects
+include liccheck.py
+include LICENSE
+include MANIFEST.in
+include test.py
+include TODO
+include CHANGES
+include CONTRIBUTERS
+global-include .cvsignore
+recursive-include SOOMv0 *.py *.pyx *.g Makefile README
+recursive-include soomext *.py *.c *.h *.tex *.dia soom.pdf Makefile
+prune soomext/build
+recursive-include tests *.py *.sas
+recursive-include web *.py *.html *.png *.ico *.xcf *.svg *.css
+recursive-include simpleinst *
+prune simpleinst/build
+recursive-include demo *.py Makefile
+include demo/demo.txt
+include demo/rawdata/*
+include demo/scratch
+prune demo/regression
+recursive-include docs *
+recursive-include sandbox *
+include tests/data/*
+exclude web/dynamic/soom*
+prune web/static/.xvpics
+global-exclude *.pyc *.swp *.bak *.orig .\#* .xvpics/*

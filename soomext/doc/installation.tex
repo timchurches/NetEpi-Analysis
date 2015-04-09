@@ -1,0 +1,58 @@
+%
+%   The contents of this file are subject to the HACOS License Version 1.2
+%   (the "License"); you may not use this file except in compliance with
+%   the License.  Software distributed under the License is distributed
+%   on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+%   implied. See the LICENSE file for the specific language governing
+%   rights and limitations under the License.  The Original Software
+%   is "NetEpi Analysis". The Initial Developer of the Original
+%   Software is the Health Administration Corporation, incorporated in
+%   the State of New South Wales, Australia.
+%
+%   Copyright (C) 2004,2005 Health Administration Corporation.
+%   All Rights Reserved.
+%
+\section{Installation}
+
+\subsection{Prerequisites}
+
+\begin{itemize}
+\item Python 1.5.2 or later.
+
+\item C compiler
+
+The \module{SOOM} package contains extension module code written in C.
+The extension module code is used by the Python wrapper module
+\module{SOOM.py}.
+
+\item Numeric Python
+
+The \module{SOOM} package uses the Numpy extension modules for Python.
+
+Numpy can be downloaded from \url{http://numpy.sourceforge.net/}.
+\end{itemize}
+
+\subsection{Installing}
+
+The \module{SOOM} package the \module{distutils} package so all you
+need to do is type the following command as root:
+
+\begin{verbatim}
+python setup.py install
+\end{verbatim}
+
+If you have problems with this step make sure that you contact the
+package author so that the installation process can be made more
+robust for other people.
+
+\subsection{Testing}
+
+The most simple way to test the \module{SOOM} package is via the
+interactive Python prompt.
+
+\begin{verbatim}
+>>> from soomfunc import *
+>>> from Numeric import *
+>>> intersect(array(range(10)) + 4, array(range(5)) * 2)
+array([4, 6, 8])
+\end{verbatim}

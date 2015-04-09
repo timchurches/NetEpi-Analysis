@@ -1,0 +1,72 @@
+<al-comment>
+
+    The contents of this file are subject to the HACOS License Version 1.2
+    (the "License"); you may not use this file except in compliance with
+    the License.  Software distributed under the License is distributed
+    on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either express or
+    implied. See the LICENSE file for the specific language governing
+    rights and limitations under the License.  The Original Software
+    is "NetEpi Analysis". The Initial Developer of the Original
+    Software is the Health Administration Corporation, incorporated in
+    the State of New South Wales, Australia.  
+    
+    Copyright (C) 2004,2005 Health Administration Corporation. 
+    All Rights Reserved.
+
+</al-comment>
+<al-include name="fields.html" />
+
+<al-expand name="body">
+ <al-expand name="helpbutt" />
+ <table class="bodytable">
+   <tr class="bannerbox">
+    <td class="logo">
+     <al-expand name="logo" />
+    </td>
+    <td>
+     <div class="tit">NetEpi Analysis</div>
+   </tr>
+
+
+  <al-if expr="workspace.errorstr">
+   <tr>
+    <td></td>
+    <td class="error">
+     <al-value expr="workspace.errorstr" />
+    </td>
+   </tr>
+  </al-if>
+
+  <al-for iter="field_i" expr="workspace.plottype.fields">
+   <al-exec expr="field = field_i.value()" />
+   <al-if expr="field.enabled(workspace)">
+    <al-value expr="field.markup" lookup="field_markup" />
+   </al-if>
+  </al-for>
+
+  <tr>
+   <td></td>
+   <td class="actions">
+    <table width="100%" cellspacing="0" cellpadding="0">
+     <al-if expr="workspace.output.have_files() and not workspace.output.inline">
+      <al-for iter="file_i" expr="workspace.output.output_names()">
+       <tr><td align="center">
+         <al-a expr="file_i.value()">Download Result</al-a>
+        </td></tr>
+      </al-for>
+     </al-if>
+     <tr>
+      <td align="left">
+       <al-input class="submit" type="submit" name="ok" value="New Analysis" />
+      </td>
+      <al-if expr="workspace.output.have_files() and workspace.output.inline">
+       <td align="right">
+        <al-input class="submit" type="submit" name="hide_params" value="Prev Result" />
+       </td>
+      </al-if>
+     </tr>
+    </table>
+   </td>
+  </tr>
+ </table>
+</al-expand>
